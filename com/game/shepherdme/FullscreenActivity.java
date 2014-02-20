@@ -49,6 +49,8 @@ public class FullscreenActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
+		System.out.println("It works!");
+		
 		setContentView(R.layout.activity_fullscreen);
 
 		final View controlsView = findViewById(R.id.fullscreen_content_controls);
