@@ -1,19 +1,23 @@
-package com.me.mygdxgame;
+package com.me.shepherdMe;
 
 import android.os.Bundle;
 
 import com.badlogic.gdx.backends.android.AndroidApplication;
 import com.badlogic.gdx.backends.android.AndroidApplicationConfiguration;
-import com.me.shepherdMe.Main;
 
 public class MainActivity extends AndroidApplication {
-    @Override
+	@Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        
-        AndroidApplicationConfiguration cfg = new AndroidApplicationConfiguration();
-        cfg.useGL20 = false;
-        
-        initialize(new Main(), cfg);
+		AndroidApplicationConfiguration config = new AndroidApplicationConfiguration();
+		config.useAccelerometer = false;
+		config.useCompass = false;
+		config.useGL20 = true;
+		
+		initialize(new ShepherdMe(), config);
     }
+    
+    
+    
+    
 }
