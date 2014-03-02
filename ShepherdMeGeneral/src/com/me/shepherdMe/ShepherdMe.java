@@ -13,7 +13,6 @@ public class ShepherdMe extends Game {
 	public void create() {
 		// TODO Auto-generated method stub
 		setScreen(new Splash());
-		
 	}
 
 	@Override
