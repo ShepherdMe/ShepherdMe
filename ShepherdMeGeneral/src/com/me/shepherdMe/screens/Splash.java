@@ -2,7 +2,6 @@ package com.me.shepherdMe.screens;
 
 import aurelienribon.tweenengine.BaseTween;
 import aurelienribon.tweenengine.Tween;
-import aurelienribon.tweenengine.TweenAccessor;
 import aurelienribon.tweenengine.TweenCallback;
 import aurelienribon.tweenengine.TweenManager;
 
@@ -13,6 +12,7 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.me.shepherdMe.ShepherdMe;
 import com.me.shepherdMe.tween.SpriteAccessor;
 
 public class Splash implements Screen {
@@ -20,7 +20,12 @@ public class Splash implements Screen {
 	private SpriteBatch batch;
 	private Sprite splash;
 	private TweenManager tweenManager;
+	private ShepherdMe game;
 	
+	
+	public Splash(ShepherdMe game){
+		this.game=game;
+	}
 	
 	@Override
 	public void render(float delta) {
@@ -59,7 +64,7 @@ public class Splash implements Screen {
 			
 			@Override
 			public void onEvent(int type, BaseTween<?> source) {
-				((Game)Gdx.app.getApplicationListener()).setScreen(new MainMenu());
+				((Game)Gdx.app.getApplicationListener()).setScreen(new Level(game));
 			}
 		}).start(tweenManager);
 	}
