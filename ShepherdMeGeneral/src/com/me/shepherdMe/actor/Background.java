@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
@@ -32,13 +33,19 @@ public class Background extends Actor {
 			@Override
 		    public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) 
 		    {
-				Gdx.app.log("Mover", "Reconoce pulsacion en x:"+x+" y:"+y);
-				logica.moveDog(x,y);
+				//Gdx.app.log("Mover", "Reconoce pulsacion en x:"+x+" y:"+y);
+				//Gdx.app.log("Mover", "Reconoce pulsacion en x:"+Gdx.input.getX()+" y:"+Gdx.input.getY());
+				Vector2 v = event.getListenerActor().localToAscendantCoordinates(getParent(),(new Vector2(x, y)));
+				Gdx.app.log("mover en back", v.toString());
+				logica.moveDog(v);
 				return true;
 		    }
 		});	*/
+<<<<<<< HEAD
 	
 			
+=======
+>>>>>>> a271b89b6f9eaec3ac3861c2ad681838ebb78ea9
 	}
 	
 	public void draw(SpriteBatch batch, float parentApha)
@@ -46,5 +53,9 @@ public class Background extends Actor {
 		batch.draw(background,getX(),getY());
 	}
 	
+	public LogicaLevel getLogica()
+	{
+		return this.logica;
+	}
 	
 }

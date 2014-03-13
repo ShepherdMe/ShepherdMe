@@ -38,6 +38,7 @@ public class Level implements Screen {
 	public void show() {
 		// TODO Auto-generated method stub
 		Gdx.input.setInputProcessor(stage);
+		
 		logica = new LogicaLevel(game, this);
 		stage.addActor(logica);
 	}
@@ -63,6 +64,7 @@ public class Level implements Screen {
 	@Override
 	public void dispose() {
 		// TODO Auto-generated method stub
+		Gdx.input.setInputProcessor(null);
 
 	}
 
