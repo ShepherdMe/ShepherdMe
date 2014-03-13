@@ -28,7 +28,7 @@ public class Background extends Actor {
 		Tbackground = new Texture(Gdx.files.internal("img/fondo.png"));
 		background = new TextureRegion(Tbackground,0,0,Gdx.graphics.getWidth(),Gdx.graphics.getHeight());
 
-		addListener(new InputListener(){
+		/*addListener(new InputListener(){
 			@Override
 		    public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) 
 		    {
@@ -36,7 +36,9 @@ public class Background extends Actor {
 				logica.moveDog(x,y);
 				return true;
 		    }
-		});	
+		});	*/
+	
+			
 	}
 	
 	public void draw(SpriteBatch batch, float parentApha)
