@@ -42,8 +42,11 @@ public class Background extends Actor {
 		    }
 		});	*/
 <<<<<<< HEAD
+<<<<<<< HEAD
 	
 			
+=======
+>>>>>>> a271b89b6f9eaec3ac3861c2ad681838ebb78ea9
 =======
 >>>>>>> a271b89b6f9eaec3ac3861c2ad681838ebb78ea9
 	}

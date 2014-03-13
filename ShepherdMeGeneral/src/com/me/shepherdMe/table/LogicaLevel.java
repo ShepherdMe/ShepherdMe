@@ -8,8 +8,11 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 <<<<<<< HEAD
+<<<<<<< HEAD
 import com.badlogic.gdx.scenes.scene2d.actions.MoveByAction;
 import com.badlogic.gdx.scenes.scene2d.actions.SequenceAction;
+=======
+>>>>>>> a271b89b6f9eaec3ac3861c2ad681838ebb78ea9
 =======
 >>>>>>> a271b89b6f9eaec3ac3861c2ad681838ebb78ea9
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
@@ -17,7 +20,11 @@ import com.me.shepherdMe.ShepherdMe;
 import com.me.shepherdMe.actor.Background;
 import com.me.shepherdMe.actor.Dog;
 <<<<<<< HEAD
+<<<<<<< HEAD
 import com.me.shepherdMe.actor.Sheep;
+=======
+import com.me.shepherdMe.actor.input.BackgroundUserInput;
+>>>>>>> a271b89b6f9eaec3ac3861c2ad681838ebb78ea9
 =======
 import com.me.shepherdMe.actor.input.BackgroundUserInput;
 >>>>>>> a271b89b6f9eaec3ac3861c2ad681838ebb78ea9
@@ -26,10 +33,16 @@ import com.me.shepherdMe.screens.Level;
 public class LogicaLevel extends Table{
 	
 <<<<<<< HEAD
+<<<<<<< HEAD
 	ShepherdMe game;
 	Background background;
 	Dog dog;
 	Sheep sheep1,sheep2;
+=======
+	private ShepherdMe game;
+	private Background background;
+	private Dog dog;
+>>>>>>> a271b89b6f9eaec3ac3861c2ad681838ebb78ea9
 =======
 	private ShepherdMe game;
 	private Background background;
@@ -44,6 +57,7 @@ public class LogicaLevel extends Table{
 		this.background.addListener(new BackgroundUserInput(this.background));
 		addActor(background);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		
 		//this.dog= new Dog(game);
 		//addActor(dog);
@@ -55,6 +69,8 @@ public class LogicaLevel extends Table{
 		addActor(sheep1);
 		addActor(sheep2);
 =======
+=======
+>>>>>>> a271b89b6f9eaec3ac3861c2ad681838ebb78ea9
 		this.dog= new Dog(game);
 		//this.dog.addListener(new DogUserInput(this.dog));
 		addActor(dog);
@@ -76,6 +92,7 @@ public class LogicaLevel extends Table{
 	}
 	
 	public Dog getDog()
+<<<<<<< HEAD
 	{
 		return this.dog;
 	}
@@ -94,5 +111,15 @@ public class LogicaLevel extends Table{
 	
 
 =======
+>>>>>>> a271b89b6f9eaec3ac3861c2ad681838ebb78ea9
+=======
+	{
+		return this.dog;
+	}
+	
+	public Background GetBackground()
+	{
+		return this.background;
+	}
 >>>>>>> a271b89b6f9eaec3ac3861c2ad681838ebb78ea9
 }
