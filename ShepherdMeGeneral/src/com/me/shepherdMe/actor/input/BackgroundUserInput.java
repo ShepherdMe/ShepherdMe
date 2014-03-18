@@ -1,11 +1,14 @@
 package com.me.shepherdMe.actor.input;
 
+import java.util.List;
+
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.me.shepherdMe.actor.Background;
 import com.me.shepherdMe.actor.Dog;
+import com.me.shepherdMe.actor.Obstacle;
 import com.me.shepherdMe.functions.Recta;
 
 public class BackgroundUserInput extends InputListener {
@@ -38,46 +41,7 @@ public class BackgroundUserInput extends InputListener {
 	 }
 	 
 
-	/*@Override
-	public void touchDragged(final InputEvent event, float x, float y, int pointer) {
-		
-		if(hilo.isAlive())
-		{
-			hilo.interrupt();
-		}
-		hilo= new Thread(new Runnable() {
-			
-			@Override
-			public void run() {
-				
-				Dog dog = BG.getLogica().getDog();
-
-				Vector2 origen = new Vector2(dog.getX() , dog.getY());
-				Vector2 destino = new Vector2(event.getStageX(), event.getStageY());
-
-				Vector2 siguientePunto = siguientePunto(origen, destino);
-				
-				while((siguientePunto.x!=destino.x && siguientePunto.y!=destino.y)&& !Thread.currentThread().isInterrupted())
-				{
-					dog.setY(siguientePunto.y);
-					dog.setX(siguientePunto.x);
-					origen.set(siguientePunto);
-					siguientePunto = siguientePunto(origen, destino);
-					try {
-						Thread.currentThread().sleep(500);
-					} catch (InterruptedException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
-				}
-								
-			}
-		});
-		hilo.start();
-		
 	
-	}*/
-	 
 	 @Override
 		public void touchDragged(final InputEvent event, float x, float y, int pointer) {
 			
@@ -113,9 +77,28 @@ public class BackgroundUserInput extends InputListener {
 		delta.nor();
 
 		Vector2 position = new Vector2(origen.x + delta.x, origen.y + delta.y);
-
-		return position;
+		
+		if(hitArea(position))
+		{
+			return origen;
+		}
+		else
+		{
+			return position;
+		}
 		//return delta;
+	}
+	
+	private boolean hitArea(Vector2 v)
+	{
+		List<Obstacle> obstaculos = this.BG.getLogica().getObstacle();
+		for (Obstacle obstacle : obstaculos) {
+			if(obstacle.hitArea(v.x, v.y,this.BG.getLogica().getDog().getWidth(),this.BG.getLogica().getDog().getHeight()))
+			{
+				return true;
+			}
+		}
+		return false;
 	}
 
 }
