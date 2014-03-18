@@ -54,36 +54,14 @@ public class Sheep extends Actor {
 		
 		
 	}
-	public Vector2 movimiento()
-	{
-		int N=(int)(Math.random()*10 + 1);
-		
-		if(N==1||N==2)
-		{
-			Vector2 v= new Vector2(0, 0);
-			return v;
-		}
-		else
-		{
-			double angulo= Math.toRadians(N*45);//Pasamos a radianes
-			Vector2 v= new Vector2();
-			v.x=(float) Math.sin(angulo);
-			v.y=(float) Math.cos(angulo);
-			return v;
-		}
-		
-		
-	}
+	
 	public void render()
 	{
 		Vector2 v= new Vector2();
-		v= movimiento();
-		MoveByAction move, move2;
-
+		MoveByAction move;
 			move = new MoveByAction();
-			move.setAmount(100*v.x, 100*v.y);
+				move.setAmount(100*v.x, 100*v.y);
 			move.setDuration(5f);
-	}		
+		}		
 }
-
 
