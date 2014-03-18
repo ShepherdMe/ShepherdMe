@@ -2,7 +2,6 @@ package com.me.shepherdMe.screens;
 
 import utils.GraphicManager;
 
-import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
@@ -12,35 +11,27 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
-import com.badlogic.gdx.scenes.scene2d.Event;
-import com.badlogic.gdx.scenes.scene2d.EventListener;
-import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
-import com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
-import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
-import com.badlogic.gdx.scenes.scene2d.ui.TextButton.TextButtonStyle;
-import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
-import com.esotericsoftware.tablelayout.Cell;
+import com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle;
 import com.me.shepherdMe.ShepherdMe;
 
-public class MainMenu implements Screen {
 
+public class RecordScreen implements Screen{
+	
 	private Stage stage;
 	private TextureAtlas atlas;
 	private SpriteBatch batchBackground;
 	private Texture textureBackground;
 	private Sprite backgroundSprite;
-//	private Skin skin;
 	private Table table;
-	private TextButton buttonRecords, buttonPlay;
 	private Label heading;
-//	private BitmapFont white, black;
+	private BitmapFont white, black;
 	private ShepherdMe game;
 	
-	public MainMenu(ShepherdMe game){
+	public RecordScreen(ShepherdMe game){
 		this.game = game;
 	}
 	
@@ -69,48 +60,45 @@ public class MainMenu implements Screen {
 	@Override
 	public void show() {
 		// TODO Auto-generated method stub
-		GraphicManager.initialize();
 		batchBackground = new SpriteBatch();
 		textureBackground = new Texture(Gdx.files.internal("img/menuBackground.gif"));
 		backgroundSprite = new Sprite(textureBackground, 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 		stage =  new Stage();
 		
 		Gdx.input.setInputProcessor(stage);
+				
+		atlas = new TextureAtlas("ui/button.pack");
+		
+		Skin skin = new Skin(atlas);
+		
+		white = new BitmapFont(Gdx.files.internal("font/white.fnt"),false);
+		black = new BitmapFont(Gdx.files.internal("font/black.fnt"),false);
 	
-		table = new Table(GraphicManager.getSkin());
+		table = new Table(skin);
 		table.setBounds(0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 		
-		buttonRecords = GraphicManager.createTextButton("Records");
-		System.out.println(buttonRecords);
-		buttonRecords.pad(20);
-		buttonRecords.addListener(new ClickListener(){
-			@Override
-			public void clicked(InputEvent event, float x, float y) {
-				// TODO Auto-generated method stub
-				super.clicked(event, x, y);
-				((Game) Gdx.app.getApplicationListener()).setScreen(new RecordScreen(game));
-			}
-		});
 		
-		buttonPlay = GraphicManager.createTextButton("Algo mas largo");
-		buttonPlay.pad(20);
+//		Label label1 = new Label("hello", skin);
 		
+//		Label label1 = new Label("hello", new LabelStyle(black, new Color()));
+		Label label1 = GraphicManager.createLabel("Statistics");
 		
-		//Creating heading
-		LabelStyle headingStyle = new LabelStyle(GraphicManager.getWhiteFont(), Color.WHITE);
-		heading = new Label("Shepherd Me!", headingStyle);
+//		//Creating heading
+		LabelStyle headingStyle = new LabelStyle(white, Color.WHITE);
+		heading = new Label("Level 1", headingStyle);
 		heading.setFontScale(3);
-		
-		//putting stuff together
-		table.add(heading).colspan(2);
-		table.getCell(heading).spaceBottom(300);
+//		
+//		//putting stuff together
+		table.add(heading).colspan(3);
+		table.getCell(heading);
 		table.row();
-		table.add(buttonPlay).spaceRight(300);
-		table.add(buttonRecords).spaceLeft(200);
-		table.debug();
-		
+		table.add(label1);
+//		table.add(tiempo).spaceLeft(200);
+//		table.add(fecha).spaceLeft(200);
+//		table.debug();
+//		
 		stage.addActor(table);
-		
+//		
 	}
 
 	@Override
@@ -136,9 +124,11 @@ public class MainMenu implements Screen {
 		// TODO Auto-generated method stub
 		stage.dispose();
 		atlas.dispose();
-//		white.dispose();
-//		black.dispose();
+		white.dispose();
+		black.dispose();
 //		skin.dispose();
 	}
 
+	
+	
 }

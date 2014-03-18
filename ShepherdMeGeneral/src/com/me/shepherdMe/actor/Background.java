@@ -29,19 +29,7 @@ public class Background extends Actor {
 		Tbackground = new Texture(Gdx.files.internal("img/fondo.png"));
 		background = new TextureRegion(Tbackground,0,0,Gdx.graphics.getWidth(),Gdx.graphics.getHeight());
 
-		/*addListener(new InputListener(){
-			@Override
-		    public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) 
-		    {
-				//Gdx.app.log("Mover", "Reconoce pulsacion en x:"+x+" y:"+y);
-				//Gdx.app.log("Mover", "Reconoce pulsacion en x:"+Gdx.input.getX()+" y:"+Gdx.input.getY());
-				Vector2 v = event.getListenerActor().localToAscendantCoordinates(getParent(),(new Vector2(x, y)));
-				Gdx.app.log("mover en back", v.toString());
-				logica.moveDog(v);
-				return true;
-		    }
-		});	*/
-
+		
 	}
 	
 	public void draw(SpriteBatch batch, float parentApha)
