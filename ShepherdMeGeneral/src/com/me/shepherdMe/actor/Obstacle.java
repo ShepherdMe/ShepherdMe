@@ -9,9 +9,9 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 
 public class Obstacle extends Actor {
 
-	private Rectangle area;
-	private TextureRegion regionObstacle;
-	private Texture obstacle;
+	protected Rectangle area;
+	protected TextureRegion regionObstacle;
+	protected Texture obstacle;
 
 	public Obstacle(float x, float y, float width, float height) {
 		this.area = new Rectangle(x, y, width, height);

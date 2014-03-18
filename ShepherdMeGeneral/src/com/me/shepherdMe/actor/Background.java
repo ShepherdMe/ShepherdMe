@@ -2,6 +2,7 @@ package com.me.shepherdMe.actor;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.Texture.TextureWrap;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
@@ -23,11 +24,13 @@ public class Background extends Actor {
 		this.game=game;
 		this.logica=logica;
 		setPosition(0, 0);
-		setHeight(Gdx.graphics.getHeight());
-		setWidth(Gdx.graphics.getWidth());
+		setHeight(Gdx.app.getGraphics().getHeight());
+		setWidth(Gdx.app.getGraphics().getWidth());
 		
-		Tbackground = new Texture(Gdx.files.internal("img/fondo.png"));
-		background = new TextureRegion(Tbackground,0,0,Gdx.graphics.getWidth(),Gdx.graphics.getHeight());
+		Tbackground = new Texture(Gdx.files.internal("img/background.jpg"));
+		Tbackground.setWrap(TextureWrap.Repeat, TextureWrap.Repeat);
+		background = new TextureRegion(Tbackground,Gdx.app.getGraphics().getWidth(),Gdx.app.getGraphics().getHeight());
+	
 
 		
 	}
