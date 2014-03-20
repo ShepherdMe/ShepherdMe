@@ -6,6 +6,7 @@ import java.util.List;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.scenes.scene2d.actions.RepeatAction;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.me.shepherdMe.ShepherdMe;
 import com.me.shepherdMe.actor.Background;
@@ -13,6 +14,7 @@ import com.me.shepherdMe.actor.Dog;
 import com.me.shepherdMe.actor.Obstacle;
 import com.me.shepherdMe.actor.Sheep;
 import com.me.shepherdMe.actor.input.BackgroundUserInput;
+import com.me.shepherdMe.functions.SheepAction;
 import com.me.shepherdMe.screens.Level;
 
 public class LogicaLevel extends Table {
@@ -36,7 +38,17 @@ public class LogicaLevel extends Table {
 
 		this.sheep1 = new Sheep(game, 250, 100);
 		this.sheep2 = new Sheep(game, 50, 400);
-		actionSheep();
+		
+		SheepAction ac= new SheepAction();
+		ac.setAmount();
+		RepeatAction repeat;
+        repeat = new RepeatAction();
+        repeat.setCount(repeat.FOREVER);
+        repeat.setAction(ac);
+        
+		//sheep1.addAction(repeat);
+		sheep2.addAction(repeat);
+
 
 		addActor(sheep1);
 		addActor(sheep2);
