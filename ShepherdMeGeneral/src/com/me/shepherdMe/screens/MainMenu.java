@@ -92,8 +92,16 @@ public class MainMenu implements Screen {
 			}
 		});
 		
-		buttonPlay = GraphicManager.createTextButton("Algo mas largo");
+		buttonPlay = GraphicManager.createTextButton("Play");
 		buttonPlay.pad(20);
+		buttonPlay.addListener(new ClickListener(){
+			@Override
+			public void clicked(InputEvent event, float x, float y) {
+				// TODO Auto-generated method stub
+				super.clicked(event, x, y);
+				((Game) Gdx.app.getApplicationListener()).setScreen(new LevelChooser(game));
+			}
+		});
 		
 		
 		//Creating heading
