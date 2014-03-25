@@ -26,8 +26,8 @@ public class Dog extends Actor {
 
 		this.game = game;
 		setPosition(50, 50);
-		setHeight(64);
-		setWidth(64);
+		setHeight(Gdx.graphics.getHeight()/7);
+		setWidth(Gdx.graphics.getHeight()/7);
 		/*setX(getWidth() / 2);
 		setY(getHeight() / 2);*/
 

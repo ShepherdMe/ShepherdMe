@@ -42,6 +42,7 @@ public class MainMenu implements Screen {
 	private Label heading;
 	private ShepherdMe game;
 	private Image volumeImage, exitImage;
+	private Sprite fondo;
 	private boolean volumeOn;
 	
 	public MainMenu(ShepherdMe game){
@@ -76,7 +77,8 @@ public class MainMenu implements Screen {
 		GraphicManager.initialize();
 		batchBackground = new SpriteBatch();
 		textureBackground = new Texture(Gdx.files.internal("img/menuBackground.gif"));
-		backgroundSprite = new Sprite(textureBackground, 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+		backgroundSprite = new Sprite(textureBackground);
+		backgroundSprite.setSize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 		stage =  new Stage();
 		
 		Gdx.input.setInputProcessor(stage);
