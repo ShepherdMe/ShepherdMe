@@ -54,8 +54,8 @@ public class LogicaLevel extends Table {
 		addActor(sheep2);
 		
 		this.obstacle = new ArrayList<Obstacle>();
-		this.obstacle.add(new Obstacle(200, 150, 100, 50));//Hacerlo mejor, recorrer el array
-		addActor(obstacle.get(0));
+		//this.obstacle.add(new Obstacle(200, 150, 100, 50));//Hacerlo mejor, recorrer el array
+//		addActor(obstacle.get(0));
 		
 
 	}
