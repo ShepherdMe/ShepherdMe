@@ -31,8 +31,8 @@ public class LevelChooser implements Screen {
 	private SpriteBatch batchBackground;
 	private Texture textureBackground;
 	private Sprite backgroundSprite;
-	// private List<Image> levelImages;
 	private ShepherdMe game;
+	private Image backArrow;
 
 	public LevelChooser(ShepherdMe game) {
 		this.game = game;
@@ -65,7 +65,6 @@ public class LevelChooser implements Screen {
 	@Override
 	public void show() {
 		// TODO Auto-generated method stub
-
 		batchBackground = new SpriteBatch();
 		textureBackground = new Texture(
 				Gdx.files.internal("img/menuBackground.gif"));
@@ -79,14 +78,9 @@ public class LevelChooser implements Screen {
 				Gdx.files.internal("img/green.png")));
 		float imageHeight = Gdx.graphics.getHeight() / 3;
 		float imageWidth = Gdx.graphics.getWidth() / 4;
-		System.out.println("Total: " + Gdx.graphics.getHeight() + " x "
-				+ Gdx.graphics.getWidth());
-		System.out.println("Width: " + imageWidth + " Height: " + imageHeight);
 		imageGreen.setSize(imageWidth, imageHeight);
 		imageBlue.setSize(imageWidth, imageHeight);
 
-		Table table = new Table(GraphicManager.getSkin());
-		table.setBounds(0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 
 		LabelStyle headingStyle = new LabelStyle(GraphicManager.getBlackFont(),
 				Color.BLACK);
@@ -101,13 +95,13 @@ public class LevelChooser implements Screen {
 		arrowRight.setX(Gdx.graphics.getWidth() * 7 / 8);
 		arrowRight.setY(Gdx.graphics.getHeight() * 1 / 7);
 		arrowRight.setHeight(imageHeight * 2 + 5);
-		arrowRight.setWidth(imageWidth);
+		arrowRight.setWidth(imageWidth/3);
 		Image arrowLeft = new Image(new Texture(
 				Gdx.files.internal("img/arrowLeft.png")));
-		arrowLeft.setX(Gdx.graphics.getWidth() / 14);
+		arrowLeft.setX(Gdx.graphics.getWidth() / 25);
 		arrowLeft.setY(Gdx.graphics.getHeight() * 1 / 7);
 		arrowLeft.setHeight(imageHeight * 2 + 5);
-		arrowLeft.setWidth(imageWidth);
+		arrowLeft.setWidth(imageWidth/3);
 
 		Gdx.input.setInputProcessor(stage);
 		List<Image> levelImages = new ArrayList<Image>();
@@ -137,15 +131,28 @@ public class LevelChooser implements Screen {
 			levelImages.add(image);
 		}
 
+		//backArrow
+		//backArrow
+				backArrow = GraphicManager.createBackArrow();
+				backArrow.addListener(new InputListener(){
+					@Override
+					public boolean touchDown(InputEvent event, float x, float y,
+							int pointer, int button) {
+						// TODO Auto-generated method stub
+						((Game) Gdx.app.getApplicationListener()).setScreen(new MainMenu(game));
+						return true;
+					}
+				});
+		
 		for (Image img : levelImages)
 			stage.addActor(img);
 		stage.addActor(heading);
 		stage.addActor(arrowRight);
 		stage.addActor(arrowLeft);
-
-		stage.addActor(table);
-		table.debug();
+		stage.addActor(backArrow);
 	}
+	
+	
 
 	@Override
 	public void hide() {

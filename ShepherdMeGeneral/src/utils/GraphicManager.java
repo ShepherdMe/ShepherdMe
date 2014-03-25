@@ -2,8 +2,10 @@ package utils;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
@@ -35,6 +37,20 @@ public class GraphicManager {
 		textButtonStyle.font.scale(1.5f);
 	}
 	
+	public static Image createBackArrow(){
+		Image backArrow = new Image(new Texture(Gdx.files.internal("img/backArrow.png")));
+		int width = Gdx.graphics.getWidth(), height = Gdx.graphics.getHeight();
+		backArrow.setBounds(width/20, 7*height/8, width/11, height/11);
+		return backArrow;
+	}
+	
+	public static Image createExitButton(){
+		Image backArrow = new Image(new Texture(Gdx.files.internal("img/exit.png")));
+		int width = Gdx.graphics.getWidth(), height = Gdx.graphics.getHeight();
+		backArrow.setBounds(width/20, 7*height/8, width/11, height/11);
+		return backArrow;
+	}
+	
 	private static boolean correct(){
 		return !(skin==null || atlas==null || white==null || black==null);
 	}
@@ -43,7 +59,7 @@ public class GraphicManager {
 		TextButton button = null;
 		if(correct()){
 			button = new TextButton(text, textButtonStyle);
-			button.scale(1.5f);
+//			button.scale(1.5f);
 		}
 		return button;
 	}
