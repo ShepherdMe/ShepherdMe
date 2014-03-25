@@ -29,6 +29,8 @@ public class BackgroundUserInput extends InputListener {
 	private static Timer timer;
 	private static TimerTask timerTask;
 	private static boolean running = false;
+	private static double speed = 1;
+	
 
 	public BackgroundUserInput(Background BG) {
 		this.BG = BG;
@@ -50,10 +52,16 @@ public class BackgroundUserInput extends InputListener {
 				public void run() {
 					// TODO Auto-generated method stub
 //					System.out.println("Moving dog to : " + toX  + " , " + toY);
+					Dog dog = BG.getLogica().getDog();
+					float x = dog.getX();
+					float y = dog.getY();
+					double distance = Math.sqrt((toX-x)*(toX-x) + (toY-y)*(toY-y));
+					speed =  8*distance/Gdx.graphics.getHeight();
+					if(speed<1) speed = 1;
 					moveDog();
 				}
 			};
-			timer.scheduleAtFixedRate(timerTask, 0, 2);
+			timer.scheduleAtFixedRate(timerTask, 0, 20);
 		 }
 		 return true; 
 	  }
@@ -105,7 +113,7 @@ public class BackgroundUserInput extends InputListener {
 
 		Vector2 delta = new Vector2(destino.x - origen.x, destino.y - origen.y);
 		delta.nor();
-	//	delta.set(delta.x*10, delta.y *10);
+		delta.set((float)speed*delta.x, (float)speed*delta.y);
 		
 		Vector2 position = new Vector2(origen.x + delta.x, origen.y + delta.y);
 		
