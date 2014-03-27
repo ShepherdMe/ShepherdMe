@@ -41,6 +41,11 @@ public class BackgroundUserInput extends InputListener {
 	 @Override public boolean touchDown(final InputEvent event, float x, float y,
 	  int pointer, int button) 
 	  {
+		 
+		 if(running){
+			 timerTask.cancel();
+			 running = false;
+		 }
 		 toX = event.getStageX();
 		 toY = event.getStageY();
 		 if(!running){
@@ -70,10 +75,10 @@ public class BackgroundUserInput extends InputListener {
 	 public void touchUp(InputEvent event, float x, float y,
 			  int pointer, int button) 
 	 {
-		 if(running){
-			 timerTask.cancel();
-			 running = false;
-		 }
+//		 if(running){
+//			 timerTask.cancel();
+//			 running = false;
+//		 }
 	 }
 	 
 	
