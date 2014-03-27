@@ -15,6 +15,8 @@ import com.me.shepherdMe.functions.Recta;
 
 public class BackgroundUserInput extends InputListener {
 
+	private static int MIN_SPEED = 5;
+	
 	private Background BG;
 
 	private float deltaY;
@@ -62,7 +64,7 @@ public class BackgroundUserInput extends InputListener {
 					float y = dog.getY();
 					double distance = Math.sqrt((toX-x)*(toX-x) + (toY-y)*(toY-y));
 					speed =  8*distance/Gdx.graphics.getHeight();
-					if(speed<1) speed = 1;
+					if(speed<MIN_SPEED) speed = MIN_SPEED;
 					moveDog();
 				}
 			};
