@@ -35,58 +35,60 @@ public class BackgroundUserInput extends InputListener {
 	private static boolean running = false;
 	private static double speed = 1;
 	private static double distance;
+	private static boolean pause = false;
 
 	public BackgroundUserInput(Background BG) {
 		this.BG = BG;
+	}
 
+	public void setPause(boolean pause) {
+		this.pause = pause;
 	}
 
 	@Override
 	public boolean touchDown(final InputEvent event, float x, float y,
 			int pointer, int button) {
+		if (!pause) {
+			if (running) {
+				timerTask.cancel();
+				running = false;
+			}
+			toX = event.getStageX();
+			toY = event.getStageY();
+			if (!running) {
+				running = true;
+				timer = new Timer();
+				timerTask = new TimerTask() {
 
-		if (running) {
-			timerTask.cancel();
-			running = false;
-		}
-		toX = event.getStageX();
-		toY = event.getStageY();
-		if (!running) {
-			running = true;
-			timer = new Timer();
-			timerTask = new TimerTask() {
+					@Override
+					public void run() {
+						// TODO Auto-generated method stub
+						Dog dog = BG.getLogica().getDog();
+						Array<Vector2> polygon = new Array();
+						polygon.add(new Vector2(dog.getX(), dog.getY()));
+						polygon.add(new Vector2(dog.getX() + dog.getWidth(),
+								dog.getY()));
+						polygon.add(new Vector2(dog.getX() + dog.getWidth(),
+								dog.getY() + dog.getHeight()));
+						polygon.add(new Vector2(dog.getX(), dog.getY()
+								+ dog.getHeight()));
 
-				@Override
-				public void run() {
-					// TODO Auto-generated method stub
-					Dog dog = BG.getLogica().getDog();
-					Array<Vector2> polygon = new Array();
-					polygon.add(new Vector2(dog.getX(), dog.getY()));
-					polygon.add(new Vector2(dog.getX()+dog.getWidth(), dog.getY()));
-					polygon.add(new Vector2(dog.getX()+dog.getWidth(), dog.getY()+dog.getHeight()));
-					polygon.add(new Vector2(dog.getX(), dog.getY()+dog.getHeight()));
-					
-					
-					Vector2 point = new Vector2(toX,toY);
-					if(!Intersector.isPointInPolygon(polygon, point)){
-					
-//					if (toX <= (dog.getX() + dog.getWidth()) && toX >= dog.getX()	&& toY <= (dog.getY() + dog.getHeight()) && toY >= dog.getY()) {
-//						timerTask.cancel();
-//						running = false;
-//					} else {
-						float x = dog.getX();
-						float y = dog.getY();
-						distance = Math.sqrt((toX - x) * (toX - x) + (toY - y)
-								* (toY - y));
-						speed = distance / Gdx.graphics.getHeight() * STEP;
+						Vector2 point = new Vector2(toX, toY);
+						if (!Intersector.isPointInPolygon(polygon, point)) {
+							float x = dog.getX();
+							float y = dog.getY();
+							distance = Math.sqrt((toX - x) * (toX - x)
+									+ (toY - y) * (toY - y));
+							speed = distance / Gdx.graphics.getHeight() * STEP;
 
-						if (speed < MIN_SPEED)
-							speed = MIN_SPEED;
-						moveDog();
+							if (speed < MIN_SPEED)
+								speed = MIN_SPEED;
+							moveDog();
+						}
 					}
-				}
-			};
-			timer.scheduleAtFixedRate(timerTask, 0, 20);
+				};
+				timer.scheduleAtFixedRate(timerTask, 0, 20);
+			}
 		}
 		return true;
 	}
@@ -94,8 +96,10 @@ public class BackgroundUserInput extends InputListener {
 	@Override
 	public void touchDragged(final InputEvent event, float x, float y,
 			int pointer) {
-		toX = event.getStageX();
-		toY = event.getStageY();
+		if (!pause) {
+			toX = event.getStageX();
+			toY = event.getStageY();
+		}
 
 	}
 

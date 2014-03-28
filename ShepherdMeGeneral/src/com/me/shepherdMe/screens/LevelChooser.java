@@ -80,13 +80,15 @@ public class LevelChooser implements Screen {
 		imageGreen.setSize(imageWidth, imageHeight);
 		imageBlue.setSize(imageWidth, imageHeight);
 
-
-		LabelStyle headingStyle = new LabelStyle(GraphicManager.getBlackFont(),
-				Color.BLACK);
-		Label heading = new Label("Choose level", headingStyle);
-		heading.setPosition(Gdx.graphics.getWidth() / 2 - heading.getWidth()
-				- 10, Gdx.graphics.getHeight() - heading.getHeight() * 3);
-		heading.setFontScale(3);
+		// Choose level text
+		Image chooseText = new Image(new Texture(Gdx.files.internal("img/chooseLevel.png")));
+		chooseText.setPosition(Gdx.graphics.getWidth()/4, 7*Gdx.graphics.getHeight()/8);
+//		LabelStyle headingStyle = new LabelStyle(GraphicManager.getBlackFont(),
+//				Color.BLACK);
+//		Label heading = new Label("Choose level", headingStyle);
+//		heading.setPosition(Gdx.graphics.getWidth() / 2 - heading.getWidth()
+//				- 10, Gdx.graphics.getHeight() - heading.getHeight() * 3);
+//		heading.setFontScale(3);
 
 		// Creating arrows
 		Image arrowRight = new Image(new Texture(
@@ -145,7 +147,7 @@ public class LevelChooser implements Screen {
 		
 		for (Image img : levelImages)
 			stage.addActor(img);
-		stage.addActor(heading);
+		stage.addActor(chooseText);
 		stage.addActor(arrowRight);
 		stage.addActor(arrowLeft);
 		stage.addActor(backArrow);

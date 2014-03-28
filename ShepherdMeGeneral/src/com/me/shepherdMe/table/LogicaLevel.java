@@ -29,6 +29,7 @@ public class LogicaLevel extends Table {
 	private Background background;
 	private Dog dog;
 	private List<Obstacle> obstacle;
+	private BackgroundUserInput bui;
 
 
 	public LogicaLevel(ShepherdMe game, Level screen) {
@@ -36,7 +37,8 @@ public class LogicaLevel extends Table {
 		setClip(true);
 		this.game = game;
 		this.background = new Background(game, this);
-		this.background.addListener(new BackgroundUserInput(this.background));
+		bui = new BackgroundUserInput(this.background);
+		this.background.addListener(bui);
 		addActor(background);
 		this.dog = new Dog(game);
 		addActor(dog);
@@ -64,6 +66,10 @@ public class LogicaLevel extends Table {
 		
 
 		
+	}
+	
+	public void setPause(boolean pause){
+		bui.setPause(pause);
 	}
 
 	@Override

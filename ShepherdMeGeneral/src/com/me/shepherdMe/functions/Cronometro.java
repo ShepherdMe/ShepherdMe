@@ -12,6 +12,7 @@ public class Cronometro {
 	private Label label;
 	private Timer timer;
 	private cronometerTask timerTask;
+	private boolean running = false;
 	
 	public Cronometro(Label label)
 	{
@@ -20,15 +21,21 @@ public class Cronometro {
 		this.label = label;
 	}
 	
+	public boolean isRunning(){
+		return running;
+	}
+	
 	public void start()
 	{
 		timer = new Timer();
 		timerTask = new cronometerTask();
-		timer.scheduleAtFixedRate(timerTask, 0, 1000);	
+		timer.scheduleAtFixedRate(timerTask, 0, 1000);
+		running = true;
 	}
 	
 	public void stop()
 	{
+		running = false;
 		if(timer!=null && timerTask!=null){
 			timerTask.cancel();
 			timer.cancel();
@@ -42,6 +49,7 @@ public class Cronometro {
 	
 	public void pause()
 	{
+		running = false;
 		if(timer!=null && timerTask!=null){
 			timerTask.cancel();
 			timer.cancel();
