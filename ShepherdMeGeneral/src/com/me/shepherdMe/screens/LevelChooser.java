@@ -53,7 +53,6 @@ public class LevelChooser implements Screen {
 		stage.act(delta);
 
 		stage.draw();
-		// Table.drawDebug(stage);
 	}
 
 	@Override
@@ -66,10 +65,10 @@ public class LevelChooser implements Screen {
 	public void show() {
 		// TODO Auto-generated method stub
 		batchBackground = new SpriteBatch();
-		textureBackground = new Texture(
-				Gdx.files.internal("img/menuBackground.gif"));
-		backgroundSprite = new Sprite(textureBackground, 0, 0,
-				Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+		textureBackground = new Texture(Gdx.files.internal("img/menuBackground.gif"));
+		backgroundSprite = new Sprite(textureBackground);
+		backgroundSprite.setSize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+		
 		stage = new Stage();
 
 		Image imageGreen = new Image(new Texture(

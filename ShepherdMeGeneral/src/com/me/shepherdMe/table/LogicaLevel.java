@@ -3,10 +3,13 @@ package com.me.shepherdMe.table;
 import java.util.ArrayList;
 import java.util.List;
 
+import utils.GraphicManager;
+
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.actions.RepeatAction;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.me.shepherdMe.ShepherdMe;
 import com.me.shepherdMe.actor.Background;
@@ -14,6 +17,7 @@ import com.me.shepherdMe.actor.Dog;
 import com.me.shepherdMe.actor.Obstacle;
 import com.me.shepherdMe.actor.Sheep;
 import com.me.shepherdMe.actor.input.BackgroundUserInput;
+import com.me.shepherdMe.functions.Cronometro;
 import com.me.shepherdMe.functions.SheepAction;
 import com.me.shepherdMe.screens.Level;
 
@@ -25,6 +29,7 @@ public class LogicaLevel extends Table {
 	private Background background;
 	private Dog dog;
 	private List<Obstacle> obstacle;
+
 
 	public LogicaLevel(ShepherdMe game, Level screen) {
 		setBounds(0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
@@ -58,6 +63,7 @@ public class LogicaLevel extends Table {
 //		addActor(obstacle.get(0));
 		
 
+		
 	}
 
 	@Override
