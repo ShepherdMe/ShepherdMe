@@ -7,27 +7,21 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 
-public class Obstacle extends Actor {
+public abstract class Obstacle extends Actor {
 
-	protected Rectangle area;
+	protected Object area;
 	protected TextureRegion regionObstacle;
 	protected Texture obstacle;
 
 	public Obstacle(float x, float y, float width, float height) {
-		this.area = new Rectangle(x, y, width, height);
+		super();
 		setPosition(x, y);
 		setHeight(height);
 		setWidth(width);
-
-		this.obstacle = new Texture(Gdx.files.internal("img/muro.jpg"));
-		this.regionObstacle = new TextureRegion(this.obstacle);
-	}
-
-	public Rectangle getArea() {
-		return this.area;
 	}
 
 	public boolean hitArea(float x, float y, float width, float height) {
+		
 		if( (x+width>= this.getX()) && (x <= this.getX() + this.getWidth()))
 		{
 			if ((y+height >= this.getY()) && (y <= this.getY() + this.getHeight())) 

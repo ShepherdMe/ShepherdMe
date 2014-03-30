@@ -1,5 +1,6 @@
 package com.me.shepherdMe.table;
 
+import java.awt.Label;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,7 +11,9 @@ import com.badlogic.gdx.scenes.scene2d.actions.RepeatAction;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.me.shepherdMe.ShepherdMe;
 import com.me.shepherdMe.actor.Background;
+import com.me.shepherdMe.actor.Bush;
 import com.me.shepherdMe.actor.Dog;
+import com.me.shepherdMe.actor.Lake;
 import com.me.shepherdMe.actor.Obstacle;
 import com.me.shepherdMe.actor.Sheep;
 import com.me.shepherdMe.actor.input.BackgroundUserInput;
@@ -54,8 +57,10 @@ public class LogicaLevel extends Table {
 		addActor(sheep2);
 		
 		this.obstacle = new ArrayList<Obstacle>();
-		//this.obstacle.add(new Obstacle(200, 150, 100, 50));//Hacerlo mejor, recorrer el array
-//		addActor(obstacle.get(0));
+		this.obstacle.add(new Bush(200, 150, 100, 50));//Hacerlo mejor, recorrer el array
+		this.obstacle.add(new Lake(500, 300, 100, 50));
+		addActor(obstacle.get(0));
+		addActor(obstacle.get(1));
 		
 
 	}
