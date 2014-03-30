@@ -22,21 +22,7 @@ public abstract class Obstacle extends Actor {
 
 	public boolean hitArea(float x, float y, float width, float height) {
 		
-		if( (x+width>= this.getX()) && (x <= this.getX() + this.getWidth()))
-		{
-			if ((y+height >= this.getY()) && (y <= this.getY() + this.getHeight())) 
-			{
-				return true;
-			}
-			else
-			{
-				return false;
-			}
-		}
-		else
-		{
-			return false;
-		}
+		return false;
 	}
 
 	public void draw(SpriteBatch batch, float parentAlpha) {

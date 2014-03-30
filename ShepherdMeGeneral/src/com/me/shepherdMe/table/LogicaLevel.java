@@ -10,7 +10,6 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.actions.RepeatAction;
-import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.me.shepherdMe.ShepherdMe;
 import com.me.shepherdMe.actor.Background;
@@ -19,6 +18,7 @@ import com.me.shepherdMe.actor.Dog;
 import com.me.shepherdMe.actor.Lake;
 import com.me.shepherdMe.actor.Obstacle;
 import com.me.shepherdMe.actor.Sheep;
+import com.me.shepherdMe.actor.WaterCircle;
 import com.me.shepherdMe.actor.input.BackgroundUserInput;
 import com.me.shepherdMe.functions.Cronometro;
 import com.me.shepherdMe.functions.SheepAction;
@@ -60,14 +60,14 @@ public class LogicaLevel extends Table {
 		sheep2.addAction(repeat);
 
 
-		addActor(sheep1);
-		addActor(sheep2);
+		//addActor(sheep1);
+		//addActor(sheep2);
 		
 		this.obstacle = new ArrayList<Obstacle>();
-		this.obstacle.add(new Bush(200, 150, 100, 50));//Hacerlo mejor, recorrer el array
-		this.obstacle.add(new Lake(500, 300, 100, 50));
+		//this.obstacle.add(new Bush(200, 150, 100, 50));//Hacerlo mejor, recorrer el array
+		this.obstacle.add(new WaterCircle(500, 200, 150));
 		addActor(obstacle.get(0));
-		addActor(obstacle.get(1));
+		//addActor(obstacle.get(1));
 		
 
 		

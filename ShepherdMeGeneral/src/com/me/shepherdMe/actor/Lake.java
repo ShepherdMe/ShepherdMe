@@ -20,10 +20,6 @@ public class Lake extends Obstacle {
 		
 	}
 	
-	@Override
-	public boolean hitArea(float x, float y, float width, float height)
-	{
-		return (((Ellipse) this.area).contains(x,y)||((Ellipse) this.area).contains(x+width,y+height) );
-	}
+
 
 }

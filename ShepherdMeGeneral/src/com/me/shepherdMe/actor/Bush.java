@@ -4,22 +4,36 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Rectangle;
+import com.sun.jmx.snmp.InetAddressAcl;
 
-public class Bush extends Obstacle {
-		
-	
+public class Bush extends Obstacle implements InterfaceObstacle {
+
 	public Bush(float x, float y, float width, float height) {
-		
-		super(x,y,width,height);
-		this.area = new Rectangle(x, y, width, height);
-		
-		this.obstacle = new Texture(Gdx.files.internal("img/muro.jpg"));
-		this.regionObstacle = new TextureRegion(this.obstacle);;
 
-		this.obstacle = new Texture(Gdx.files.internal("img/muro.jpg"));//Cambiarle la foto y poner un width y height determinado
+		super(x, y, width, height);
+		this.area = new Rectangle(x, y, width, height);
+
+		this.obstacle = new Texture(Gdx.files.internal("img/muro.jpg"));
+		this.regionObstacle = new TextureRegion(this.obstacle);
+		;
+
+		this.obstacle = new Texture(Gdx.files.internal("img/muro.jpg"));
 		this.regionObstacle = new TextureRegion(this.obstacle);
 	}
 
-	
-		
+	@Override
+	public boolean hitArea(float x, float y, float width, float height) {
+
+		if ((x + width >= this.getX()) && (x <= this.getX() + this.getWidth())) {
+			if ((y + height >= this.getY())
+					&& (y <= this.getY() + this.getHeight())) {
+				return true;
+			} else {
+				return false;
+			}
+		} else {
+			return false;
+		}
+	}
+
 }
