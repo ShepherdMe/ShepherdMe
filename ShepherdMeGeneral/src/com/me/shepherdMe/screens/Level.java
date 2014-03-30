@@ -73,7 +73,7 @@ public class Level implements Screen {
 		cronometerLabel.setX(7 * Gdx.graphics.getWidth() / 8);
 		cronometerLabel.setY(8 * Gdx.graphics.getHeight() / 9);
 		cronometerLabel.setSize(50, 50);
-		cronometerLabel.setFontScale(3);
+//		cronometerLabel.setFontScale(3);
 		cronometer = new Cronometro(cronometerLabel);
 		cronometer.start();
 		stage.addActor(cronometerLabel);

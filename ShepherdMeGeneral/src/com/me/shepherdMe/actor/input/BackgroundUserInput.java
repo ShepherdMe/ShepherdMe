@@ -63,27 +63,31 @@ public class BackgroundUserInput extends InputListener {
 					@Override
 					public void run() {
 						// TODO Auto-generated method stub
-						Dog dog = BG.getLogica().getDog();
-						Array<Vector2> polygon = new Array();
-						polygon.add(new Vector2(dog.getX(), dog.getY()));
-						polygon.add(new Vector2(dog.getX() + dog.getWidth(),
-								dog.getY()));
-						polygon.add(new Vector2(dog.getX() + dog.getWidth(),
-								dog.getY() + dog.getHeight()));
-						polygon.add(new Vector2(dog.getX(), dog.getY()
-								+ dog.getHeight()));
+						if (!pause) {
+							Dog dog = BG.getLogica().getDog();
+							Array<Vector2> polygon = new Array();
+							polygon.add(new Vector2(dog.getX(), dog.getY()));
+							polygon.add(new Vector2(
+									dog.getX() + dog.getWidth(), dog.getY()));
+							polygon.add(new Vector2(
+									dog.getX() + dog.getWidth(), dog.getY()
+											+ dog.getHeight()));
+							polygon.add(new Vector2(dog.getX(), dog.getY()
+									+ dog.getHeight()));
 
-						Vector2 point = new Vector2(toX, toY);
-						if (!Intersector.isPointInPolygon(polygon, point)) {
-							float x = dog.getX();
-							float y = dog.getY();
-							distance = Math.sqrt((toX - x) * (toX - x)
-									+ (toY - y) * (toY - y));
-							speed = distance / Gdx.graphics.getHeight() * STEP;
+							Vector2 point = new Vector2(toX, toY);
+							if (!Intersector.isPointInPolygon(polygon, point)) {
+								float x = dog.getX();
+								float y = dog.getY();
+								distance = Math.sqrt((toX - x) * (toX - x)
+										+ (toY - y) * (toY - y));
+								speed = distance / Gdx.graphics.getHeight()
+										* STEP;
 
-							if (speed < MIN_SPEED)
-								speed = MIN_SPEED;
-							moveDog();
+								if (speed < MIN_SPEED)
+									speed = MIN_SPEED;
+								moveDog();
+							}
 						}
 					}
 				};
