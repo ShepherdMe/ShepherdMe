@@ -4,10 +4,13 @@ import java.awt.Label;
 import java.util.ArrayList;
 import java.util.List;
 
+import utils.GraphicManager;
+
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.actions.RepeatAction;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.me.shepherdMe.ShepherdMe;
 import com.me.shepherdMe.actor.Background;
@@ -17,6 +20,7 @@ import com.me.shepherdMe.actor.Lake;
 import com.me.shepherdMe.actor.Obstacle;
 import com.me.shepherdMe.actor.Sheep;
 import com.me.shepherdMe.actor.input.BackgroundUserInput;
+import com.me.shepherdMe.functions.Cronometro;
 import com.me.shepherdMe.functions.SheepAction;
 import com.me.shepherdMe.screens.Level;
 
@@ -28,13 +32,16 @@ public class LogicaLevel extends Table {
 	private Background background;
 	private Dog dog;
 	private List<Obstacle> obstacle;
+	private BackgroundUserInput bui;
+
 
 	public LogicaLevel(ShepherdMe game, Level screen) {
 		setBounds(0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 		setClip(true);
 		this.game = game;
 		this.background = new Background(game, this);
-		this.background.addListener(new BackgroundUserInput(this.background));
+		bui = new BackgroundUserInput(this.background);
+		this.background.addListener(bui);
 		addActor(background);
 		this.dog = new Dog(game);
 		addActor(dog);
@@ -63,6 +70,11 @@ public class LogicaLevel extends Table {
 		addActor(obstacle.get(1));
 		
 
+		
+	}
+	
+	public void setPause(boolean pause){
+		bui.setPause(pause);
 	}
 
 	@Override

@@ -2,6 +2,7 @@ package com.me.shepherdMe.screens;
 
 import utils.GraphicManager;
 
+import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
@@ -11,7 +12,10 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
@@ -30,6 +34,7 @@ public class RecordScreen implements Screen{
 	private Label heading;
 	private BitmapFont white, black;
 	private ShepherdMe game;
+	private Image backArrow;
 	
 	public RecordScreen(ShepherdMe game){
 		this.game = game;
@@ -87,6 +92,19 @@ public class RecordScreen implements Screen{
 		LabelStyle headingStyle = new LabelStyle(white, Color.WHITE);
 		heading = new Label("Level 1", headingStyle);
 		heading.setFontScale(3);
+		
+		//backArrow
+		backArrow = GraphicManager.createBackArrow();
+		backArrow.addListener(new InputListener(){
+			@Override
+			public boolean touchDown(InputEvent event, float x, float y,
+					int pointer, int button) {
+				// TODO Auto-generated method stub
+				((Game) Gdx.app.getApplicationListener()).setScreen(new MainMenu(game));
+				return true;
+			}
+		});
+		
 //		
 //		//putting stuff together
 		table.add(heading).colspan(3);
@@ -98,6 +116,7 @@ public class RecordScreen implements Screen{
 //		table.debug();
 //		
 		stage.addActor(table);
+		stage.addActor(backArrow);
 //		
 	}
 
