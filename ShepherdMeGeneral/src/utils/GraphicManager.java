@@ -18,6 +18,13 @@ public class GraphicManager {
 	private static TextureAtlas atlas = null;
 	private static BitmapFont white, black;
 	private static TextButtonStyle textButtonStyle;
+	private static float landscapeWidth, screenDensity;
+	private static String usesDpi;
+	
+	private static final String usesLdpi = "ldpi";
+	private static final String usesMdpi = "mdpi";
+	private static final String usesHdpi = "hdpi";
+	private static final String usesXdpi = "xdpi";
 
 	public static void initialize() {
 		atlas = new TextureAtlas("ui/button.pack");
@@ -30,8 +37,60 @@ public class GraphicManager {
 		textButtonStyle.pressedOffsetX = 1;
 		textButtonStyle.pressedOffsetY = -1;
 		textButtonStyle.font = black;
-		textButtonStyle.font.scale(1.5f);
-
+		landscapeWidth=Gdx.graphics.getWidth();
+		screenDensity=Gdx.graphics.getDensity();
+		defineScreenSize();
+	}
+	
+	public static void scaleFont(BitmapFont font){
+		if(usesDpi.equals(usesXdpi)){
+			font.scale(1.5f);
+			System.out.println("XDPI");
+		}
+		else if(usesDpi.equals(usesLdpi)){
+			font.scale(1f);
+			System.out.println("LDPI");
+		}
+		else if(usesDpi.equals(usesMdpi)){
+			textButtonStyle.font.scale(1f);
+			System.out.println("MDPI");
+		}
+		else if(usesDpi.equals(usesHdpi)){
+			textButtonStyle.font.scale(1.1f);
+			System.out.println("HDPI");
+		}
+	}
+	
+	private static void defineScreenSize(){
+		if(landscapeWidth<=320){
+			if (screenDensity <= 1.00f) {
+				usesDpi=usesLdpi;
+			} else {
+				usesDpi=usesMdpi;
+			}
+		}else if(landscapeWidth<=480){
+			if (screenDensity < 1.00f) {
+				usesDpi=usesLdpi;
+			} else if (screenDensity == 1.00f) {
+				usesDpi=usesMdpi;
+			} else if (screenDensity >= 2.00f){
+				usesDpi=usesXdpi;
+			}else{
+				usesDpi=usesHdpi;
+			}
+		}else if(landscapeWidth<=854){
+			if (screenDensity <= 1.00f) {
+				usesDpi=usesHdpi;
+			}else{
+				usesDpi=usesXdpi;
+			}
+		}else{
+			if (screenDensity < 1.00f) {
+				usesDpi=usesHdpi;
+			} else{
+				usesDpi=usesXdpi;
+			}
+		}
 	}
 
 	public static Image createBackArrow() {

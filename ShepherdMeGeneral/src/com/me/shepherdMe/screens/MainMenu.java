@@ -83,12 +83,12 @@ public class MainMenu implements Screen {
 		
 		Gdx.input.setInputProcessor(stage);
 	
-		
+		GraphicManager.scaleFont(GraphicManager.getWhiteFont());
+		GraphicManager.scaleFont(GraphicManager.getBlackFont());
 		int width = Gdx.graphics.getWidth(), height = Gdx.graphics.getHeight();
 		buttonRecords = GraphicManager.createTextButton("Records");
 		buttonRecords.setBounds(8*width/14, height/8, width/3, height/4);
 		
-		System.out.println(buttonRecords);
 		buttonRecords.pad(20);
 		buttonRecords.addListener(new ClickListener(){
 			@Override
@@ -116,7 +116,7 @@ public class MainMenu implements Screen {
 		//Creating heading
 		LabelStyle headingStyle = new LabelStyle(GraphicManager.getWhiteFont(), Color.WHITE);
 		heading = new Label("Shepherd Me!", headingStyle);
-		heading.setFontScale(3);
+//		heading.setFontScale(3);
 		heading.setBounds(5*width/16, 5*height/8, width/2, height/4);
 		
 		//Volume icon

@@ -82,7 +82,8 @@ public class LevelChooser implements Screen {
 
 		// Choose level text
 		Image chooseText = new Image(new Texture(Gdx.files.internal("img/chooseLevel.png")));
-		chooseText.setPosition(Gdx.graphics.getWidth()/4, 7*Gdx.graphics.getHeight()/8);
+		chooseText.setPosition(Gdx.graphics.getWidth()/3, 6*Gdx.graphics.getHeight()/8);
+		chooseText.setSize(Gdx.graphics.getWidth()/3, Gdx.graphics.getHeight()/7);
 //		LabelStyle headingStyle = new LabelStyle(GraphicManager.getBlackFont(),
 //				Color.BLACK);
 //		Label heading = new Label("Choose level", headingStyle);

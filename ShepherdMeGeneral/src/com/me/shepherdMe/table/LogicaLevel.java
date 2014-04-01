@@ -1,10 +1,7 @@
 package com.me.shepherdMe.table;
 
-import java.awt.Label;
 import java.util.ArrayList;
 import java.util.List;
-
-import utils.GraphicManager;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
@@ -20,7 +17,6 @@ import com.me.shepherdMe.actor.Obstacle;
 import com.me.shepherdMe.actor.Sheep;
 import com.me.shepherdMe.actor.WaterCircle;
 import com.me.shepherdMe.actor.input.BackgroundUserInput;
-import com.me.shepherdMe.functions.Cronometro;
 import com.me.shepherdMe.functions.SheepAction;
 import com.me.shepherdMe.screens.Level;
 
