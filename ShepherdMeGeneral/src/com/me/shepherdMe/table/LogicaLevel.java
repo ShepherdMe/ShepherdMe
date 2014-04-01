@@ -65,7 +65,7 @@ public class LogicaLevel extends Table {
 		
 		this.obstacle = new ArrayList<Obstacle>();
 		//this.obstacle.add(new Bush(200, 150, 100, 50));//Hacerlo mejor, recorrer el array
-		this.obstacle.add(new WaterCircle(500, 200, 150));
+		this.obstacle.add(new WaterCircle(400, 200, 80));
 		addActor(obstacle.get(0));
 		//addActor(obstacle.get(1));
 		
