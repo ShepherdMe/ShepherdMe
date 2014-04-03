@@ -2,12 +2,17 @@ package com.me.shepherdMe.table;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.math.Intersector;
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.actions.RepeatAction;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.badlogic.gdx.utils.Array;
 import com.me.shepherdMe.ShepherdMe;
 import com.me.shepherdMe.actor.Background;
 import com.me.shepherdMe.actor.Bush;
@@ -20,15 +25,18 @@ import com.me.shepherdMe.actor.input.BackgroundUserInput;
 import com.me.shepherdMe.functions.SheepAction;
 import com.me.shepherdMe.screens.Level;
 
+
 public class LogicaLevel extends Table {
 
-	private Sheep sheep1, sheep2;
+	private static Timer timer;
+	private static TimerTask timerTask;
 
 	private ShepherdMe game;
 	private Background background;
 	private Dog dog;
 	private List<Obstacle> obstacle;
 	private BackgroundUserInput bui;
+	private List<Sheep> sheeps;
 
 
 	public LogicaLevel(ShepherdMe game, Level screen) {
@@ -42,22 +50,33 @@ public class LogicaLevel extends Table {
 		this.dog = new Dog(game);
 		addActor(dog);
 
-		this.sheep1 = new Sheep(game, 250, 100);
-		this.sheep2 = new Sheep(game, 50, 400);
+		Sheep sheep1 = new Sheep(game, 250, 100);
+		Sheep sheep2 = new Sheep(game, 50, 400);
 		
-		SheepAction ac= new SheepAction();
-		ac.setAmount();
-		RepeatAction repeat;
-        repeat = new RepeatAction();
-        repeat.setCount(repeat.FOREVER);
-        repeat.setAction(ac);
-        
-		//sheep1.addAction(repeat);
-		sheep2.addAction(repeat);
 
+		this.sheeps = new ArrayList<Sheep>();
+		this.sheeps.add(sheep1);
+		this.sheeps.add(sheep2);
+		
+		for (Sheep s : sheeps) {
+			addActor(s);
+		}
+		
+		//Mover ovejas
+		timer = new Timer();
+		timerTask = new TimerTask() {
 
-		//addActor(sheep1);
-		//addActor(sheep2);
+			@Override
+			public void run() {
+				// TODO Auto-generated method stub
+				moveSheeps();
+			
+			
+			}
+		};
+		timer.scheduleAtFixedRate(timerTask, 0, 15);
+		//fin mover ovejas
+		
 		
 		this.obstacle = new ArrayList<Obstacle>();
 		//this.obstacle.add(new Bush(200, 150, 100, 50));//Hacerlo mejor, recorrer el array
@@ -87,6 +106,19 @@ public class LogicaLevel extends Table {
 	public Dog getDog() {
 		return this.dog;
 	}
+	
+	protected void moveSheeps() {
+		// TODO Auto-generated method stub
+		for (int i=0; i< this.sheeps.size();i++) {
+			Vector2 v= this.sheeps.get(i).moveSheep();
+			
+			if (!hitArea(v)) {
+				this.sheeps.get(i).setX(v.x);
+				this.sheeps.get(i).setY(v.y);
+			}
+			
+		}
+	}
 
 	public Background GetBackground() {
 		return this.background;
@@ -97,9 +129,13 @@ public class LogicaLevel extends Table {
 		return this.obstacle;
 	}
 	
-	public void actionSheep() {
-		int with = 480;
-		int height = 800;
-
+	private boolean hitArea(Vector2 v) {
+		List<Obstacle> obstaculos = obstacle;
+		for (Obstacle obstacle : obstaculos) {
+			if (obstacle.hitArea(v.x, v.y, sheeps.get(0).getWidth(), sheeps.get(0).getHeight())) {
+				return true;
+			}
+		}
+		return false;
 	}
 }

@@ -13,55 +13,113 @@ import com.badlogic.gdx.scenes.scene2d.actions.RotateToAction;
 import com.badlogic.gdx.scenes.scene2d.actions.SequenceAction;
 import com.me.shepherdMe.ShepherdMe;
 
-
 public class Sheep extends Actor {
-	
+
 	private ShepherdMe game;
 	private TextureRegion regionSheep;
 	private Texture sheep;
 	private RotateToAction rotate;
 	private MoveByAction move;
-	private float x,y;
-	
-	public Sheep(ShepherdMe game, int x,int y)
-	{
-		this.game=game;
+
+	private int i = 1000;
+	float amountX, amountY;
+
+	public Sheep(ShepherdMe game, int x, int y) {
+		this.game = game;
 		setPosition(x, y);
-		this.x=x;
-		this.y=y;
+		this.setX(x);
+		this.setY(y);
 		setHeight(64);
 		setWidth(64);
-		setOriginX(getWidth()/2);
-		setOriginY(getHeight()/2);
-		
-		
-		
+		setOriginX(getWidth() / 2);
+		setOriginY(getHeight() / 2);
+
 		sheep = new Texture(Gdx.files.internal("img/sheep.png"));
-		
+
 		regionSheep = new TextureRegion(sheep);
-		
-		
-		
+
 	}
-	public Vector2 position()
-	{
-		return new Vector2(this.x,this.y);
+
+	public void draw(SpriteBatch batch, float parentAlpha) {
+		batch.draw(regionSheep, getX(), getY(), getOriginX(), getOriginY(),
+				getWidth(), getHeight(), getScaleX(), getScaleY(),
+				getRotation());
+
 	}
-	
-	public void draw(SpriteBatch batch, float parentAlpha)
-	{
-		batch.draw(regionSheep, getX(), getY(), getOriginX(), getOriginY(), getWidth(), getHeight(), getScaleX(), getScaleY(), getRotation());
-		
-		
-	}
-	
-	public void render()
-	{
-		Vector2 v= new Vector2();
+
+	public void render() {
+		Vector2 v = new Vector2();
 		MoveByAction move;
-			move = new MoveByAction();
-				move.setAmount(100*v.x, 100*v.y);
-			move.setDuration(5f);
-		}		
+		move = new MoveByAction();
+		move.setAmount(100 * v.x, 100 * v.y);
+		move.setDuration(5f);
+	}
+
+	public void setAmount() {
+
+		int N = (int) (Math.random() * 20 + 1);
+
+		if (N <=10) {
+			amountX = 0;
+			amountY = 0;
+		} else {
+			double angulo = Math.toRadians(N * 45);// Pasamos a radianes
+			Vector2 v = new Vector2();
+			amountX = (float) Math.sin(angulo);
+			amountY = (float) Math.cos(angulo);
+
+		}
+		System.out.println("y");
+		System.out.println(amountY);
+		System.out.println("x");
+		System.out.println(amountX);
+
+	}
+
+	public Vector2 moveSheep() {
+
+		if (i % 50 == 0) {
+			setAmount();
+			System.out.println("entro");
+
+		}
+		float x = this.getX();
+
+		float y = this.getY();
+
+		float CambioX = amountX*2;
+
+		float CambioY = amountY*2;
+
+		float Alto = Gdx.app.getGraphics().getHeight();
+
+		float Ancho = Gdx.app.getGraphics().getWidth();
+
+		if ((x + CambioX + this.getWidth()) >= Ancho) {
+
+			CambioX = -1*(Ancho - x - this.getWidth());
+			setAmount();
+		}
+		if ((y + CambioY + this.getHeight()) >= Alto) {
+			CambioY = -1*(Alto - y - this.getHeight());
+			setAmount();
+		}
+		if ((x + CambioX) < 0) {
+			CambioX = 0;
+			setAmount();
+		}
+		if ((y + CambioY) < 0) {
+			CambioY = 0;
+			setAmount();
+		}
+		i++;
+
+		Vector2 v = new Vector2();
+		v.x = x + CambioX;
+		v.y = y + CambioY;
+		return v;
+
+	}
 }
+
 
