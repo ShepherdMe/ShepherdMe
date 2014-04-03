@@ -29,7 +29,7 @@ import com.me.shepherdMe.screens.Level;
 public class LogicaLevel extends Table {
 
 	private static Timer timer;
-	private static TimerTask timerTask;
+	private static TimerTaskSheep timerTask;
 
 	private ShepherdMe game;
 	private Background background;
@@ -64,16 +64,7 @@ public class LogicaLevel extends Table {
 		
 		//Mover ovejas
 		timer = new Timer();
-		timerTask = new TimerTask() {
-
-			@Override
-			public void run() {
-				// TODO Auto-generated method stub
-				moveSheeps();
-			
-			
-			}
-		};
+		timerTask = new TimerTaskSheep();
 		timer.scheduleAtFixedRate(timerTask, 0, 15);
 		//fin mover ovejas
 		
@@ -89,6 +80,14 @@ public class LogicaLevel extends Table {
 	}
 	
 	public void setPause(boolean pause){
+		if(pause)
+		{
+			pauseOvejas();
+		}
+		else
+		{
+			inciarOvejas();
+		}
 		bui.setPause(pause);
 	}
 
@@ -112,14 +111,29 @@ public class LogicaLevel extends Table {
 		for (int i=0; i< this.sheeps.size();i++) {
 			Vector2 v= this.sheeps.get(i).moveSheep();
 			
-			if (!hitArea(v)) {
+			if (!hitArea(v)&&!hitSheep(v,this.sheeps.get(i))) {
 				this.sheeps.get(i).setX(v.x);
 				this.sheeps.get(i).setY(v.y);
 			}
 			
 		}
 	}
-
+	public void pauseOvejas()
+	{
+		if(this.timerTask!=null)
+		{
+			this.timerTask.cancel();
+			this.timerTask=null;
+		}
+	}
+	public void inciarOvejas()
+	{
+		if(this.timerTask==null)
+		{
+			timerTask = new TimerTaskSheep();
+			timer.scheduleAtFixedRate(timerTask, 0, 15);
+		}
+	}
 	public Background GetBackground() {
 		return this.background;
 	}
@@ -128,7 +142,10 @@ public class LogicaLevel extends Table {
 	{
 		return this.obstacle;
 	}
-	
+	public List<Sheep> getSheeps()
+	{
+		return this.sheeps;
+	}
 	private boolean hitArea(Vector2 v) {
 		List<Obstacle> obstaculos = obstacle;
 		for (Obstacle obstacle : obstaculos) {
@@ -138,4 +155,27 @@ public class LogicaLevel extends Table {
 		}
 		return false;
 	}
+	private boolean hitSheep(Vector2 v, Sheep s) {
+		List<Sheep> oveja = sheeps;
+		for (Sheep o : oveja) {
+			if(!o.Equals(s))
+			{
+				if (o.hitArea(v.x, v.y, sheeps.get(0).getWidth(), sheeps.get(0).getHeight())) {
+					return true;
+				}
+			}
+		}
+		return false;
+	}
+	class TimerTaskSheep extends TimerTask
+	{
+
+		@Override
+		public void run() {
+			// TODO Auto-generated method stub
+			moveSheeps();
+		}
+		
+	}
+
 }

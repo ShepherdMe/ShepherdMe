@@ -13,6 +13,7 @@ import com.badlogic.gdx.utils.Array;
 import com.me.shepherdMe.actor.Background;
 import com.me.shepherdMe.actor.Dog;
 import com.me.shepherdMe.actor.Obstacle;
+import com.me.shepherdMe.actor.Sheep;
 
 public class BackgroundUserInput extends InputListener {
 
@@ -129,7 +130,7 @@ public class BackgroundUserInput extends InputListener {
 
 		Vector2 position = new Vector2(origen.x + delta.x, origen.y + delta.y);
 
-		if (hitArea(position)) {
+		if (hitArea(position)||hitSheep(position)) {
 			return origen;
 		} else {
 			return position;
@@ -144,6 +145,16 @@ public class BackgroundUserInput extends InputListener {
 				return true;
 			}
 		}
+		return false;
+	}
+	private boolean hitSheep(Vector2 v) {
+		List<Sheep> oveja = this.BG.getLogica().getSheeps();
+		for (Sheep o : oveja) {
+				if (o.hitArea(v.x, v.y, o.getWidth(), o.getHeight())) {
+					return true;
+				}
+		}
+		
 		return false;
 	}
 

@@ -39,6 +39,16 @@ public class Sheep extends Actor {
 		regionSheep = new TextureRegion(sheep);
 
 	}
+	
+	public boolean Equals(Sheep s)
+	{
+		if(s.getX()==this.getX()||s.getY()==this.getY())
+		{
+			return true;
+		}
+		return false;
+		
+	}
 
 	public void draw(SpriteBatch batch, float parentAlpha) {
 		batch.draw(regionSheep, getX(), getY(), getOriginX(), getOriginY(),
@@ -78,7 +88,7 @@ public class Sheep extends Actor {
 
 	public Vector2 moveSheep() {
 
-		if (i % 50 == 0) {
+		if (i % 200 == 0) {
 			setAmount();
 			System.out.println("entro");
 
@@ -87,9 +97,9 @@ public class Sheep extends Actor {
 
 		float y = this.getY();
 
-		float CambioX = amountX*2;
+		float CambioX = amountX*1/2;
 
-		float CambioY = amountY*2;
+		float CambioY = amountY*1/2;
 
 		float Alto = Gdx.app.getGraphics().getHeight();
 
@@ -119,6 +129,19 @@ public class Sheep extends Actor {
 		v.y = y + CambioY;
 		return v;
 
+	}
+
+	public boolean hitArea(float x, float y, float width, float height) {
+		if ((x + width >= this.getX()) && (x <= this.getX() + this.getWidth())) {
+			if ((y + height >= this.getY())
+					&& (y <= this.getY() + this.getHeight())) {
+				return true;
+			} else {
+				return false;
+			}
+		} else {
+			return false;
+		}
 	}
 }
 
