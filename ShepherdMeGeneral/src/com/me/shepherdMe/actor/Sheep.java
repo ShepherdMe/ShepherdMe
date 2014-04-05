@@ -29,8 +29,8 @@ public class Sheep extends Actor {
 		setPosition(x, y);
 		this.setX(x);
 		this.setY(y);
-		setHeight(64);
-		setWidth(64);
+		setHeight(Gdx.graphics.getHeight()/7);
+		setWidth(Gdx.graphics.getHeight()/7);
 		setOriginX(getWidth() / 2);
 		setOriginY(getHeight() / 2);
 

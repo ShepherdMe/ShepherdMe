@@ -130,7 +130,7 @@ public class BackgroundUserInput extends InputListener {
 
 		Vector2 position = new Vector2(origen.x + delta.x, origen.y + delta.y);
 
-		if (hitArea(position)||hitSheep(position)) {
+		if (hitArea(position)) {
 			return origen;
 		} else {
 			return position;
@@ -145,16 +145,6 @@ public class BackgroundUserInput extends InputListener {
 				return true;
 			}
 		}
-		return false;
-	}
-	private boolean hitSheep(Vector2 v) {
-		List<Sheep> oveja = this.BG.getLogica().getSheeps();
-		for (Sheep o : oveja) {
-				if (o.hitArea(v.x, v.y, o.getWidth(), o.getHeight())) {
-					return true;
-				}
-		}
-		
 		return false;
 	}
 

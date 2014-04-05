@@ -19,7 +19,9 @@ import com.me.shepherdMe.actor.Bush;
 import com.me.shepherdMe.actor.Dog;
 import com.me.shepherdMe.actor.Lake;
 import com.me.shepherdMe.actor.Obstacle;
+import com.me.shepherdMe.actor.Open;
 import com.me.shepherdMe.actor.Sheep;
+import com.me.shepherdMe.actor.SheepFold;
 import com.me.shepherdMe.actor.WaterCircle;
 import com.me.shepherdMe.actor.input.BackgroundUserInput;
 import com.me.shepherdMe.functions.SheepAction;
@@ -37,10 +39,13 @@ public class LogicaLevel extends Table {
 	private List<Obstacle> obstacle;
 	private BackgroundUserInput bui;
 	private List<Sheep> sheeps;
+	private SheepFold fold;
 
 
 	public LogicaLevel(ShepherdMe game, Level screen) {
-		setBounds(0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+		float width = Gdx.graphics.getWidth();
+		float height = Gdx.graphics.getHeight();
+		setBounds(0, 0, width, height);
 		setClip(true);
 		this.game = game;
 		this.background = new Background(game, this);
@@ -52,7 +57,6 @@ public class LogicaLevel extends Table {
 
 		Sheep sheep1 = new Sheep(game, 250, 100);
 		Sheep sheep2 = new Sheep(game, 50, 400);
-		
 
 		this.sheeps = new ArrayList<Sheep>();
 		this.sheeps.add(sheep1);
@@ -70,13 +74,24 @@ public class LogicaLevel extends Table {
 		
 		
 		this.obstacle = new ArrayList<Obstacle>();
+		
+		//redil
+		fold = new SheepFold(width/2, height/2, 500, 400, Open.LEFT);
+		for(Bush b : fold.getFoldObstacles()){
+			addActor(b);
+		}
+		
 		//this.obstacle.add(new Bush(200, 150, 100, 50));//Hacerlo mejor, recorrer el array
-		this.obstacle.add(new WaterCircle(400, 200, 80));
+		this.obstacle.add(new WaterCircle(400, 400, 150));
 		addActor(obstacle.get(0));
+		for(Bush b : fold.getFoldObstacles()){
+			this.obstacle.add(b);
+		}
 		//addActor(obstacle.get(1));
-		
-
-		
+	}
+	
+	public SheepFold getFold(){
+		return this.fold;
 	}
 	
 	public void setPause(boolean pause){
@@ -115,7 +130,6 @@ public class LogicaLevel extends Table {
 				this.sheeps.get(i).setX(v.x);
 				this.sheeps.get(i).setY(v.y);
 			}
-			
 		}
 	}
 	public void pauseOvejas()
