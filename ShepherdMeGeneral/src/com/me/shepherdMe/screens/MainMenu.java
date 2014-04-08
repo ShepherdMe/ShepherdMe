@@ -1,45 +1,35 @@
 package com.me.shepherdMe.screens;
 
-import java.awt.event.KeyEvent;
-
-import javax.swing.plaf.basic.BasicInternalFrameTitlePane.MoveAction;
+import java.util.Random;
 
 import utils.GraphicManager;
+import aurelienribon.tweenengine.BaseTween;
+import aurelienribon.tweenengine.Tween;
+import aurelienribon.tweenengine.TweenCallback;
+import aurelienribon.tweenengine.TweenManager;
 
-import com.badlogic.gdx.Application;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.Screen;
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.badlogic.gdx.scenes.scene2d.Event;
-import com.badlogic.gdx.scenes.scene2d.EventListener;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.Touchable;
-import com.badlogic.gdx.scenes.scene2d.actions.MoveToAction;
+import com.badlogic.gdx.scenes.scene2d.actions.AlphaAction;
 import com.badlogic.gdx.scenes.scene2d.actions.RepeatAction;
 import com.badlogic.gdx.scenes.scene2d.actions.RotateByAction;
-import com.badlogic.gdx.scenes.scene2d.actions.RotateToAction;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
-import com.badlogic.gdx.scenes.scene2d.ui.Label;
-import com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle;
-import com.badlogic.gdx.scenes.scene2d.ui.Skin;
-import com.badlogic.gdx.scenes.scene2d.ui.Table;
-import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
-import com.badlogic.gdx.scenes.scene2d.ui.TextButton.TextButtonStyle;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
-import com.esotericsoftware.tablelayout.Cell;
 import com.me.shepherdMe.ShepherdMe;
+import com.me.shepherdMe.tween.SpriteAccessor;
 
 public class MainMenu implements Screen {
 
@@ -51,11 +41,11 @@ public class MainMenu implements Screen {
 	private Image buttonPlay, buttonRecords, buttonExit, buttonContinue,heading;
 	private Image sun, sheep;
 	private ShepherdMe game;
-	private Image volumeImage;
-	private boolean volumeOn;
-	
+	private Image volumeEffects, volumeMusic;
+	private boolean volumeEffectsOn,volumeMusicOn;
+	private TweenManager tweenManager;
 	private Image cartelExit;
-	
+
 	
 	public MainMenu(ShepherdMe game){
 		this.game = game;	
@@ -84,6 +74,7 @@ public class MainMenu implements Screen {
 		
 		stage.act(delta);
 		stage.draw();
+		
 	}
 
 	@Override
@@ -126,10 +117,57 @@ public class MainMenu implements Screen {
         sun.setOriginY(sun.getHeight()/2);
 		stage.addActor(sun);
 		
+		int i = new Random().nextInt(8);
 		
-		sheep = new Image( new Texture(Gdx.files.internal("img/main/sheep.png")));
+		sheep = new Image( new Texture(Gdx.files.internal("img/main/sheep_"+i+".png")));
+		/*if(i==7 || i ==1 || i==0 || i==3 || i==5 ||i==6)
+		{
+			sheep.setBounds(2*width/10, -15, height/1.5f, height/1.5f);
+		}*/
+		if(i==2)
+		{
+			sheep.setBounds(2*width/10, -15, 1.5f*height/1.5f, height/1.5f);
+		}
+		else if(i==4)
+		{
+			sheep.setBounds(width/10, -30, 1.5f*height/1.5f, height/1.5f);
+		}
+		else
+		{
+			sheep.setBounds(2*width/10, -15, height/1.5f, height/1.5f);
+
+		}
+		//sheep.setBounds(2*width/10, -15, height/1.5f, height/1.5f);
+		
+		
+		
+		/*AlphaAction alphaAc = new AlphaAction();
+		
+		
+		RepeatAction ra2 = new RepeatAction();
+		ra2.setActor(sheep);
+		ra2.setAction(alphaAc);
+		ra2.setCount(RepeatAction.FOREVER);*/
+		
+		/*SpriteBatch batch = new SpriteBatch();
+		tweenManager= new TweenManager();
+		Tween.registerAccessor(Sprite.class, new SpriteAccessor());
+		
+		Texture splashTexture= new Texture(Gdx.files.internal("img/main/sheep.png"));
+		sheep= new Sprite(splashTexture);
 		sheep.setBounds(2*width/10, -15, height/1.5f, height/1.5f);
+				
+		/*Sprite splash= new Sprite(new Texture(Gdx.files.internal("img/main/sheep.png")));
+		splash.setSize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());*/
 		
+		/*Tween.set(sheep, SpriteAccessor.ALPHA).target(0).start(tweenManager);
+		Tween.to(sheep, SpriteAccessor.ALPHA, 2).target(1).repeatYoyo(1, 2).setCallback(new TweenCallback() {
+			
+			@Override
+			public void onEvent(int type, BaseTween<?> source) {
+				
+			}
+		}).start(tweenManager);*/
 		
 		buttonRecords = new Image(new Texture(Gdx.files.internal("ui/records.png")));
 		buttonRecords.setBounds(width-width/5, height/21, width/5, height/4);
@@ -154,36 +192,59 @@ public class MainMenu implements Screen {
 		});
 		
 		
+		
 		//Creating heading
 		heading = new Image(new Texture(Gdx.files.internal("ui/tittle.png")));
 		heading.setBounds(width/25, 4*height/8, width/1.5f, height/1.5f);
 		
-		//Volume icon
-		volumeImage = new Image(new Texture(Gdx.files.internal("img/volumeOn.png")));
-		volumeOn = true;
-		volumeImage.setBounds(7*width/8, 7*height/8, width/11, height/11);
-		volumeImage.addListener(new InputListener(){
+		//Volume effects icon
+		volumeEffects = new Image(new Texture(Gdx.files.internal("img/main/sonido.png")));
+		volumeEffectsOn = true;
+		volumeEffects.setBounds(7.2f*width/8, 7*height/8, height/11, height/11);
+		volumeEffects.addListener(new InputListener(){
 			@Override
 			public boolean touchDown(InputEvent event, float x, float y,
 					int pointer, int button) {
 				// TODO Auto-generated method stub
-				if(volumeOn){
-					volumeImage.setDrawable(new TextureRegionDrawable(new TextureRegion(new Texture(Gdx.files.internal("img/volumeOff.png")))));
-					volumeOn = false;
+				if(volumeEffectsOn){
+					volumeEffects.setDrawable(new TextureRegionDrawable(new TextureRegion(new Texture(Gdx.files.internal("img/main/sonido_2.png")))));
+					volumeEffectsOn = false;
 				}
 				else{
-					volumeImage.setDrawable(new TextureRegionDrawable(new TextureRegion(new Texture(Gdx.files.internal("img/volumeOn.png")))));
-					volumeOn = true;
+					volumeEffects.setDrawable(new TextureRegionDrawable(new TextureRegion(new Texture(Gdx.files.internal("img/main/sonido.png")))));
+					volumeEffectsOn = true;
 				}
 				return true;
 			}
 		});
+		
+		//Volume music icon
+				volumeMusic = new Image(new Texture(Gdx.files.internal("img/main/music.png")));
+				volumeMusicOn = true;
+				volumeMusic.setBounds(7.2f*width/8, 6.8f*height/8 - height/11, height/11, height/11);
+				volumeMusic.addListener(new InputListener(){
+					@Override
+					public boolean touchDown(InputEvent event, float x, float y,
+							int pointer, int button) {
+						// TODO Auto-generated method stub
+						if(volumeMusicOn){
+							volumeMusic.setDrawable(new TextureRegionDrawable(new TextureRegion(new Texture(Gdx.files.internal("img/main/music_2.png")))));
+							volumeMusicOn = false;
+						}
+						else{
+							volumeMusic.setDrawable(new TextureRegionDrawable(new TextureRegion(new Texture(Gdx.files.internal("img/main/music.png")))));
+							volumeMusicOn = true;
+						}
+						return true;
+					}
+				});
 			
 		stage.addActor(sheep);
 		stage.addActor(buttonPlay);
 		stage.addActor(buttonRecords);
 		stage.addActor(heading);
-		stage.addActor(volumeImage);
+		stage.addActor(volumeEffects);
+		stage.addActor(volumeMusic);
 		
 		cartelExit = new Image(new Texture(Gdx.files.internal("ui/cartel.png")));
 		cartelExit.setBounds(Gdx.graphics.getWidth()/2-Gdx.graphics.getWidth()/3,Gdx.graphics.getHeight()/2-Gdx.graphics.getWidth()/4,Gdx.graphics.getWidth()/1.5f,Gdx.graphics.getWidth()/2);
