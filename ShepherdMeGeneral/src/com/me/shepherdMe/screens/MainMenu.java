@@ -87,6 +87,7 @@ public class MainMenu implements Screen {
 	public void show() {
 		// TODO Auto-generated method stub
 		GraphicManager.initialize();
+		Gdx.input.setCatchBackKey(true);
 		batchBackground = new SpriteBatch();
 		textureBackground = new Texture(Gdx.files.internal("img/main/Fondo_main.png"));
 		backgroundSprite = new Sprite(textureBackground);
