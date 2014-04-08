@@ -86,7 +86,7 @@ public class LogicaLevel extends Table {
 		addActor(fold.getGate());
 		//addActor(obstacle.get(1));
 		
-		//Mover ovejas DEBE SER LO ÚLTIMO DEL CONSTRUCTOR!
+		//Mover ovejas DEBE SER LO ï¿½LTIMO DEL CONSTRUCTOR!
 		timer = new Timer();
 		timerTask = new TimerTaskSheep();
 		timer.scheduleAtFixedRate(timerTask, 0, 15);
@@ -151,17 +151,17 @@ public class LogicaLevel extends Table {
 				}
 			}
 			
-			else//Si el perro está cerca.
+			else//Si el perro esta cerca.
 			{
-				Vector2 nuevaPosición= runAwayDog(this.sheeps.get(i));
-				if (!hitArea(nuevaPosición)&&!hitSheep(nuevaPosición,this.sheeps.get(i))) {
+				Vector2 nuevaPosicion= runAwayDog(this.sheeps.get(i));
+				if (!hitArea(nuevaPosicion)&&!hitSheep(nuevaPosicion,this.sheeps.get(i))) {
 					
-					this.sheeps.get(i).setX(nuevaPosición.x);
-					this.sheeps.get(i).setY(nuevaPosición.y);
+					this.sheeps.get(i).setX(nuevaPosicion.x);
+					this.sheeps.get(i).setY(nuevaPosicion.y);
 				}
 				
 			}
-			//Comprobamos si están todas en el redil
+			//Comprobamos si estï¿½n todas en el redil
 			if(this.fold.isInFold(this.sheeps.get(i)))
 			{
 				sheepsIn++;
