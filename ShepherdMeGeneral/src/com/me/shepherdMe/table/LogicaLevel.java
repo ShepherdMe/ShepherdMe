@@ -55,7 +55,7 @@ public class LogicaLevel extends Table {
 		this.dog = new Dog(game);
 		addActor(dog);
 
-		Sheep sheep1 = new Sheep(game, 250, 100);
+		Sheep sheep1 = new Sheep(game, 600, 150);
 		Sheep sheep2 = new Sheep(game, 50, 400);
 
 		this.sheeps = new ArrayList<Sheep>();
@@ -66,31 +66,33 @@ public class LogicaLevel extends Table {
 			addActor(s);
 		}
 		
-		//Mover ovejas
-		timer = new Timer();
-		timerTask = new TimerTaskSheep();
-		timer.scheduleAtFixedRate(timerTask, 0, 15);
-		//fin mover ovejas
-		
-		
+
 		this.obstacle = new ArrayList<Obstacle>();
 		
 		//redil
-		fold = new SheepFold(width/2, height/2, 500, 400, Open.LEFT);
+		fold = new SheepFold(300, 100, 250, 200, Open.LEFT);
 		for(Bush b : fold.getFoldObstacles()){
 			addActor(b);
 		}
 		
 		
 		//this.obstacle.add(new Bush(200, 150, 100, 50));//Hacerlo mejor, recorrer el array
-		this.obstacle.add(new WaterCircle(400, 400, 150));
-		addActor(obstacle.get(0));
+		//this.obstacle.add(new WaterCircle(400, 400, 150));
+		//addActor(obstacle.get(0));
 		for(Bush b : fold.getFoldObstacles()){
 			this.obstacle.add(b);
 		}
 		this.obstacle.add(fold.getGate());
 		addActor(fold.getGate());
 		//addActor(obstacle.get(1));
+		
+		//Mover ovejas DEBE SER LO �LTIMO DEL CONSTRUCTOR!
+		timer = new Timer();
+		timerTask = new TimerTaskSheep();
+		timer.scheduleAtFixedRate(timerTask, 0, 15);
+		//fin mover ovejas
+		
+		
 	}
 	
 	public SheepFold getFold(){
@@ -136,14 +138,42 @@ public class LogicaLevel extends Table {
 	
 	protected void moveSheeps() {
 		// TODO Auto-generated method stub
+		int sheepsIn=0;
+		
 		for (int i=0; i< this.sheeps.size();i++) {
 			Vector2 v= this.sheeps.get(i).moveSheep();
 			
-			if (!hitArea(v)&&!hitSheep(v,this.sheeps.get(i))) {
-				this.sheeps.get(i).setX(v.x);
-				this.sheeps.get(i).setY(v.y);
+			if(!nearDog(this.sheeps.get(i)))
+			{
+				if (!hitArea(v)&&!hitSheep(v,this.sheeps.get(i))) {
+					this.sheeps.get(i).setX(v.x);
+					this.sheeps.get(i).setY(v.y);
+				}
+			}
+			
+			else//Si el perro esta cerca.
+			{
+				Vector2 nuevaPosicion= runAwayDog(this.sheeps.get(i));
+				if (!hitArea(nuevaPosicion)&&!hitSheep(nuevaPosicion,this.sheeps.get(i))) {
+					
+					this.sheeps.get(i).setX(nuevaPosicion.x);
+					this.sheeps.get(i).setY(nuevaPosicion.y);
+				}
+				
+			}
+			//Comprobamos si est�n todas en el redil
+			if(this.fold.isInFold(this.sheeps.get(i)))
+			{
+				sheepsIn++;
+				System.out.println(sheepsIn);
+				if(sheepsIn==this.sheeps.size())
+				{
+					System.out.println("win");
+				}
+				
 			}
 		}
+		
 	}
 	public void pauseOvejas()
 	{
@@ -193,6 +223,46 @@ public class LogicaLevel extends Table {
 			}
 		}
 		return false;
+	}
+	public boolean nearDog(Sheep s)
+	{
+		Vector2 vector;
+		vector=new Vector2 (this.dog.getX()-s.getX() , this.dog.getY()-s.getY());
+		if(Math.sqrt(Math.pow(vector.x,2)+Math.pow(vector.y,2))<200)
+		{
+			return true;
+		}
+		return false;
+	}
+	public Vector2 runAwayDog(Sheep s)
+	{
+		Vector2 vectorN=new Vector2 (s.getX()-this.dog.getX() , s.getY()-this.dog.getY());
+		Vector2 vector=vectorN.nor();
+		
+		float Alto = Gdx.app.getGraphics().getHeight();
+
+		float Ancho = Gdx.app.getGraphics().getWidth();
+		
+		if ((s.getX() + vector.x + s.getWidth()) >= Ancho) {
+
+			vector.x = -1*(Ancho - s.getX() - s.getWidth());
+			
+		}
+		if ((s.getY() + vector.y + s.getHeight()) >= Alto) {
+			vector.y = -1*(Alto - s.getY() - s.getHeight());
+			
+		}
+		if ((s.getX() + vector.x) < 0) {
+			vector.x= 0;
+			
+		}
+		if ((s.getY() + vector.y) < 0) {
+			vector.y = 0;
+			
+		}
+		vector.x=s.getX()+vector.x;
+		vector.y=s.getY()+vector.y;
+		return vector;		
 	}
 	class TimerTaskSheep extends TimerTask
 	{
