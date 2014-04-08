@@ -79,10 +79,7 @@ public class Sheep extends Actor {
 			amountY = (float) Math.cos(angulo);
 
 		}
-		System.out.println("y");
-		System.out.println(amountY);
-		System.out.println("x");
-		System.out.println(amountX);
+		
 
 	}
 
@@ -90,8 +87,7 @@ public class Sheep extends Actor {
 
 		if (i % 200 == 0) {
 			setAmount();
-			System.out.println("entro");
-
+			
 		}
 		float x = this.getX();
 
@@ -143,6 +139,7 @@ public class Sheep extends Actor {
 			return false;
 		}
 	}
+	
 }
 
 
