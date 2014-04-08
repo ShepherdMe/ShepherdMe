@@ -59,7 +59,6 @@ public class MainMenu implements Screen {
 		{
 			this.quitarEventos();
 			sacarCartel();
-			//Gdx.app.exit();
 		}
 		
 
@@ -117,27 +116,19 @@ public class MainMenu implements Screen {
         sun.setOriginY(sun.getHeight()/2);
 		stage.addActor(sun);
 		
-		int i = new Random().nextInt(8);
+		int i = new Random().nextInt(7);
 		
 		sheep = new Image( new Texture(Gdx.files.internal("img/main/sheep_"+i+".png")));
-		/*if(i==7 || i ==1 || i==0 || i==3 || i==5 ||i==6)
-		{
-			sheep.setBounds(2*width/10, -15, height/1.5f, height/1.5f);
-		}*/
+
 		if(i==2)
 		{
 			sheep.setBounds(2*width/10, -15, 1.5f*height/1.5f, height/1.5f);
-		}
-		else if(i==4)
-		{
-			sheep.setBounds(width/10, -30, 1.5f*height/1.5f, height/1.5f);
 		}
 		else
 		{
 			sheep.setBounds(2*width/10, -15, height/1.5f, height/1.5f);
 
 		}
-		//sheep.setBounds(2*width/10, -15, height/1.5f, height/1.5f);
 		
 		
 		
