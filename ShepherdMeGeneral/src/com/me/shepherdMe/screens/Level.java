@@ -17,6 +17,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.me.shepherdMe.ShepherdMe;
+import com.me.shepherdMe.actor.SheepFold;
 import com.me.shepherdMe.functions.Cronometro;
 import com.me.shepherdMe.table.LogicaLevel;
 
@@ -100,7 +101,6 @@ public class Level implements Screen {
 				System.out.println("Resume pulsado");
 				if(!cronometer.isRunning()){
 					logica.setPause(false);
-					System.out.println("Reanudando todo");
 					cronometer.resume();
 					resumeImage.setVisible(false);
 					resumeImage.setZIndex(0);
@@ -154,6 +154,30 @@ public class Level implements Screen {
 			}
 		});
 		
+		// Open and close folder
+		final Image imageLocker = new Image(new Texture(Gdx.files.internal("img/close.png")));
+		imageLocker.setSize(imagePause.getWidth(), imagePause.getHeight());
+		imageLocker.setPosition(imagePause.getX() + imagePause.getWidth() + 10, imagePause.getY());
+		imageLocker.addListener(new InputListener(){
+			@Override
+			public boolean touchDown(InputEvent event, float x, float y,
+					int pointer, int button) {
+				// TODO Auto-generated method stub
+				SheepFold fold = logica.getFold();
+				if(fold.isOpen()){
+					imageLocker.setDrawable(new TextureRegionDrawable(new TextureRegion(new Texture(Gdx.files.internal("img/close.png")))));
+					logica.closeFold();
+				}
+				else{
+					imageLocker.setDrawable(new TextureRegionDrawable(new TextureRegion(new Texture(Gdx.files.internal("img/open.png")))));
+					logica.openFold();
+				}
+				
+				return super.touchDown(event, x, y, pointer, button);
+			}
+		});
+		
+		stage.addActor(imageLocker);
 		stage.addActor(imagePause);
 		
 

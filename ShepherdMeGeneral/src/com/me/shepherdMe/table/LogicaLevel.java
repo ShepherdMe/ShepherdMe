@@ -81,17 +81,30 @@ public class LogicaLevel extends Table {
 			addActor(b);
 		}
 		
+		
 		//this.obstacle.add(new Bush(200, 150, 100, 50));//Hacerlo mejor, recorrer el array
 		this.obstacle.add(new WaterCircle(400, 400, 150));
 		addActor(obstacle.get(0));
 		for(Bush b : fold.getFoldObstacles()){
 			this.obstacle.add(b);
 		}
+		this.obstacle.add(fold.getGate());
+		addActor(fold.getGate());
 		//addActor(obstacle.get(1));
 	}
 	
 	public SheepFold getFold(){
 		return this.fold;
+	}
+	
+	public void openFold(){
+		this.obstacle.remove(fold.getGate());
+		fold.open(this);
+	}
+	
+	public void closeFold(){
+		this.obstacle.add(fold.getGate());
+		fold.close(this);
 	}
 	
 	public void setPause(boolean pause){

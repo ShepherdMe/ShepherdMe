@@ -2,11 +2,12 @@ package com.me.shepherdMe.actor;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Intersector;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.utils.Array;
 
 public class SheepFold{
@@ -14,12 +15,13 @@ public class SheepFold{
 	private static final int THICKNESS_FACTOR = 20;
 	
 	private List<Bush> obstacles;
+	private Bush openable;
 	private float screenWidth, screenHeight;
 	private float x, y, width, height;
 	private Open open;
 	private Vector2 bottomLeft, bottomRight, topLeft, topRight;
-	
-	
+	private boolean isOpen = false;
+
 	
 	public SheepFold(float x, float y, float width, float heigth, Open open){
 		obstacles = new ArrayList<Bush>();
@@ -41,27 +43,31 @@ public class SheepFold{
 			obstacles.add(new Bush(x, y, screenWidth/THICKNESS_FACTOR, this.height)); //left
 			obstacles.add(new Bush(x, y, this.width, screenHeight/THICKNESS_FACTOR)); //bottom
 			obstacles.add(new Bush(x+this.width-screenWidth/THICKNESS_FACTOR, y, screenWidth/THICKNESS_FACTOR, this.height));//right
+			openable = new Bush(x, y+this.height-screenHeight/THICKNESS_FACTOR, this.width, screenHeight/THICKNESS_FACTOR); //top
 		}
 		else if(open == Open.BOTTOM){
 			obstacles.add(new Bush(x, y, screenWidth/THICKNESS_FACTOR, this.height)); //left
 			obstacles.add(new Bush(x+this.width-screenWidth/THICKNESS_FACTOR, y, screenWidth/THICKNESS_FACTOR, this.height));//right
 			obstacles.add(new Bush(x, y+this.height-screenHeight/THICKNESS_FACTOR, this.width, screenHeight/THICKNESS_FACTOR)); //top
+			openable = new Bush(x, y, this.width, screenHeight/THICKNESS_FACTOR);
 		}
 		else if(open == Open.LEFT){
 			obstacles.add(new Bush(x+this.width-screenWidth/THICKNESS_FACTOR, y, screenWidth/THICKNESS_FACTOR, this.height));//right
 			obstacles.add(new Bush(x, y+this.height-screenHeight/THICKNESS_FACTOR, this.width, screenHeight/THICKNESS_FACTOR)); //top
 			obstacles.add(new Bush(x, y, this.width, screenHeight/THICKNESS_FACTOR)); //bottom
+			openable = new Bush(x, y, screenWidth/THICKNESS_FACTOR, this.height);
 		}
 		else if(open == Open.RIGHT){
 			obstacles.add(new Bush(x, y+this.height-screenHeight/THICKNESS_FACTOR, this.width, screenHeight/THICKNESS_FACTOR)); //top
 			obstacles.add(new Bush(x, y, this.width, screenHeight/THICKNESS_FACTOR)); //bottom
 			obstacles.add(new Bush(x, y, screenWidth/THICKNESS_FACTOR, this.height)); //left
+			openable = new Bush(x+this.width-screenWidth/THICKNESS_FACTOR, y, screenWidth/THICKNESS_FACTOR, this.height);
 		}
 	}
 	
 	public boolean isInFold(Actor actor){
 		
-		Array<Vector2> polygon = new Array();
+		Array<Vector2> polygon = new Array<Vector2>();
 		
 		if(open == Open.TOP){
 			polygon.add(bottomLeft);
@@ -98,6 +104,28 @@ public class SheepFold{
 	
 	public List<Bush> getFoldObstacles(){
 		return this.obstacles;
+	}
+	
+	public Bush getGate(){
+		return openable;
+	}
+	
+	public void open(Table stage){
+		if(!isOpen){
+			stage.removeActor(openable);
+			isOpen = true;
+		}
+	}
+	
+	public void close(Table stage){
+		if(isOpen){
+			stage.addActor(openable);
+			isOpen = false;
+		}
+	}
+	
+	public boolean isOpen(){
+		return isOpen;
 	}
 
 	public float getX() {
