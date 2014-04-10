@@ -18,6 +18,7 @@ import com.me.shepherdMe.ShepherdMe;
 import com.me.shepherdMe.actor.ActorInvisible;
 import com.me.shepherdMe.actor.Background;
 import com.me.shepherdMe.actor.Bush;
+import com.me.shepherdMe.actor.Cloud;
 import com.me.shepherdMe.actor.Dog;
 import com.me.shepherdMe.actor.Lake;
 import com.me.shepherdMe.actor.Obstacle;
@@ -41,6 +42,7 @@ public class LogicaLevel extends Table {
 	private List<Obstacle> obstacle;
 	private BackgroundUserInput bui;
 	private List<Sheep> sheeps;
+	private List<Cloud> clouds;
 	private SheepFold fold;
 	private ActorInvisible actorInvisible;
 
@@ -75,7 +77,7 @@ public class LogicaLevel extends Table {
 		this.obstacle = new ArrayList<Obstacle>();
 		
 		//redil
-		fold = new SheepFold(200, 100, 500, 600, Open.LEFT);
+		fold = new SheepFold(150, 50, 50, 80, Open.LEFT);
 		for(Bush b : fold.getFoldObstacles()){
 			addActor(b);
 		}
@@ -96,6 +98,14 @@ public class LogicaLevel extends Table {
 		timerTask = new TimerTaskSheep();
 		timer.scheduleAtFixedRate(timerTask, 0, 15);
 		//fin mover ovejas
+		
+		this.clouds = new ArrayList<Cloud>();
+		this.clouds.add(new Cloud(200, 100,100, 200));
+		
+		for (Cloud s : clouds) {
+			addActor(s);
+		}
+		
 		
 		addActor(actorInvisible);
 
