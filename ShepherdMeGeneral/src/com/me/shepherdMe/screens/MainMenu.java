@@ -45,6 +45,8 @@ public class MainMenu implements Screen {
 	private boolean volumeEffectsOn,volumeMusicOn;
 	private TweenManager tweenManager;
 	private Image cartelExit;
+	private LevelChooser lc = null;
+	private RecordScreen rs = null;
 
 	
 	public MainMenu(ShepherdMe game){
@@ -87,6 +89,7 @@ public class MainMenu implements Screen {
 	public void show() {
 		// TODO Auto-generated method stub
 		GraphicManager.initialize();
+		final MainMenu mm = this;
 		Gdx.input.setCatchBackKey(true);
 		batchBackground = new SpriteBatch();
 		textureBackground = new Texture(Gdx.files.internal("img/main/Fondo_main.png"));
@@ -177,10 +180,11 @@ public class MainMenu implements Screen {
 			public void clicked(InputEvent event, float x, float y) {
 				// TODO Auto-generated method stub
 				super.clicked(event, x, y);
-				((Game) Gdx.app.getApplicationListener()).setScreen(new RecordScreen(game));
+				if(rs==null)
+					rs = new RecordScreen(game,mm);
+				((Game) Gdx.app.getApplicationListener()).setScreen(rs);
 			}
 		});
-		
 		buttonPlay = new Image(new Texture(Gdx.files.internal("ui/play.png")));
 		buttonPlay.setBounds(width-width/5, height/3.5f, width/5, height/4);
 		buttonPlay.addListener(new ClickListener(){
@@ -188,11 +192,11 @@ public class MainMenu implements Screen {
 			public void clicked(InputEvent event, float x, float y) {
 				// TODO Auto-generated method stub
 				super.clicked(event, x, y);
-				((Game) Gdx.app.getApplicationListener()).setScreen(new LevelChooser(game));
+				if(lc==null)
+					lc = new LevelChooser(game,mm);
+				((Game) Gdx.app.getApplicationListener()).setScreen(lc);
 			}
 		});
-		
-		
 		
 		//Creating heading
 		heading = new Image(new Texture(Gdx.files.internal("ui/tittle.png")));
@@ -288,9 +292,6 @@ public class MainMenu implements Screen {
 		stage.addActor(cartelExit);
 		stage.addActor(buttonContinue);
 		stage.addActor(buttonExit);
-		
-		
-		//stage.addActor(exitImage);
 	}
 	
 	private void sacarCartel()

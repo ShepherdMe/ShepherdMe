@@ -38,11 +38,13 @@ public class Level implements Screen {
 	private Image cartelExit, buttonContinue, buttonExit;
 	private boolean showingPause = false, stop = false;
 	private Timer timer = new Timer();
+	private LevelChooser lc;
 
-	public Level(ShepherdMe game) {
+	public Level(ShepherdMe game, LevelChooser lc) {
 		Gdx.app.log("LEVEL", "contruye level");
 		this.game = game;
 		this.stage = new Stage();
+		this.lc = lc;
 	}
 
 	@Override
@@ -199,7 +201,7 @@ public class Level implements Screen {
 				if (!cronometer.isRunning()) {
 					logica.setPause(false);
 					((Game) Gdx.app.getApplicationListener())
-							.setScreen(new LevelChooser(game));
+							.setScreen(lc);
 				}
 			}
 		});

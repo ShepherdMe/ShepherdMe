@@ -35,9 +35,11 @@ public class RecordScreen implements Screen{
 	private BitmapFont white, black;
 	private ShepherdMe game;
 	private Image backArrow;
+	private MainMenu mm;
 	
-	public RecordScreen(ShepherdMe game){
+	public RecordScreen(ShepherdMe game, MainMenu mm){
 		this.game = game;
+		this.mm = mm;
 	}
 	
 	@Override

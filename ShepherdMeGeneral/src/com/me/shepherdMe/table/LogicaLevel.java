@@ -70,7 +70,7 @@ public class LogicaLevel extends Table {
 		this.obstacle = new ArrayList<Obstacle>();
 		
 		//redil
-		fold = new SheepFold(300, 100, 250, 200, Open.LEFT);
+		fold = new SheepFold(300, 100, 500, 600, Open.LEFT);
 		for(Bush b : fold.getFoldObstacles()){
 			addActor(b);
 		}
@@ -86,7 +86,7 @@ public class LogicaLevel extends Table {
 		addActor(fold.getGate());
 		//addActor(obstacle.get(1));
 		
-		//Mover ovejas DEBE SER LO �LTIMO DEL CONSTRUCTOR!
+		//Mover ovejas DEBE SER LO ULTIMO DEL CONSTRUCTOR!
 		timer = new Timer();
 		timerTask = new TimerTaskSheep();
 		timer.scheduleAtFixedRate(timerTask, 0, 15);
