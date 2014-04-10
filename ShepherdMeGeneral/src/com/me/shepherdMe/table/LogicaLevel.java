@@ -43,12 +43,14 @@ public class LogicaLevel extends Table {
 	private List<Sheep> sheeps;
 	private SheepFold fold;
 	private ActorInvisible actorInvisible;
+	private Level screen;
 
 
 	public LogicaLevel(ShepherdMe game, Level screen) {
 		float width = Gdx.graphics.getWidth();
 		float height = Gdx.graphics.getHeight();
 		setBounds(0, 0, width, height);
+		this.screen = screen;
 		setClip(true);
 		this.game = game;
 		this.background = new Background(game, this);
@@ -75,7 +77,7 @@ public class LogicaLevel extends Table {
 		this.obstacle = new ArrayList<Obstacle>();
 		
 		//redil
-		fold = new SheepFold(200, 100, 500, 600, Open.LEFT);
+		fold = new SheepFold(200, 100, 300, 300, Open.RIGHT);
 		for(Bush b : fold.getFoldObstacles()){
 			addActor(b);
 		}
@@ -174,7 +176,7 @@ public class LogicaLevel extends Table {
 						
 						this.sheeps.get(i).setX(this.sheeps.get(i).getX());
 						this.sheeps.get(i).setY(this.sheeps.get(i).getY());
-						System.out.println("choco ambas");
+						
 					}
 					else
 					{
@@ -183,29 +185,31 @@ public class LogicaLevel extends Table {
 							
 							this.sheeps.get(i).setX(this.sheeps.get(i).getX());
 							this.sheeps.get(i).setY(nuevaPosicion.y);
-							System.out.println("choco x");
+							
 						}
 						else
 						{
 							this.sheeps.get(i).setX(nuevaPosicion.x);
 							this.sheeps.get(i).setY(this.sheeps.get(i).getY());
-							System.out.println("choco Y");
+							
 						}
 					}
 				}
 			}
-			//Comprobamos si est�n todas en el redil
+			//Comprobamos si estan todas en el redil
 			if(this.fold.isInFold(this.sheeps.get(i)))
 			{
 				sheepsIn++;
-				System.out.println(sheepsIn);
-				if(sheepsIn==this.sheeps.size())
+				
+				if(sheepsIn==this.sheeps.size()&&!this.fold.isOpen())
 				{
-					System.out.println("win");
+					this.screen.ganar();
+					//SACAR CARTEL
 				}
 				
 			}
 		}
+		
 		
 	}
 	public void pauseOvejas()
@@ -243,6 +247,7 @@ public class LogicaLevel extends Table {
 				return true;
 			}
 		}
+		
 		return false;
 	}
 	private boolean hitSheep(Vector2 v, Sheep s) {

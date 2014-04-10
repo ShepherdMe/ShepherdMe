@@ -101,6 +101,10 @@ public class Level implements Screen {
 		buttonContinue.setZIndex(stage.getActors().size);
 
 	}
+	public void ganar()
+	{
+		sacarCartel();
+	}
 
 	@Override
 	public void resize(int width, int height) {
