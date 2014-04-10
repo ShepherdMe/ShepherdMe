@@ -10,10 +10,12 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Intersector;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.actions.RepeatAction;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.utils.Array;
 import com.me.shepherdMe.ShepherdMe;
+import com.me.shepherdMe.actor.ActorInvisible;
 import com.me.shepherdMe.actor.Background;
 import com.me.shepherdMe.actor.Bush;
 import com.me.shepherdMe.actor.Dog;
@@ -40,6 +42,7 @@ public class LogicaLevel extends Table {
 	private BackgroundUserInput bui;
 	private List<Sheep> sheeps;
 	private SheepFold fold;
+	private ActorInvisible actorInvisible;
 
 
 	public LogicaLevel(ShepherdMe game, Level screen) {
@@ -49,8 +52,10 @@ public class LogicaLevel extends Table {
 		setClip(true);
 		this.game = game;
 		this.background = new Background(game, this);
-		bui = new BackgroundUserInput(this.background);
-		this.background.addListener(bui);
+		this.actorInvisible = new ActorInvisible(game, this);
+		bui = new BackgroundUserInput(this.actorInvisible);
+		this.actorInvisible.addListener(bui);
+		//this.background.addListener(bui);
 		addActor(background);
 		this.dog = new Dog(game);
 		addActor(dog);
@@ -92,7 +97,8 @@ public class LogicaLevel extends Table {
 		timer.scheduleAtFixedRate(timerTask, 0, 15);
 		//fin mover ovejas
 		
-		
+		addActor(actorInvisible);
+
 	}
 	
 	public SheepFold getFold(){

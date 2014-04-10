@@ -10,6 +10,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.utils.Array;
+import com.me.shepherdMe.actor.ActorInvisible;
 import com.me.shepherdMe.actor.Background;
 import com.me.shepherdMe.actor.Dog;
 import com.me.shepherdMe.actor.Obstacle;
@@ -20,7 +21,7 @@ public class BackgroundUserInput extends InputListener {
 	private static final int MIN_SPEED = 5;
 	private static final float STEP = 8;
 
-	private Background BG;
+	private ActorInvisible AI;
 
 	private float deltaY;
 	private float deltaX;
@@ -38,8 +39,8 @@ public class BackgroundUserInput extends InputListener {
 	private static double distance;
 	private static boolean pause = false;
 
-	public BackgroundUserInput(Background BG) {
-		this.BG = BG;
+	public BackgroundUserInput(ActorInvisible Ai) {
+		this.AI = Ai;
 	}
 
 	public void setPause(boolean pause) {
@@ -65,7 +66,7 @@ public class BackgroundUserInput extends InputListener {
 					public void run() {
 						// TODO Auto-generated method stub
 						if (!pause) {
-							Dog dog = BG.getLogica().getDog();
+							Dog dog = AI.getLogica().getDog();
 							Array<Vector2> polygon = new Array();
 							polygon.add(new Vector2(dog.getX(), dog.getY()));
 							polygon.add(new Vector2(
@@ -109,7 +110,7 @@ public class BackgroundUserInput extends InputListener {
 	}
 
 	private void moveDog() {
-		Dog dog = BG.getLogica().getDog();
+		Dog dog = AI.getLogica().getDog();
 
 		Vector2 origen = new Vector2(dog.getX(), dog.getY());
 		Vector2 destino = new Vector2(toX, toY);
@@ -138,10 +139,10 @@ public class BackgroundUserInput extends InputListener {
 	}
 
 	private boolean hitArea(Vector2 v) {
-		List<Obstacle> obstaculos = this.BG.getLogica().getObstacle();
+		List<Obstacle> obstaculos = this.AI.getLogica().getObstacle();
 		for (Obstacle obstacle : obstaculos) {
-			if (obstacle.hitArea(v.x, v.y, this.BG.getLogica().getDog()
-					.getWidth(), this.BG.getLogica().getDog().getHeight())) {
+			if (obstacle.hitArea(v.x, v.y, this.AI.getLogica().getDog()
+					.getWidth(), this.AI.getLogica().getDog().getHeight())) {
 				return true;
 			}
 		}
