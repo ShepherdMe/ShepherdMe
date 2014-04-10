@@ -38,11 +38,13 @@ public class LevelChooser implements Screen {
 	private Image backArrow;
 	private List<Image> imagenesNiveles1, imagenesNiveles2;
 	private Image arrowRight, arrowLeft, dog1,dog2;
+	private MainMenu mm;
 
-	public LevelChooser(ShepherdMe game) {
+	public LevelChooser(ShepherdMe game, MainMenu mm) {
 		this.game = game;
 		this.imagenesNiveles1 = new ArrayList<Image>();
 		this.imagenesNiveles2 = new ArrayList<Image>();
+		this.mm = mm;
 	}
 
 	@Override
@@ -269,7 +271,7 @@ public class LevelChooser implements Screen {
 		float imageWidth = Gdx.graphics.getWidth() / 5;
 		float initialX = Gdx.graphics.getWidth() * 3 / 16, initialY = Gdx.graphics
 				.getHeight() * 2 / 5, deltaX = 0;
-
+		final LevelChooser levelChooser = this;
 		for (int i = 0; i < 6; i++) {
 			image = new Image(new Texture(Gdx.files.internal("img/chooseLevel/cartel.png")));
 			this.imagenesNiveles1.add(image);
@@ -282,7 +284,7 @@ public class LevelChooser implements Screen {
 					public boolean touchDown(InputEvent event, float x,
 							float y, int pointer, int button) {
 						((Game) Gdx.app.getApplicationListener())
-								.setScreen(new Level(game));
+								.setScreen(new Level(game, levelChooser));
 						return true;
 					}
 				});
@@ -296,7 +298,6 @@ public class LevelChooser implements Screen {
 		initialX = Gdx.graphics.getWidth() * 3 / 16;
 		initialY = Gdx.graphics.getHeight() * 2 / 5;
 		deltaX = 0;
-		
 		for (int i = 0; i < 6; i++) {
 			image = new Image(new Texture(Gdx.files.internal("img/chooseLevel/cartel.png")));
 			this.imagenesNiveles2.add(image);
@@ -309,7 +310,7 @@ public class LevelChooser implements Screen {
 					public boolean touchDown(InputEvent event, float x,
 							float y, int pointer, int button) {
 						((Game) Gdx.app.getApplicationListener())
-								.setScreen(new Level(game));
+								.setScreen(new Level(game,levelChooser));
 						return true;
 					}
 				});
