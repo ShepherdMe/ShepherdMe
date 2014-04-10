@@ -75,7 +75,7 @@ public class LogicaLevel extends Table {
 		this.obstacle = new ArrayList<Obstacle>();
 		
 		//redil
-		fold = new SheepFold(300, 100, 500, 600, Open.LEFT);
+		fold = new SheepFold(200, 100, 500, 600, Open.LEFT);
 		for(Bush b : fold.getFoldObstacles()){
 			addActor(b);
 		}
@@ -272,9 +272,30 @@ public class LogicaLevel extends Table {
 		Vector2 vectorN=new Vector2 (s.getX()-this.dog.getX() , s.getY()-this.dog.getY());
 		Vector2 vector=vectorN.nor();
 		
+		int v=1;
+		
+		Vector2 vector2;
+		vector2=new Vector2 (this.dog.getX()-s.getX() , this.dog.getY()-s.getY());
+		if(Math.sqrt(Math.pow(vector2.x,2)+Math.pow(vector2.y,2))<200)
+		{
+			v=1;
+		}
+		if(Math.sqrt(Math.pow(vector2.x,2)+Math.pow(vector2.y,2))<100)
+		{
+			v=3;
+		}
+		if(Math.sqrt(Math.pow(vector2.x,2)+Math.pow(vector2.y,2))<50)
+		{
+			v=6;
+		}
+		
+		
 		float Alto = Gdx.app.getGraphics().getHeight();
 
 		float Ancho = Gdx.app.getGraphics().getWidth();
+
+		vector.x=vector.x*v;
+		vector.y=vector.y*v;
 		
 		if ((s.getX() + vector.x + s.getWidth()) >= Ancho) {
 
@@ -293,6 +314,7 @@ public class LogicaLevel extends Table {
 			vector.y = 0;
 			
 		}
+		
 		vector.x=s.getX()+vector.x;
 		vector.y=s.getY()+vector.y;
 		return vector;		
