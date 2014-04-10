@@ -95,17 +95,13 @@ public class LevelChooser implements Screen {
 		chooseText.setSize(Gdx.graphics.getWidth()/1.5f,Gdx.graphics.getHeight()/4.2f);
 		chooseText.setPosition(Gdx.graphics.getWidth()/2-chooseText.getWidth()/2,Gdx.graphics.getHeight()-chooseText.getHeight()/0.9f);
 
-		dog1 = new Image(new Texture(Gdx.files.internal("img/chooseLevel/dog.png")));
-		dog1.setOrigin(dog1.getX()+dog1.getWidth()/2, dog1.getY()+dog1.getHeight());
-		dog1.setSize(Gdx.graphics.getWidth()/3.5f, Gdx.graphics.getWidth()/3.5f);
-		dog1.setPosition(dog1.getWidth()/3.5f, -dog1.getHeight()/2);
-		dog1.setRotation(300);
+		dog1 = new Image(new Texture(Gdx.files.internal("img/chooseLevel/dog1.png")));
+		dog1.setSize(Gdx.graphics.getWidth()/4.5f, Gdx.graphics.getWidth()/4.5f);
 		
-		dog2 = new Image(new Texture(Gdx.files.internal("img/chooseLevel/dog.png")));
-		dog2.setOrigin(dog2.getX()+dog2.getWidth()/2, dog2.getY()+dog2.getHeight());
-		dog2.setSize(Gdx.graphics.getWidth()/3.5f, Gdx.graphics.getWidth()/3.5f);
-		dog2.setPosition(Gdx.graphics.getWidth()-dog2.getWidth()*1.3f+dog2.getWidth(), -dog2.getHeight()/2-dog2.getHeight()*2);//Desplazada dado que este al principio esta mas abajo para la animacion
-		dog2.setRotation(60);
+		
+		dog2 = new Image(new Texture(Gdx.files.internal("img/chooseLevel/dog2.png")));
+		dog2.setSize(Gdx.graphics.getWidth()/4.5f, Gdx.graphics.getWidth()/4.5f);
+		dog2.setPosition(Gdx.graphics.getWidth(),-dog2.getHeight()*2);//Desplazada dado que este al principio esta mas abajo para la animacion
 		
 		arrowRight = new Image(new Texture(
 		Gdx.files.internal("img/chooseLevel/arrowRight.png")));
