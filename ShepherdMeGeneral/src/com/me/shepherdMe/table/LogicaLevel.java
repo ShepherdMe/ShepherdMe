@@ -79,11 +79,8 @@ public class LogicaLevel extends Table {
 		this.obstacle = new ArrayList<Obstacle>();
 		
 		//redil
-<<<<<<< HEAD
 		fold = new SheepFold(150, 50, 50, 80, Open.LEFT);
-=======
-		fold = new SheepFold(200, 100, 300, 300, Open.RIGHT);
->>>>>>> 707bf5d98af104eef8538dfcd80b04e218279023
+
 		for(Bush b : fold.getFoldObstacles()){
 			addActor(b);
 		}
