@@ -69,36 +69,19 @@ public class SheepFold{
 		
 		Array<Vector2> polygon = new Array<Vector2>();
 		
-		if(open == Open.TOP){
-			polygon.add(bottomLeft);
-			polygon.add(bottomRight);
-			polygon.add(new Vector2(bottomRight.x,topRight.y-height));
-			polygon.add(new Vector2(bottomLeft.x,topRight.y-height));
-		}
-		else if(open == Open.BOTTOM){
-			polygon.add(topLeft);
-			polygon.add(topRight);
-			polygon.add(new Vector2(topLeft.x,topLeft.y - height));
-			polygon.add(new Vector2(topRight.x,topLeft.y - height));
-		}
-		else if(open == Open.LEFT){
-			polygon.add(topRight);
-			polygon.add(bottomRight);
-			polygon.add(new Vector2(topLeft.x+width,topLeft.y));
-			polygon.add(new Vector2(topLeft.x+width,bottomLeft.y));
-		}
-		else if(open == Open.RIGHT){
-			polygon.add(topLeft);
-			polygon.add(bottomLeft);
-			polygon.add(new Vector2(topLeft.x+width,topLeft.y));
-			polygon.add(new Vector2(topLeft.x+width,bottomLeft.y));
-		}
+		polygon.add(topLeft);
+		polygon.add(topRight);
+		polygon.add(bottomLeft);
+		polygon.add(bottomRight);
 		
-
+		
 		Vector2 point = new Vector2(actor.getX()+actor.getWidth()/2, actor.getY() + actor.getHeight()/2);
 		
 		if(Intersector.isPointInPolygon(polygon, point))
+		{	
 			return true;
+		}
+		
 		return false;
 	}
 	
