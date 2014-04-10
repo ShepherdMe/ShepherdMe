@@ -159,7 +159,34 @@ public class LogicaLevel extends Table {
 					this.sheeps.get(i).setX(nuevaPosicion.x);
 					this.sheeps.get(i).setY(nuevaPosicion.y);
 				}
-				
+				else
+				{ 
+					Vector2 x=new Vector2(nuevaPosicion.x,this.sheeps.get(i).getY());
+					Vector2 y=new Vector2(this.sheeps.get(i).getX(),nuevaPosicion.y);
+					if(!hitArea(x)&&!hitArea(y))
+					{
+						
+						this.sheeps.get(i).setX(this.sheeps.get(i).getX());
+						this.sheeps.get(i).setY(this.sheeps.get(i).getY());
+						System.out.println("choco ambas");
+					}
+					else
+					{
+						if(hitArea(x))
+						{
+							
+							this.sheeps.get(i).setX(this.sheeps.get(i).getX());
+							this.sheeps.get(i).setY(nuevaPosicion.y);
+							System.out.println("choco x");
+						}
+						else
+						{
+							this.sheeps.get(i).setX(nuevaPosicion.x);
+							this.sheeps.get(i).setY(this.sheeps.get(i).getY());
+							System.out.println("choco Y");
+						}
+					}
+				}
 			}
 			//Comprobamos si est�n todas en el redil
 			if(this.fold.isInFold(this.sheeps.get(i)))
@@ -245,11 +272,11 @@ public class LogicaLevel extends Table {
 		
 		if ((s.getX() + vector.x + s.getWidth()) >= Ancho) {
 
-			vector.x = -1*(Ancho - s.getX() - s.getWidth());
+			vector.x =(Ancho - s.getX() - s.getWidth());
 			
 		}
 		if ((s.getY() + vector.y + s.getHeight()) >= Alto) {
-			vector.y = -1*(Alto - s.getY() - s.getHeight());
+			vector.y = (Alto - s.getY() - s.getHeight());
 			
 		}
 		if ((s.getX() + vector.x) < 0) {

@@ -145,6 +145,13 @@ public class BackgroundUserInput extends InputListener {
 				return true;
 			}
 		}
+		List<Sheep> ovejas = this.BG.getLogica().getSheeps();
+		for (Sheep oveja : ovejas) {
+			if (oveja.hitArea(v.x, v.y, this.BG.getLogica().getDog()
+					.getWidth(), this.BG.getLogica().getDog().getHeight())) {
+				return true;
+			}
+		}
 		return false;
 	}
 
