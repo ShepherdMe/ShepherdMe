@@ -20,6 +20,7 @@ public class Sheep extends Actor {
 	private Texture sheep;
 	private RotateToAction rotate;
 	private MoveByAction move;
+	private double STEP;
 
 	private int i = 1000;
 	float amountX, amountY;
@@ -33,6 +34,8 @@ public class Sheep extends Actor {
 		setWidth(Gdx.graphics.getHeight()/7);
 		setOriginX(getWidth() / 2);
 		setOriginY(getHeight() / 2);
+		
+		this.STEP=Math.sqrt(Math.pow(Gdx.graphics.getWidth(), 2)+Math.pow(Gdx.graphics.getHeight(), 2))/100;
 
 		sheep = new Texture(Gdx.files.internal("img/sheep.png"));
 
@@ -61,7 +64,7 @@ public class Sheep extends Actor {
 		Vector2 v = new Vector2();
 		MoveByAction move;
 		move = new MoveByAction();
-		move.setAmount(100 * v.x, 100 * v.y);
+		move.setAmount((float)this.STEP * v.x,(float)this.STEP * v.y);
 		move.setDuration(5f);
 	}
 
