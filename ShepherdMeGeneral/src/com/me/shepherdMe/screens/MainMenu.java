@@ -31,6 +31,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.me.shepherdMe.ShepherdMe;
+import com.me.shepherdMe.sound.SoundManager;
 import com.me.shepherdMe.tween.SpriteAccessor;
 
 public class MainMenu implements Screen {
@@ -52,9 +53,12 @@ public class MainMenu implements Screen {
 	private LevelChooser lc = null;
 	private RecordScreen rs = null;
 	private Timer timer = new Timer();
+	private SoundManager SM;
 
 	public MainMenu(ShepherdMe game) {
 		this.game = game;
+		//this.SM= new SoundManager();
+		//this.SM.startMusic();
 	}
 
 	@Override

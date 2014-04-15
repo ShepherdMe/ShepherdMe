@@ -68,14 +68,13 @@ public class BackgroundUserInput extends InputListener {
 						if (!pause) {
 							Dog dog = AI.getLogica().getDog();
 							Array<Vector2> polygon = new Array();
-							polygon.add(new Vector2(dog.getX(), dog.getY()));
+							polygon.add(new Vector2(dog.getX()-dog.getWidth()/4, dog.getY()-dog.getHeight()/4));
 							polygon.add(new Vector2(
-									dog.getX() + dog.getWidth(), dog.getY()));
+									dog.getX() +dog.getWidth()/4,dog.getY()-dog.getHeight()/4));
 							polygon.add(new Vector2(
-									dog.getX() + dog.getWidth(), dog.getY()
+									dog.getX() +dog.getWidth()/4,dog.getY()+dog.getHeight()/4
 											+ dog.getHeight()));
-							polygon.add(new Vector2(dog.getX(), dog.getY()
-									+ dog.getHeight()));
+							polygon.add(new Vector2(dog.getX()-dog.getWidth()/4, dog.getY()+dog.getHeight()/4));
 
 							Vector2 point = new Vector2(toX, toY);
 							if (!Intersector.isPointInPolygon(polygon, point)) {
