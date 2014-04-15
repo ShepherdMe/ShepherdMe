@@ -90,9 +90,9 @@ public class LogicaLevel extends Table {
 		//this.obstacle.add(new WaterCircle(400, 400, 150));
 		//addActor(obstacle.get(0));
 		for(Bush b : fold.getFoldObstacles()){
-			this.obstacle.add(b);
+//			this.obstacle.add(b);
 		}
-		this.obstacle.add(fold.getGate());
+//		this.obstacle.add(fold.getGate());
 		addActor(fold.getGate());
 		//addActor(obstacle.get(1));
 		
