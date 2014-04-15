@@ -50,7 +50,8 @@ public class Level implements Screen {
 	@Override
 	public void render(float delta) {
 
-		if (Gdx.input.isKeyPressed(Keys.BACK) && !stop) {
+		if ((Gdx.input.isKeyPressed(Keys.BACK) || Gdx.input
+				.isKeyPressed(Keys.MENU)) && !stop) {
 			stop = true;
 			timer.schedule(new TimerTask() {
 				

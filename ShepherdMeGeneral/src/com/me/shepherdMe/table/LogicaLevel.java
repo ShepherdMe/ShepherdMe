@@ -64,8 +64,8 @@ public class LogicaLevel extends Table {
 		this.dog = new Dog(game);
 		addActor(dog);
 
-		Sheep sheep1 = new Sheep(game, 600, 150);
-		Sheep sheep2 = new Sheep(game, 50, 400);
+		Sheep sheep1 = new Sheep(game,this.actorInvisible, 600, 150);
+		Sheep sheep2 = new Sheep(game,this.actorInvisible, 50, 400);
 
 		this.sheeps = new ArrayList<Sheep>();
 		this.sheeps.add(sheep1);
@@ -158,13 +158,20 @@ public class LogicaLevel extends Table {
 	protected void moveSheeps() {
 		// TODO Auto-generated method stub
 		int sheepsIn=0;
+		Sheep oveja;
 		
 		for (int i=0; i< this.sheeps.size();i++) {
 			Vector2 v= this.sheeps.get(i).moveSheep();
+			oveja = this.sheeps.get(i);
+			
 			
 			if(!nearDog(this.sheeps.get(i)))
 			{
-				if (!hitArea(v)&&!hitSheep(v,this.sheeps.get(i))) {
+				if(oveja.estaHuyendo)
+				{
+					oveja.nuevoPunto=true;
+				}
+				if (!oveja.ovejaTocaElemento(v)) {
 					this.sheeps.get(i).setX(v.x);
 					this.sheeps.get(i).setY(v.y);
 				}
@@ -172,8 +179,10 @@ public class LogicaLevel extends Table {
 			
 			else//Si el perro esta cerca.
 			{
-				Vector2 nuevaPosicion= runAwayDog(this.sheeps.get(i));
-				if (!hitArea(nuevaPosicion)&&!hitSheep(nuevaPosicion,this.sheeps.get(i))) {
+				oveja.estaHuyendo=true;
+				
+				Vector2 nuevaPosicion= runAwayDog(oveja);
+				if (!oveja.ovejaTocaElemento(nuevaPosicion)) {
 					
 					this.sheeps.get(i).setX(nuevaPosicion.x);
 					this.sheeps.get(i).setY(nuevaPosicion.y);
@@ -182,7 +191,7 @@ public class LogicaLevel extends Table {
 				{ 
 					Vector2 x=new Vector2(nuevaPosicion.x,this.sheeps.get(i).getY());
 					Vector2 y=new Vector2(this.sheeps.get(i).getX(),nuevaPosicion.y);
-					if(!hitArea(x)&&!hitArea(y))
+					if(!oveja.ovejaTocaElemento(x)&&!oveja.ovejaTocaElemento(y))
 					{
 						
 						this.sheeps.get(i).setX(this.sheeps.get(i).getX());
@@ -191,7 +200,7 @@ public class LogicaLevel extends Table {
 					}
 					else
 					{
-						if(hitArea(x))
+						if(oveja.ovejaTocaElemento(x))
 						{
 							
 							this.sheeps.get(i).setX(this.sheeps.get(i).getX());
@@ -251,7 +260,7 @@ public class LogicaLevel extends Table {
 	{
 		return this.sheeps;
 	}
-	private boolean hitArea(Vector2 v) {
+	/*private boolean hitArea(Vector2 v) {
 		List<Obstacle> obstaculos = obstacle;
 		for (Obstacle obstacle : obstaculos) {
 			if (obstacle.hitArea(v.x, v.y, sheeps.get(0).getWidth(), sheeps.get(0).getHeight())) {
@@ -260,19 +269,19 @@ public class LogicaLevel extends Table {
 		}
 		
 		return false;
-	}
-	private boolean hitSheep(Vector2 v, Sheep s) {
+	}*/
+	/*private boolean hitSheep(Vector2 v, Sheep s) {
 		List<Sheep> oveja = sheeps;
 		for (Sheep o : oveja) {
 			if(!o.Equals(s))
 			{
-				if (o.hitArea(v.x, v.y, sheeps.get(0).getWidth(), sheeps.get(0).getHeight())) {
+				if (o.elementoTocaOveja(v.x, v.y, sheeps.get(0).getWidth(), sheeps.get(0).getHeight())) {
 					return true;
 				}
 			}
 		}
 		return false;
-	}
+	}*/
 	public boolean nearDog(Sheep s)
 	{
 		Vector2 vector;

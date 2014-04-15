@@ -9,8 +9,8 @@ import com.me.shepherdMe.table.LogicaLevel;
 
 public class ActorInvisible extends Actor {
 	
-	ShepherdMe game;
-	LogicaLevel logica;
+	private ShepherdMe game;
+	private LogicaLevel logica;
 	
 	public ActorInvisible(ShepherdMe game, final LogicaLevel logica) {
 		setPosition(0, 0);

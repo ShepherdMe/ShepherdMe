@@ -149,7 +149,7 @@ public class BackgroundUserInput extends InputListener {
 		}
 		List<Sheep> ovejas = this.AI.getLogica().getSheeps();
 		for (Sheep oveja : ovejas) {
-			if (oveja.hitArea(v.x, v.y, this.AI.getLogica().getDog()
+			if (oveja.elementoTocaOveja(v.x, v.y, this.AI.getLogica().getDog()
 					.getWidth(), this.AI.getLogica().getDog().getHeight())) {
 				return true;
 			}
