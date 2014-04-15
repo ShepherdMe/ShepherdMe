@@ -19,7 +19,7 @@ import com.me.shepherdMe.actor.Sheep;
 public class BackgroundUserInput extends InputListener {
 
 	private static final int MIN_SPEED = 5;
-	private static final float STEP = 8;
+	private static double STEP = 8;
 
 	private ActorInvisible AI;
 
@@ -41,6 +41,8 @@ public class BackgroundUserInput extends InputListener {
 
 	public BackgroundUserInput(ActorInvisible Ai) {
 		this.AI = Ai;
+		this.STEP=Math.sqrt(Math.pow(Gdx.graphics.getWidth(), 2)+Math.pow(Gdx.graphics.getHeight(), 2))/100;
+		//this.STEP=this.STEP * Gdx.graphics.getWidth()/Gdx.graphics.getHeight();
 	}
 
 	public void setPause(boolean pause) {
