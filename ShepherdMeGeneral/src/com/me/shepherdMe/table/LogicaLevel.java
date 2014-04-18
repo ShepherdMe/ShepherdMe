@@ -46,7 +46,8 @@ public class LogicaLevel extends Table {
 	private SheepFold fold;
 	private ActorInvisible actorInvisible;
 	private Level screen;
-
+	private int AltoPantalla = Gdx.graphics.getHeight();
+	private int AnchoPantalla = Gdx.graphics.getWidth();
 
 	public LogicaLevel(ShepherdMe game, Level screen) {
 		float width = Gdx.graphics.getWidth();
@@ -150,10 +151,6 @@ public class LogicaLevel extends Table {
 		batch.setColor(Color.WHITE);
 		super.draw(batch, parentAlpha);
 	}
-
-	public Dog getDog() {
-		return this.dog;
-	}
 	
 	protected void moveSheeps() {
 		// TODO Auto-generated method stub
@@ -164,19 +161,23 @@ public class LogicaLevel extends Table {
 			Vector2 v= this.sheeps.get(i).moveSheep();
 			oveja = this.sheeps.get(i);
 			
-			
 			if(!nearDog(this.sheeps.get(i)))
 			{
 				if(oveja.estaHuyendo)
 				{
 					oveja.nuevoPunto=true;
+					oveja.estaHuyendo=false;
 				}
+				System.out.println("Toca? "+oveja.ovejaTocaElemento(v));
 				if (!oveja.ovejaTocaElemento(v)) {
 					this.sheeps.get(i).setX(v.x);
 					this.sheeps.get(i).setY(v.y);
 				}
+				else
+				{
+					oveja.nuevoPunto=true;
+				}
 			}
-			
 			else//Si el perro esta cerca.
 			{
 				oveja.estaHuyendo=true;
@@ -248,6 +249,57 @@ public class LogicaLevel extends Table {
 			timer.scheduleAtFixedRate(timerTask, 0, 15);
 		}
 	}
+	
+	public boolean nearDog(Sheep s)
+	{
+		Vector2 vector;
+		vector=new Vector2 (this.dog.getX()-s.getX() , this.dog.getY()-s.getY());
+		if(Math.sqrt(Math.pow(vector.x,2)+Math.pow(vector.y,2))<200)
+		{
+			return true;
+		}
+		return false;
+	}
+
+	public Vector2 runAwayDog(Sheep s)
+	{
+		Vector2 vectorN=new Vector2 (s.getX()-this.dog.getX() , s.getY()-this.dog.getY());
+				
+		int v;
+		
+		if (vectorN.len()<20)
+		{
+			v=7;
+		}
+		else if (vectorN.len()<50)
+		{
+			v=6;
+		}
+		else if(vectorN.len()<100)
+		{
+			v=4;
+		}
+		else
+		{
+			v=3;
+		}
+		
+		vectorN.nor();
+		vectorN.scl(v);
+		
+		
+		if ((s.getX() + vectorN.x + s.getWidth()) >= AnchoPantalla ||(s.getX() + vectorN.x) <= 0) {
+			vectorN.x = 0;
+		}
+		if ((s.getY() + vectorN.y + s.getHeight()) >= AltoPantalla ||(s.getY() + vectorN.y) <= 0) {
+			vectorN.y = 0;
+		}
+		
+		vectorN.x=s.getX()+vectorN.x;
+		vectorN.y=s.getY()+vectorN.y;
+		return vectorN;		
+	}
+	
 	public Background GetBackground() {
 		return this.background;
 	}
@@ -260,90 +312,12 @@ public class LogicaLevel extends Table {
 	{
 		return this.sheeps;
 	}
-	/*private boolean hitArea(Vector2 v) {
-		List<Obstacle> obstaculos = obstacle;
-		for (Obstacle obstacle : obstaculos) {
-			if (obstacle.hitArea(v.x, v.y, sheeps.get(0).getWidth(), sheeps.get(0).getHeight())) {
-				return true;
-			}
-		}
-		
-		return false;
-	}*/
-	/*private boolean hitSheep(Vector2 v, Sheep s) {
-		List<Sheep> oveja = sheeps;
-		for (Sheep o : oveja) {
-			if(!o.Equals(s))
-			{
-				if (o.elementoTocaOveja(v.x, v.y, sheeps.get(0).getWidth(), sheeps.get(0).getHeight())) {
-					return true;
-				}
-			}
-		}
-		return false;
-	}*/
-	public boolean nearDog(Sheep s)
-	{
-		Vector2 vector;
-		vector=new Vector2 (this.dog.getX()-s.getX() , this.dog.getY()-s.getY());
-		if(Math.sqrt(Math.pow(vector.x,2)+Math.pow(vector.y,2))<200)
-		{
-			return true;
-		}
-		return false;
+	public Dog getDog() {
+		return this.dog;
 	}
-	public Vector2 runAwayDog(Sheep s)
-	{
-		Vector2 vectorN=new Vector2 (s.getX()-this.dog.getX() , s.getY()-this.dog.getY());
-		Vector2 vector=vectorN.nor();
-		
-		int v=1;
-		
-		Vector2 vector2;
-		vector2=new Vector2 (this.dog.getX()-s.getX() , this.dog.getY()-s.getY());
-		if(Math.sqrt(Math.pow(vector2.x,2)+Math.pow(vector2.y,2))<200)
-		{
-			v=1;
-		}
-		if(Math.sqrt(Math.pow(vector2.x,2)+Math.pow(vector2.y,2))<100)
-		{
-			v=3;
-		}
-		if(Math.sqrt(Math.pow(vector2.x,2)+Math.pow(vector2.y,2))<50)
-		{
-			v=6;
-		}
-		
-		
-		float Alto = Gdx.app.getGraphics().getHeight();
-
-		float Ancho = Gdx.app.getGraphics().getWidth();
-
-		vector.x=vector.x*v;
-		vector.y=vector.y*v;
-		
-		if ((s.getX() + vector.x + s.getWidth()) >= Ancho) {
-
-			vector.x =(Ancho - s.getX() - s.getWidth());
-			
-		}
-		if ((s.getY() + vector.y + s.getHeight()) >= Alto) {
-			vector.y = (Alto - s.getY() - s.getHeight());
-			
-		}
-		if ((s.getX() + vector.x) < 0) {
-			vector.x= 0;
-			
-		}
-		if ((s.getY() + vector.y) < 0) {
-			vector.y = 0;
-			
-		}
-		
-		vector.x=s.getX()+vector.x;
-		vector.y=s.getY()+vector.y;
-		return vector;		
-	}
+	
+	
+	
 	class TimerTaskSheep extends TimerTask
 	{
 

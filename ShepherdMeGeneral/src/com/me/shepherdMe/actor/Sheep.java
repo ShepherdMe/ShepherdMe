@@ -76,26 +76,76 @@ public class Sheep extends Actor {
 		move.setDuration(5f);
 	}
 	
+	/**
+	 * Si el punto esta fuera de los limites lo ajusta
+	 * @param v
+	 * @return
+	 */
+	private Vector2 limitarAlBorde(Vector2 v)
+	{
+		if(v.x>Gdx.graphics.getWidth()-this.getWidth())
+		{
+			v.x=(float) (Gdx.graphics.getWidth()-this.getWidth()-STEP*2);
+		}
+		else if(v.x<0)
+		{
+			v.x=(float) (0+STEP*2);
+		}
+		
+		if(v.y>Gdx.graphics.getHeight()-this.getHeight())
+		{
+			v.y=(float) (Gdx.graphics.getHeight()-this.getHeight()-STEP*2);
+		}
+		else if (v.y<0)
+		{
+			v.y=(float) (0+STEP*2);
+		}
+		
+		return v;
+	}
+	
+	
 	private Vector2 nuevoDestino()
 	{
+			
+		float x =  (float) (Math.random()*Gdx.graphics.getWidth());
+		float y =  (float) (Math.random()* Gdx.graphics.getHeight());
+		return limitarAlBorde(new Vector2(x,y));
+	}
+	
+	public boolean estaEnDestino()
+	{
 		
-		float x = this.getX()-Gdx.graphics.getWidth()/4 + (int)(Math.random()*this.getX()+Gdx.graphics.getWidth()/4); 
-		float y = this.getY()-Gdx.graphics.getHeight()/4 + (int)(Math.random()*this.getY()+Gdx.graphics.getHeight()/4);
+		if( Math.abs(this.getX()-this.destino.x)<=this.STEP*2)
+		{
+			return true;
+		}
+		if( Math.abs(this.getY()-this.destino.y)<this.STEP*2)
+		{
+			return true;
+		}
 		
-		return new Vector2(x,y);
+		return false;
 	}
 	
 	public Vector2 moveSheep() {
 		
 		Vector2 origen = new Vector2(this.getX(), this.getY());
-		if(this.nuevoPunto||(origen.x==destino.x && origen.y==destino.y))
+		System.out.println("En moveSheep nuevoPunto "+nuevoPunto);
+		if(this.nuevoPunto||estaEnDestino())
 		{
+			System.out.println("HACE NUEVO DESTINO");
+			System.out.println("VIEJO "+this.destino.toString());
 			this.destino = nuevoDestino();
+			System.out.println("NUEVO "+this.destino.toString());
+			this.nuevoPunto=false;
+			
 		}
 		System.out.println(destino.toString());
 
 		Vector2 siguientePunto = siguientePunto(origen, destino);
-
+		System.out.println("El siguiete punto es: "+siguientePunto.toString());
+		System.out.println("El destino es : "+destino.toString());
 		return siguientePunto;
 	}
 	
@@ -105,11 +155,10 @@ public class Sheep extends Actor {
 		Vector2 delta = new Vector2(destino.x - origen.x, destino.y - origen.y);
 		delta.nor();
 		
-		delta.set(delta.x, delta.y);
-
 		Vector2 position = new Vector2(origen.x + delta.x, origen.y + delta.y);
 
 		if (ovejaTocaElemento(position)) {
+			this.nuevoPunto=true;
 			return origen;
 		} else {
 			return position;
@@ -126,16 +175,14 @@ public class Sheep extends Actor {
 	{
 		List<Obstacle> obstaculos = this.AI.getLogica().getObstacle();
 		for (Obstacle obstacle : obstaculos) {
-			if (obstacle.hitArea(siguientePunto.x, siguientePunto.y, this.AI.getLogica().getDog()
-					.getWidth(), this.AI.getLogica().getDog().getHeight())) {
+			if (obstacle.hitArea(siguientePunto.x, siguientePunto.y,this.getWidth(), this.getHeight())) {
 				return true;
 			}
 		}
 		List<Sheep> ovejas = this.AI.getLogica().getSheeps();
 		for (Sheep oveja : ovejas) {
 			if(!oveja.Equals(this)){
-				if (oveja.elementoTocaOveja(siguientePunto.x, siguientePunto.y, this.AI.getLogica().getDog()
-						.getWidth(), this.AI.getLogica().getDog().getHeight())) {
+				if (oveja.elementoTocaOveja(siguientePunto.x, siguientePunto.y, this.getWidth(), this.getHeight())) {
 					return true;
 				}
 			}
@@ -144,68 +191,6 @@ public class Sheep extends Actor {
 		return false;
 	
 	}
-	
-//	public void setAmount() {
-//
-//		int N = (int) (Math.random() * 20 + 1);
-//
-//		if (N <=10) {
-//			amountX = 0;
-//			amountY = 0;
-//		} else {
-//			double angulo = Math.toRadians(N * 45);// Pasamos a radianes
-//			Vector2 v = new Vector2();
-//			amountX = (float) Math.sin(angulo);
-//			amountY = (float) Math.cos(angulo);
-//
-//		}
-		
-
-	//}
-
-//	public Vector2 moveSheep() {
-//
-//		if (i % 200 == 0) {
-//			setAmount();
-//			
-//		}
-//		float x = this.getX();
-//
-//		float y = this.getY();
-//
-//		float CambioX = amountX*1/2;
-//
-//		float CambioY = amountY*1/2;
-//
-//		float Alto = Gdx.app.getGraphics().getHeight();
-//
-//		float Ancho = Gdx.app.getGraphics().getWidth();
-//
-//		if ((x + CambioX + this.getWidth()) >= Ancho) {
-//
-//			CambioX = -1*(Ancho - x - this.getWidth());
-//			setAmount();
-//		}
-//		if ((y + CambioY + this.getHeight()) >= Alto) {
-//			CambioY = -1*(Alto - y - this.getHeight());
-//			setAmount();
-//		}
-//		if ((x + CambioX) < 0) {
-//			CambioX = 0;
-//			setAmount();
-//		}
-//		if ((y + CambioY) < 0) {
-//			CambioY = 0;
-//			setAmount();
-//		}
-//		i++;
-//
-//		Vector2 v = new Vector2();
-//		v.x = x + CambioX;
-//		v.y = y + CambioY;
-//		return v;
-//
-//	}
 
 	/**
 	 * Comprueba si un elemento toca a la oveja
@@ -214,9 +199,10 @@ public class Sheep extends Actor {
 	 */
 	
 	public boolean elementoTocaOveja(float x, float y, float width, float height) {
+		System.out.println("EL del this "+ this.getX()+" "+this.getY()+" "+this.getWidth()+" "+this.getHeight());
+		System.out.println("Los parametros "+x+" "+y+" "+width+" "+height);
 		if ((x + width >= this.getX()) && (x <= this.getX() + this.getWidth())) {
-			if ((y + height >= this.getY())
-					&& (y <= this.getY() + this.getHeight())) {
+			if ((y + height >= this.getY()) && (y <= this.getY() + this.getHeight())) {
 				return true;
 			} else {
 				return false;
@@ -224,6 +210,11 @@ public class Sheep extends Actor {
 		} else {
 			return false;
 		}
+	}
+	
+	public double getStep()
+	{
+		return this.STEP;
 	}
 	
 }
