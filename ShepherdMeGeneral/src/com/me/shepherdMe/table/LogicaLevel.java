@@ -29,6 +29,7 @@ public class LogicaLevel extends Table {
 	private static Timer timer;
 	private static TimerTaskSheep timerTask;
 
+	
 	private ShepherdMe game;
 	private Background background;
 	private Dog dog;
@@ -50,16 +51,18 @@ public class LogicaLevel extends Table {
 		setClip(true);
 		this.game = game;
 		this.background = new Background(game, this);
-		this.actorInvisible = new ActorInvisible(game, this);
+		this.actorInvisible = new ActorInvisible(this);
 		bui = new BackgroundUserInput(this.actorInvisible);
 		this.actorInvisible.addListener(bui);
 		//this.background.addListener(bui);
 		addActor(background);
-		this.dog = new Dog(game);
+		
+		this.dog = new Dog();
+		
 		addActor(dog);
 
-		Sheep sheep1 = new Sheep(game,this.actorInvisible, 600, 150);
-		Sheep sheep2 = new Sheep(game,this.actorInvisible, 50, 400);
+		Sheep sheep1 = new Sheep(this, 600, 150);
+		Sheep sheep2 = new Sheep(this, 50, 400);
 
 		this.sheeps = new ArrayList<Sheep>();
 		this.sheeps.add(sheep1);

@@ -5,7 +5,6 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import utils.GraphicManager;
-import aurelienribon.tweenengine.TweenManager;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
@@ -43,7 +42,6 @@ public class MainMenu implements Screen {
 	private Image volumeEffects, volumeMusic;
 	private boolean volumeEffectsOn, volumeMusicOn, stop = false,
 			showingPause = false;
-	private TweenManager tweenManager;
 	private Image cartelExit;
 	private LevelChooser lc = null;
 	private RecordScreen rs = null;

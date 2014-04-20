@@ -9,12 +9,11 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.actions.MoveByAction;
-import com.me.shepherdMe.ShepherdMe;
+import com.me.shepherdMe.table.LogicaLevel;
 
 public class Sheep extends Actor {
 
-	private ShepherdMe game;
-	private ActorInvisible AI;
+	private LogicaLevel LL;
 
 	private TextureRegion regionSheep;
 	private Texture sheep;
@@ -28,9 +27,8 @@ public class Sheep extends Actor {
 	
 	private Vector2 destino;
 
-	public Sheep(ShepherdMe game, ActorInvisible AI, int x, int y) {
-		this.game = game;
-		this.AI=AI;
+	public Sheep(LogicaLevel AI, float x, float y) {
+		this.LL=AI;
 		setPosition(x, y);
 		this.setX(x);
 		this.setY(y);
@@ -127,21 +125,12 @@ public class Sheep extends Actor {
 	public Vector2 moveSheep() {
 		
 		Vector2 origen = new Vector2(this.getX(), this.getY());
-		System.out.println("En moveSheep nuevoPunto "+nuevoPunto);
 		if(this.nuevoPunto||estaEnDestino())
 		{
-			System.out.println("HACE NUEVO DESTINO");
-			System.out.println("VIEJO "+this.destino.toString());
 			this.destino = nuevoDestino();
-			System.out.println("NUEVO "+this.destino.toString());
 			this.nuevoPunto=false;
-			
 		}
-		System.out.println(destino.toString());
-
 		Vector2 siguientePunto = siguientePunto(origen, destino);
-		System.out.println("El siguiete punto es: "+siguientePunto.toString());
-		System.out.println("El destino es : "+destino.toString());
 		return siguientePunto;
 	}
 	
@@ -169,13 +158,13 @@ public class Sheep extends Actor {
 	 */
 	public boolean ovejaTocaElemento(Vector2 siguientePunto)
 	{
-		List<Obstacle> obstaculos = this.AI.getLogica().getObstacle();
+		List<Obstacle> obstaculos = this.LL.getObstacle();
 		for (Obstacle obstacle : obstaculos) {
 			if (obstacle.hitArea(siguientePunto.x, siguientePunto.y,this.getWidth(), this.getHeight())) {
 				return true;
 			}
 		}
-		List<Sheep> ovejas = this.AI.getLogica().getSheeps();
+		List<Sheep> ovejas = this.LL.getSheeps();
 		for (Sheep oveja : ovejas) {
 			if(!oveja.Equals(this)){
 				if (oveja.elementoTocaOveja(siguientePunto.x, siguientePunto.y, this.getWidth(), this.getHeight())) {

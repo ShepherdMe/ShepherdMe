@@ -6,11 +6,9 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.actions.MoveByAction;
-import com.me.shepherdMe.ShepherdMe;
 
 public class Cloud extends Actor {
 
-	private ShepherdMe game;
 	private TextureRegion regionCloud;
 	private Texture cloud;
 	

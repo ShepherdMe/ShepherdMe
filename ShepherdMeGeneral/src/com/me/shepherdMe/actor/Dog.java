@@ -5,18 +5,15 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Actor;
-import com.me.shepherdMe.ShepherdMe;
 
 public class Dog extends Actor {
 
-	private ShepherdMe game;
 	private TextureRegion regionDog;
 	private Texture dog;
 
 
-	public Dog(ShepherdMe game) {
+	public Dog() {
 
-		this.game = game;
 		setPosition(50, 50);
 		setHeight(Gdx.graphics.getHeight()/7);
 		setWidth(Gdx.graphics.getHeight()/7);
