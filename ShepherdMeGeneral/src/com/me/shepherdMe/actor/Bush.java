@@ -6,19 +6,16 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Rectangle;
 
 
-public class Bush extends Obstacle implements InterfaceObstacle {
+public class Bush extends Obstacle{
 
 	public Bush(float x, float y, float width, float height) {
 
 		super(x, y, width, height);
 		this.area = new Rectangle(x, y, width, height);
 
-		this.obstacle = new Texture(Gdx.files.internal("img/muro.jpg"));
+		this.obstacle = new Texture(Gdx.files.internal("img/level/muro.jpg"));
 		this.regionObstacle = new TextureRegion(this.obstacle);
-		;
 
-		this.obstacle = new Texture(Gdx.files.internal("img/muro.jpg"));
-		this.regionObstacle = new TextureRegion(this.obstacle);
 	}
 
 	@Override

@@ -5,12 +5,10 @@ import java.util.TimerTask;
 
 import utils.GraphicManager;
 
-import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.InputProcessor;
-import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.Input.Keys;
+import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
@@ -122,9 +120,6 @@ public class Level implements Screen {
 		logica = new LogicaLevel(game, this);
 		stage.addActor(logica);
 
-		int width = Gdx.graphics.getWidth();
-		int height = Gdx.graphics.getHeight();
-
 		// Cronometer
 		GraphicManager.initialize();
 		GraphicManager.scaleFont(GraphicManager.getBlackFont());
@@ -134,17 +129,18 @@ public class Level implements Screen {
 		cronometerLabel.setZIndex(1000);
 		cronometerLabel.setX(7 * Gdx.graphics.getWidth() / 8);
 		cronometerLabel.setY(8 * Gdx.graphics.getHeight() / 9);
-		// cronometerLabel.setFon
-		// cronometerLabel.setSize(width/5, height/5);
-		// cronometerLabel.setFontScale(3);
+
 		cronometer = new Cronometro(cronometerLabel);
 		cronometer.start();
 		stage.addActor(cronometerLabel);
 
 		// Open and close fold
-		final Image imageLocker = GraphicManager.createBackArrow();
-		imageLocker.setDrawable(new TextureRegionDrawable(new TextureRegion(
-				new Texture(Gdx.files.internal("img/close.png")))));
+		final Image imageLocker =new Image(new Texture(Gdx.files.internal("img/level/close.png")));
+		int width = Gdx.graphics.getWidth(), height = Gdx.graphics.getHeight();
+		imageLocker.setBounds(width / 20, 7 * height / 8, width / 11, height / 11);
+				
+		/*imageLocker.setDrawable(new TextureRegionDrawable(new TextureRegion(
+				new Texture(Gdx.files.internal("img/level/close.png")))));*/
 		imageLocker.addListener(new InputListener() {
 			@Override
 			public boolean touchDown(InputEvent event, float x, float y,
@@ -154,12 +150,12 @@ public class Level implements Screen {
 				if (fold.isOpen()) {
 					imageLocker.setDrawable(new TextureRegionDrawable(
 							new TextureRegion(new Texture(Gdx.files
-									.internal("img/close.png")))));
+									.internal("img/level/close.png")))));
 					logica.closeFold();
 				} else {
 					imageLocker.setDrawable(new TextureRegionDrawable(
 							new TextureRegion(new Texture(Gdx.files
-									.internal("img/open.png")))));
+									.internal("img/level/open.png")))));
 					logica.openFold();
 				}
 

@@ -96,16 +96,7 @@ public class RecordScreen implements Screen{
 		heading.setFontScale(3);
 		
 		//backArrow
-		backArrow = GraphicManager.createBackArrow();
-		backArrow.addListener(new InputListener(){
-			@Override
-			public boolean touchDown(InputEvent event, float x, float y,
-					int pointer, int button) {
-				// TODO Auto-generated method stub
-				((Game) Gdx.app.getApplicationListener()).setScreen(new MainMenu(game));
-				return true;
-			}
-		});
+		
 		
 //		
 //		//putting stuff together

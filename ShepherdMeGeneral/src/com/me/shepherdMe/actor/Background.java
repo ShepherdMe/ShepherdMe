@@ -32,7 +32,7 @@ public class Background extends Actor {
 		setHeight(Gdx.app.getGraphics().getHeight());
 		setWidth(Gdx.app.getGraphics().getWidth());
 		
-		Tbackground = new Texture(Gdx.files.internal("img/background.jpg"));
+		Tbackground = new Texture(Gdx.files.internal("img/level/background.jpg"));
 		Tbackground.setWrap(TextureWrap.Repeat, TextureWrap.Repeat);
 		background = new TextureRegion(Tbackground,Gdx.app.getGraphics().getWidth(),Gdx.app.getGraphics().getHeight());
 		

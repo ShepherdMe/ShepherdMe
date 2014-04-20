@@ -27,16 +27,16 @@ public class GraphicManager {
 	private static final String usesXdpi = "xdpi";
 
 	public static void initialize() {
-		atlas = new TextureAtlas("ui/button.pack");
-		skin = new Skin(atlas);
+		/*atlas = new TextureAtlas("ui/button.pack");
+		skin = new Skin(atlas);*/
 		white = new BitmapFont(Gdx.files.internal("font/white.fnt"), false);
 		black = new BitmapFont(Gdx.files.internal("font/black.fnt"), false);
-		textButtonStyle = new TextButtonStyle();
+		/*textButtonStyle = new TextButtonStyle();
 		textButtonStyle.up = skin.getDrawable("negro");
 		textButtonStyle.down = skin.getDrawable("blanco");
 		textButtonStyle.pressedOffsetX = 1;
 		textButtonStyle.pressedOffsetY = -1;
-		textButtonStyle.font = black;
+		textButtonStyle.font = black;*/
 		landscapeWidth=Gdx.graphics.getWidth();
 		screenDensity=Gdx.graphics.getDensity();
 		defineScreenSize();
@@ -91,24 +91,6 @@ public class GraphicManager {
 				usesDpi=usesXdpi;
 			}
 		}
-	}
-
-	public static Image createBackArrow() {
-		Image backArrow = new Image(new Texture(
-				Gdx.files.internal("img/backArrow.png")));
-		int width = Gdx.graphics.getWidth(), height = Gdx.graphics.getHeight();
-		backArrow
-				.setBounds(width / 20, 7 * height / 8, width / 11, height / 11);
-		return backArrow;
-	}
-
-	public static Image createExitButton() {
-		Image backArrow = new Image(new Texture(
-				Gdx.files.internal("img/exit.png")));
-		int width = Gdx.graphics.getWidth(), height = Gdx.graphics.getHeight();
-		backArrow
-				.setBounds(width / 20, 7 * height / 8, width / 11, height / 11);
-		return backArrow;
 	}
 
 	private static boolean correct() {

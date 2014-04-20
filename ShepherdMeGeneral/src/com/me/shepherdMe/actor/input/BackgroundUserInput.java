@@ -11,7 +11,6 @@ import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.utils.Array;
 import com.me.shepherdMe.actor.ActorInvisible;
-import com.me.shepherdMe.actor.Background;
 import com.me.shepherdMe.actor.Dog;
 import com.me.shepherdMe.actor.Obstacle;
 import com.me.shepherdMe.actor.Sheep;
@@ -42,7 +41,6 @@ public class BackgroundUserInput extends InputListener {
 	public BackgroundUserInput(ActorInvisible Ai) {
 		this.AI = Ai;
 		this.STEP=Math.sqrt(Math.pow(Gdx.graphics.getWidth(), 2)+Math.pow(Gdx.graphics.getHeight(), 2))/100;
-		//this.STEP=this.STEP * Gdx.graphics.getWidth()/Gdx.graphics.getHeight();
 	}
 
 	public void setPause(boolean pause) {

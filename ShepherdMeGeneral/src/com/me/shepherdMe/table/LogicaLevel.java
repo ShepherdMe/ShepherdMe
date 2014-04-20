@@ -8,26 +8,19 @@ import java.util.TimerTask;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.math.Intersector;
 import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.scenes.scene2d.Actor;
-import com.badlogic.gdx.scenes.scene2d.actions.RepeatAction;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
-import com.badlogic.gdx.utils.Array;
 import com.me.shepherdMe.ShepherdMe;
 import com.me.shepherdMe.actor.ActorInvisible;
 import com.me.shepherdMe.actor.Background;
 import com.me.shepherdMe.actor.Bush;
 import com.me.shepherdMe.actor.Cloud;
 import com.me.shepherdMe.actor.Dog;
-import com.me.shepherdMe.actor.Lake;
 import com.me.shepherdMe.actor.Obstacle;
 import com.me.shepherdMe.actor.Open;
 import com.me.shepherdMe.actor.Sheep;
 import com.me.shepherdMe.actor.SheepFold;
-import com.me.shepherdMe.actor.WaterCircle;
 import com.me.shepherdMe.actor.input.BackgroundUserInput;
-import com.me.shepherdMe.functions.SheepAction;
 import com.me.shepherdMe.screens.Level;
 
 

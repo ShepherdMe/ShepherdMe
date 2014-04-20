@@ -5,9 +5,6 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import utils.GraphicManager;
-import aurelienribon.tweenengine.BaseTween;
-import aurelienribon.tweenengine.Tween;
-import aurelienribon.tweenengine.TweenCallback;
 import aurelienribon.tweenengine.TweenManager;
 
 import com.badlogic.gdx.Game;
@@ -24,7 +21,6 @@ import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.Touchable;
-import com.badlogic.gdx.scenes.scene2d.actions.AlphaAction;
 import com.badlogic.gdx.scenes.scene2d.actions.RepeatAction;
 import com.badlogic.gdx.scenes.scene2d.actions.RotateByAction;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
@@ -32,7 +28,6 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.me.shepherdMe.ShepherdMe;
 import com.me.shepherdMe.sound.SoundManager;
-import com.me.shepherdMe.tween.SpriteAccessor;
 
 public class MainMenu implements Screen {
 
@@ -133,8 +128,6 @@ public class MainMenu implements Screen {
 
 		Gdx.input.setInputProcessor(stage);
 
-		GraphicManager.scaleFont(GraphicManager.getWhiteFont());
-		GraphicManager.scaleFont(GraphicManager.getBlackFont());
 		int width = Gdx.graphics.getWidth(), height = Gdx.graphics.getHeight();
 
 		sun = new Image(
@@ -161,10 +154,7 @@ public class MainMenu implements Screen {
 
 		sheep = new Image(new Texture(Gdx.files.internal("img/main/sheep_" + i
 				+ ".png")));
-		/*
-		 * if(i==7 || i ==1 || i==0 || i==3 || i==5 ||i==6) {
-		 * sheep.setBounds(2*width/10, -15, height/1.5f, height/1.5f); }
-		 */
+		
 		if (i == 2) {
 			sheep.setBounds(2 * width / 10, -15, 1.5f * height / 1.5f,
 					height / 1.5f);
@@ -175,46 +165,11 @@ public class MainMenu implements Screen {
 			sheep.setBounds(2 * width / 10, -15, height / 1.5f, height / 1.5f);
 
 		}
-		// sheep.setBounds(2*width/10, -15, height/1.5f, height/1.5f);
-
-		/*
-		 * AlphaAction alphaAc = new AlphaAction();
-		 * 
-		 * 
-		 * RepeatAction ra2 = new RepeatAction(); ra2.setActor(sheep);
-		 * ra2.setAction(alphaAc); ra2.setCount(RepeatAction.FOREVER);
-		 */
-
-		/*
-		 * SpriteBatch batch = new SpriteBatch(); tweenManager= new
-		 * TweenManager(); Tween.registerAccessor(Sprite.class, new
-		 * SpriteAccessor());
-		 * 
-		 * Texture splashTexture= new
-		 * Texture(Gdx.files.internal("img/main/sheep.png")); sheep= new
-		 * Sprite(splashTexture); sheep.setBounds(2*width/10, -15, height/1.5f,
-		 * height/1.5f);
-		 * 
-		 * /*Sprite splash= new Sprite(new
-		 * Texture(Gdx.files.internal("img/main/sheep.png")));
-		 * splash.setSize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-		 */
-
-		/*
-		 * Tween.set(sheep, SpriteAccessor.ALPHA).target(0).start(tweenManager);
-		 * Tween.to(sheep, SpriteAccessor.ALPHA, 2).target(1).repeatYoyo(1,
-		 * 2).setCallback(new TweenCallback() {
-		 * 
-		 * @Override public void onEvent(int type, BaseTween<?> source) {
-		 * 
-		 * } }).start(tweenManager);
-		 */
-
 		buttonRecords = new Image(new Texture(
-				Gdx.files.internal("ui/records.png")));
+				Gdx.files.internal("img/main/records.png")));
 		buttonRecords.setBounds(width - width / 5, height / 21, width / 5,
 				height / 4);
-		buttonRecords.addListener(new ClickListener() {
+		/*buttonRecords.addListener(new ClickListener() {
 			@Override
 			public void clicked(InputEvent event, float x, float y) {
 				// TODO Auto-generated method stub
@@ -223,8 +178,8 @@ public class MainMenu implements Screen {
 					rs = new RecordScreen(game, mm);
 				((Game) Gdx.app.getApplicationListener()).setScreen(rs);
 			}
-		});
-		buttonPlay = new Image(new Texture(Gdx.files.internal("ui/play.png")));
+		});*/
+		buttonPlay = new Image(new Texture(Gdx.files.internal("img/main/play.png")));
 		buttonPlay.setBounds(width - width / 5, height / 3.5f, width / 5,
 				height / 4);
 		buttonPlay.addListener(new ClickListener() {
@@ -239,7 +194,7 @@ public class MainMenu implements Screen {
 		});
 
 		// Creating heading
-		heading = new Image(new Texture(Gdx.files.internal("ui/tittle.png")));
+		heading = new Image(new Texture(Gdx.files.internal("img/main/tittle.png")));
 		heading.setBounds(width / 25, 4 * height / 8, width / 1.5f,
 				height / 1.5f);
 
@@ -402,9 +357,7 @@ public class MainMenu implements Screen {
 		// TODO Auto-generated method stub
 		stage.dispose();
 		atlas.dispose();
-		// white.dispose();
-		// black.dispose();
-		// skin.dispose();
+
 	}
 
 }

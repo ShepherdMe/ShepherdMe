@@ -2,21 +2,15 @@ package com.me.shepherdMe.screens;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.TimerTask;
-
-import utils.GraphicManager;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.Input.Keys;
-import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.scenes.scene2d.Event;
-import com.badlogic.gdx.scenes.scene2d.EventListener;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
@@ -24,10 +18,6 @@ import com.badlogic.gdx.scenes.scene2d.actions.AlphaAction;
 import com.badlogic.gdx.scenes.scene2d.actions.MoveByAction;
 import com.badlogic.gdx.scenes.scene2d.actions.ParallelAction;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
-import com.badlogic.gdx.scenes.scene2d.ui.Label;
-import com.badlogic.gdx.scenes.scene2d.ui.Table;
-import com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle;
-import com.esotericsoftware.tablelayout.Cell;
 import com.me.shepherdMe.ShepherdMe;
 
 public class LevelChooser implements Screen {
@@ -91,14 +81,10 @@ public class LevelChooser implements Screen {
 
 		Gdx.input.setInputProcessor(stage);
 
-		Image imageGreen = new Image(new Texture(
-				Gdx.files.internal("img/green.png")));
-		Image imageBlue = new Image(new Texture(
-				Gdx.files.internal("img/green.png")));
+		
 		float imageHeight = Gdx.graphics.getHeight() / 3;
 		float imageWidth = Gdx.graphics.getWidth() / 4;
-		imageGreen.setSize(imageWidth, imageHeight);
-		imageBlue.setSize(imageWidth, imageHeight);
+		
 
 		// Choose level text
 		Image chooseText = new Image(new Texture(

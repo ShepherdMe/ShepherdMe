@@ -12,10 +12,10 @@ public class Lake extends Obstacle {
 		
 		this.area = new Ellipse(x, y, width, height);
 		
-		this.obstacle = new Texture(Gdx.files.internal("img/muro.jpg"));
+		this.obstacle = new Texture(Gdx.files.internal("img/level/muro.jpg"));
 		this.regionObstacle = new TextureRegion(this.obstacle);;
 
-		this.obstacle = new Texture(Gdx.files.internal("img/rojo.jpg"));//Cambiarle la foto y poner un width y height determinado
+		this.obstacle = new Texture(Gdx.files.internal("img/level/muro.jpg"));//Cambiarle la foto y poner un width y height determinado
 		this.regionObstacle = new TextureRegion(this.obstacle);	
 		
 	}
