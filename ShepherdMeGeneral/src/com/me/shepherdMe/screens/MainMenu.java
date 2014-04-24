@@ -40,18 +40,19 @@ public class MainMenu implements Screen {
 	private Image sun, sheep;
 	private ShepherdMe game;
 	private Image volumeEffects, volumeMusic;
-	private boolean volumeEffectsOn, volumeMusicOn, stop = false,
+	private boolean stop = false,
 			showingPause = false;
 	private Image cartelExit;
 	private LevelChooser lc = null;
 	private RecordScreen rs = null;
 	private Timer timer = new Timer();
-	private SoundManager SM;
 
 	public MainMenu(ShepherdMe game) {
 		this.game = game;
-		//this.SM= new SoundManager();
-		//this.SM.startMusic();
+		SoundManager.asignarValores();
+		SoundManager.playMusicMenu();
+		SoundManager.loadAudios();
+		this.game.menu=this;
 	}
 
 	@Override
@@ -185,9 +186,11 @@ public class MainMenu implements Screen {
 			public void clicked(InputEvent event, float x, float y) {
 				// TODO Auto-generated method stub
 				super.clicked(event, x, y);
-				if (lc == null)
-					lc = new LevelChooser(game, mm);
-				((Game) Gdx.app.getApplicationListener()).setScreen(lc);
+				if (game.chooseLevel == null)
+				{
+					game.chooseLevel = new LevelChooser(game);
+				}
+				((Game) Gdx.app.getApplicationListener()).setScreen(game.chooseLevel);
 			}
 		});
 
@@ -197,52 +200,61 @@ public class MainMenu implements Screen {
 				height / 1.5f);
 
 		// Volume effects icon
-		volumeEffects = new Image(new Texture(
-				Gdx.files.internal("img/main/sonido.png")));
-		volumeEffectsOn = true;
-		volumeEffects.setBounds(7.2f * width / 8, 7 * height / 8, height / 11,
-				height / 11);
+	
+		if(SoundManager.getEffectsOn())
+		{
+			volumeEffects = new Image(new Texture(Gdx.files.internal("img/main/sonido.png")));
+		}
+		else
+		{
+			volumeEffects = new Image(new Texture(Gdx.files.internal("img/main/sonido_2.png")));
+		}
+		volumeEffects.setBounds(7.2f * width / 8, 7 * height / 8, height / 11,height / 11);
 		volumeEffects.addListener(new InputListener() {
 			@Override
 			public boolean touchDown(InputEvent event, float x, float y,
 					int pointer, int button) {
 				// TODO Auto-generated method stub
-				if (volumeEffectsOn) {
+				if (SoundManager.getEffectsOn()) {
+					SoundManager.setEffectsOn(false);
 					volumeEffects.setDrawable(new TextureRegionDrawable(
 							new TextureRegion(new Texture(Gdx.files
 									.internal("img/main/sonido_2.png")))));
-					volumeEffectsOn = false;
 				} else {
+					SoundManager.setEffectsOn(true);
 					volumeEffects.setDrawable(new TextureRegionDrawable(
 							new TextureRegion(new Texture(Gdx.files
 									.internal("img/main/sonido.png")))));
-					volumeEffectsOn = true;
 				}
 				return true;
 			}
 		});
 
 		// Volume music icon
-		volumeMusic = new Image(new Texture(
-				Gdx.files.internal("img/main/music.png")));
-		volumeMusicOn = true;
-		volumeMusic.setBounds(7.2f * width / 8,
-				6.8f * height / 8 - height / 11, height / 11, height / 11);
+		if(SoundManager.getMusicOn())
+		{
+			volumeMusic = new Image(new Texture(Gdx.files.internal("img/main/music.png")));
+		}
+		else
+		{
+			volumeMusic = new Image(new Texture(Gdx.files.internal("img/main/music_2.png")));
+		}
+		volumeMusic.setBounds(7.2f * width / 8, 6.8f * height / 8 - height / 11, height / 11, height / 11);
 		volumeMusic.addListener(new InputListener() {
 			@Override
 			public boolean touchDown(InputEvent event, float x, float y,
 					int pointer, int button) {
 				// TODO Auto-generated method stub
-				if (volumeMusicOn) {
+				if (SoundManager.getMusicOn()) {
+					SoundManager.setMusicOn(false);
 					volumeMusic.setDrawable(new TextureRegionDrawable(
 							new TextureRegion(new Texture(Gdx.files
 									.internal("img/main/music_2.png")))));
-					volumeMusicOn = false;
 				} else {
+					SoundManager.setMusicOn(true);
 					volumeMusic.setDrawable(new TextureRegionDrawable(
 							new TextureRegion(new Texture(Gdx.files
 									.internal("img/main/music.png")))));
-					volumeMusicOn = true;
 				}
 				return true;
 			}

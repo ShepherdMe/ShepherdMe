@@ -22,6 +22,7 @@ import com.me.shepherdMe.actor.Sheep;
 import com.me.shepherdMe.actor.SheepFold;
 import com.me.shepherdMe.actor.input.BackgroundUserInput;
 import com.me.shepherdMe.screens.Level;
+import com.me.shepherdMe.sound.SoundManager;
 
 
 public class LogicaLevel extends Table {
@@ -90,7 +91,7 @@ public class LogicaLevel extends Table {
 //			this.obstacle.add(b);
 		}
 //		this.obstacle.add(fold.getGate());
-//		addActor(fold.getGate());
+		addActor(fold.getGate());
 		//addActor(obstacle.get(1));
 		
 		//Mover ovejas DEBE SER LO ULTIMO DEL CONSTRUCTOR!
@@ -177,7 +178,6 @@ public class LogicaLevel extends Table {
 			else//Si el perro esta cerca.
 			{
 				oveja.estaHuyendo=true;
-				
 				Vector2 nuevaPosicion= runAwayDog(oveja);
 				if (!oveja.ovejaTocaElemento(nuevaPosicion)) {
 					

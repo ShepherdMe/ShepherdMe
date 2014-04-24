@@ -184,8 +184,6 @@ public class Sheep extends Actor {
 	 */
 	
 	public boolean elementoTocaOveja(float x, float y, float width, float height) {
-		System.out.println("EL del this "+ this.getX()+" "+this.getY()+" "+this.getWidth()+" "+this.getHeight());
-		System.out.println("Los parametros "+x+" "+y+" "+width+" "+height);
 		if ((x + width >= this.getX()) && (x <= this.getX() + this.getWidth())) {
 			if ((y + height >= this.getY()) && (y <= this.getY() + this.getHeight())) {
 				return true;

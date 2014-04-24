@@ -30,13 +30,14 @@ public class LevelChooser implements Screen {
 	private Image backArrow;
 	private List<Image> imagenesNiveles1, imagenesNiveles2;
 	private Image arrowRight, arrowLeft, dog1, dog2;
-	private MainMenu mm;
+	//private MainMenu mm;
 
-	public LevelChooser(ShepherdMe game, MainMenu mm) {
+	public LevelChooser(ShepherdMe game) {
 		this.game = game;
 		this.imagenesNiveles1 = new ArrayList<Image>();
 		this.imagenesNiveles2 = new ArrayList<Image>();
-		this.mm = mm;
+		//this.mm = mm;
+		this.game.chooseLevel=this;
 	}
 
 	@Override
@@ -45,9 +46,13 @@ public class LevelChooser implements Screen {
 		Gdx.gl.glClearColor(0, 0, 0, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
-		if (Gdx.input.isKeyPressed(Keys.BACK)) {
-			((Game) Gdx.app.getApplicationListener()).setScreen(new MainMenu(
-					game));
+		if (Gdx.input.isKeyPressed(Keys.BACK)) 
+		{
+			if (game.menu == null)
+			{
+				game.menu = new MainMenu(game);
+			}
+			((Game) Gdx.app.getApplicationListener()).setScreen(game.menu);
 		}
 
 		batchBackground.begin();
@@ -255,8 +260,11 @@ public class LevelChooser implements Screen {
 			@Override
 			public boolean touchDown(InputEvent event, float x, float y,
 					int pointer, int button) {
-				((Game) Gdx.app.getApplicationListener())
-						.setScreen(new MainMenu(game));
+				if (game.menu == null)
+				{
+					game.menu = new MainMenu(game);
+				}
+				((Game) Gdx.app.getApplicationListener()).setScreen(game.menu);
 				return true;
 			}
 		});

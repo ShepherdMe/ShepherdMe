@@ -14,6 +14,7 @@ import com.me.shepherdMe.actor.ActorInvisible;
 import com.me.shepherdMe.actor.Dog;
 import com.me.shepherdMe.actor.Obstacle;
 import com.me.shepherdMe.actor.Sheep;
+import com.me.shepherdMe.sound.SoundManager;
 
 public class BackgroundUserInput extends InputListener {
 
@@ -50,6 +51,7 @@ public class BackgroundUserInput extends InputListener {
 	@Override
 	public boolean touchDown(final InputEvent event, float x, float y,
 			int pointer, int button) {
+		SoundManager.playDog();
 		if (!pause) {
 			if (running) {
 				timerTask.cancel();
