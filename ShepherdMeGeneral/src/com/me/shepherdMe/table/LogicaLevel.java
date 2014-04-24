@@ -90,7 +90,7 @@ public class LogicaLevel extends Table {
 //			this.obstacle.add(b);
 		}
 //		this.obstacle.add(fold.getGate());
-		addActor(fold.getGate());
+//		addActor(fold.getGate());
 		//addActor(obstacle.get(1));
 		
 		//Mover ovejas DEBE SER LO ULTIMO DEL CONSTRUCTOR!
@@ -250,7 +250,7 @@ public class LogicaLevel extends Table {
 	{
 		Vector2 vector;
 		vector=new Vector2 (this.dog.getX()-s.getX() , this.dog.getY()-s.getY());
-		if(Math.sqrt(Math.pow(vector.x,2)+Math.pow(vector.y,2))<200)
+		if(Math.sqrt(Math.pow(vector.x,2)+Math.pow(vector.y,2))<Gdx.graphics.getWidth()/5)
 		{
 			return true;
 		}
@@ -263,15 +263,15 @@ public class LogicaLevel extends Table {
 				
 		int v;
 		
-		if (vectorN.len()<20)
+		if (vectorN.len()<Gdx.graphics.getWidth()/12)
 		{
 			v=7;
 		}
-		else if (vectorN.len()<50)
+		else if (vectorN.len()<Gdx.graphics.getWidth()/8)
 		{
 			v=6;
 		}
-		else if(vectorN.len()<100)
+		else if(vectorN.len()<Gdx.graphics.getWidth()/6)
 		{
 			v=4;
 		}
