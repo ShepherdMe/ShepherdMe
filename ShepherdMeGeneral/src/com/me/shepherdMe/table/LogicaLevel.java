@@ -44,6 +44,8 @@ public class LogicaLevel extends Table {
 	private int AltoPantalla = Gdx.graphics.getHeight();
 	private int AnchoPantalla = Gdx.graphics.getWidth();
 
+	
+	
 	public LogicaLevel(ShepherdMe game, Level screen) {
 		float width = Gdx.graphics.getWidth();
 		float height = Gdx.graphics.getHeight();
@@ -229,17 +231,18 @@ public class LogicaLevel extends Table {
 		
 		
 	}
+	
 	public void pauseOvejas()
 	{
-		if(this.timerTask!=null)
+		if(timerTask!=null)
 		{
-			this.timerTask.cancel();
-			this.timerTask=null;
+			timerTask.cancel();
+			timerTask=null;
 		}
 	}
 	public void inciarOvejas()
 	{
-		if(this.timerTask==null)
+		if(timerTask==null)
 		{
 			timerTask = new TimerTaskSheep();
 			timer.scheduleAtFixedRate(timerTask, 0, 15);

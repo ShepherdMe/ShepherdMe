@@ -203,6 +203,7 @@ public class Level implements Screen {
 					{
 						game.chooseLevel = new LevelChooser(game);
 					}
+					logica.pauseOvejas();
 					((Game) Gdx.app.getApplicationListener()).setScreen(game.chooseLevel);
 				}
 			}
