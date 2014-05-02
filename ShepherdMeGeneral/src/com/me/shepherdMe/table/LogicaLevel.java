@@ -2,6 +2,7 @@ package com.me.shepherdMe.table;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -178,7 +179,13 @@ public class LogicaLevel extends Table {
 				}
 			}
 			else//Si el perro esta cerca.
-			{
+			{	
+				
+				if(!oveja.estaHuyendo)
+				{
+					SoundManager.playSheep();
+				}
+				
 				oveja.estaHuyendo=true;
 				Vector2 nuevaPosicion= runAwayDog(oveja);
 				if (!oveja.ovejaTocaElemento(nuevaPosicion)) {

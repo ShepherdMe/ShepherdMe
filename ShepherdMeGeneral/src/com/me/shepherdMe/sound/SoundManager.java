@@ -1,5 +1,7 @@
 package com.me.shepherdMe.sound;
 
+import java.util.Random;
+
 import com.badlogic.gdx.Files.FileType;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Music;
@@ -11,6 +13,8 @@ public class SoundManager {
 	private static boolean effectsOn;
 
 	private static Sound dogSound;
+	private static Sound sheepSound1;
+	private static Sound sheepSound2;
 	private static Music mainMenu;
 	
 	public SoundManager() 
@@ -43,6 +47,21 @@ public class SoundManager {
 		}
 	}
 	
+	public static void playSheep()
+	{
+		if(effectsOn)
+		{
+			if(new Random().nextInt()%2==0)
+			{
+				SoundManager.sheepSound1.play(1);
+			}
+			else
+			{
+				SoundManager.sheepSound2.play(1);
+			}
+		}
+	}
+	
 	public static void stopMusicMenu()
 	{
 		if(mainMenu.isPlaying())
@@ -55,7 +74,10 @@ public class SoundManager {
 	{
 		if(effectsOn)
 		{
-			dogSound = Gdx.audio.newSound(Gdx.files.internal("sounds/prueba2.mp3"));
+			dogSound = Gdx.audio.newSound(Gdx.files.internal("sounds/dog.wav"));
+			sheepSound1 = Gdx.audio.newSound(Gdx.files.internal("sounds/balido_1.mp3"));
+			sheepSound2 = Gdx.audio.newSound(Gdx.files.internal("sounds/balido_2.mp3"));
+
 		}
 	}
 
