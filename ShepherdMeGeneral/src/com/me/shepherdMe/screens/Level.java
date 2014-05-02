@@ -12,7 +12,9 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas.AtlasRegion;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
@@ -31,16 +33,20 @@ public class Level implements Screen {
 	private ShepherdMe game;
 	private Stage stage;
 	private LogicaLevel logica;
-	private Label cronometerLabel;
 	private Cronometro cronometer;
 	private Image cartelExit, buttonContinue, buttonExit;
 	private boolean showingPause = false, stop = false;
 	private Timer timer = new Timer();
+	private SpriteBatch batch;
+	private float width, height;
 
 	public Level(ShepherdMe game, LevelChooser lc) {
 		Gdx.app.log("LEVEL", "contruye level");
 		this.game = game;
 		this.stage = new Stage();
+		batch = new SpriteBatch();
+		width = Gdx.graphics.getWidth();
+		height = Gdx.graphics.getHeight();
 	}
 
 	@Override
@@ -50,7 +56,7 @@ public class Level implements Screen {
 				.isKeyPressed(Keys.MENU)) && !stop) {
 			stop = true;
 			timer.schedule(new TimerTask() {
-				
+
 				@Override
 				public void run() {
 					// TODO Auto-generated method stub
@@ -71,6 +77,29 @@ public class Level implements Screen {
 		stage.act(delta);
 		stage.draw();
 
+		batch.begin();
+//		int x = 0;
+//		for (AtlasRegion at : cronometer.getImages()) {
+//			if (at != null) {
+//				batch.draw(at, x, 100);
+//				x += at.getRegionWidth();
+//			}
+//		}
+		float x = 4*width/5, y = 7*height/8;
+		float swidth = width/25;
+		
+		if(cronometer != null && cronometer.ready){
+			batch.draw(cronometer.min1, x, y, swidth, height/16);
+			x += swidth;
+			batch.draw(cronometer.min2, x, y, swidth, height/16);
+			x += swidth;
+			batch.draw(cronometer.separator, x, y, swidth/4, height/16);
+			x += swidth/4;
+			batch.draw(cronometer.sec1, x, y, swidth, height/16);
+			x += swidth;
+			batch.draw(cronometer.sec2, x, y, swidth, height/16);
+		}
+		batch.end();
 	}
 
 	private void continueGame() {
@@ -98,8 +127,8 @@ public class Level implements Screen {
 		buttonContinue.setZIndex(stage.getActors().size);
 
 	}
-	public void ganar()
-	{
+
+	public void ganar() {
 		sacarCartel();
 	}
 
@@ -123,22 +152,26 @@ public class Level implements Screen {
 		GraphicManager.scaleFont(GraphicManager.getBlackFont());
 		LabelStyle headingStyle = new LabelStyle(GraphicManager.getBlackFont(),
 				Color.BLACK);
-		cronometerLabel = new Label("0:0", headingStyle);
-		cronometerLabel.setZIndex(1000);
-		cronometerLabel.setX(7 * Gdx.graphics.getWidth() / 8);
-		cronometerLabel.setY(8 * Gdx.graphics.getHeight() / 9);
 
-		cronometer = new Cronometro(cronometerLabel);
+		cronometer = new Cronometro();
+		// for(Image image : cronometer.getImages()){
+		// if(image!=null)
+		// stage.addActor(image);
+		// }
+
 		cronometer.start();
-		stage.addActor(cronometerLabel);
 
 		// Open and close fold
-		final Image imageLocker =new Image(new Texture(Gdx.files.internal("img/level/close.png")));
+		final Image imageLocker = new Image(new Texture(
+				Gdx.files.internal("img/level/close.png")));
 		int width = Gdx.graphics.getWidth(), height = Gdx.graphics.getHeight();
-		imageLocker.setBounds(width / 20, 7 * height / 8, width / 11, height / 11);
-				
-		/*imageLocker.setDrawable(new TextureRegionDrawable(new TextureRegion(
-				new Texture(Gdx.files.internal("img/level/close.png")))));*/
+		imageLocker.setBounds(width / 20, 7 * height / 8, width / 11,
+				height / 11);
+
+		/*
+		 * imageLocker.setDrawable(new TextureRegionDrawable(new TextureRegion(
+		 * new Texture(Gdx.files.internal("img/level/close.png")))));
+		 */
 		imageLocker.addListener(new InputListener() {
 			@Override
 			public boolean touchDown(InputEvent event, float x, float y,
@@ -199,12 +232,12 @@ public class Level implements Screen {
 				super.clicked(event, x, y);
 				if (!cronometer.isRunning()) {
 					logica.setPause(false);
-					if (game.chooseLevel == null)
-					{
+					if (game.chooseLevel == null) {
 						game.chooseLevel = new LevelChooser(game);
 					}
 					logica.pauseOvejas();
-					((Game) Gdx.app.getApplicationListener()).setScreen(game.chooseLevel);
+					((Game) Gdx.app.getApplicationListener())
+							.setScreen(game.chooseLevel);
 				}
 			}
 		});
@@ -230,7 +263,6 @@ public class Level implements Screen {
 	@Override
 	public void pause() {
 		// TODO Auto-generated method stub
-
 	}
 
 	@Override
@@ -243,5 +275,6 @@ public class Level implements Screen {
 	public void dispose() {
 		// TODO Auto-generated method stub
 		Gdx.input.setInputProcessor(null);
+		batch.dispose();
 	}
 }

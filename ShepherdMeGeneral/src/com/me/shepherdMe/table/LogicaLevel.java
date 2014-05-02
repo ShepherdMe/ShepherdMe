@@ -168,7 +168,7 @@ public class LogicaLevel extends Table {
 					oveja.nuevoPunto=true;
 					oveja.estaHuyendo=false;
 				}
-				System.out.println("Toca? "+oveja.ovejaTocaElemento(v));
+//				System.out.println("Toca? "+oveja.ovejaTocaElemento(v));
 				if (!oveja.ovejaTocaElemento(v)) {
 					this.sheeps.get(i).setX(v.x);
 					this.sheeps.get(i).setY(v.y);
