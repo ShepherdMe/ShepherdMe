@@ -26,6 +26,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.me.shepherdMe.ShepherdMe;
 import com.me.shepherdMe.actor.SheepFold;
 import com.me.shepherdMe.functions.Cronometro;
+import com.me.shepherdMe.medals.Medal;
 import com.me.shepherdMe.table.LogicaLevel;
 
 public class Level implements Screen {
@@ -39,6 +40,7 @@ public class Level implements Screen {
 	private Timer timer = new Timer();
 	private SpriteBatch batch;
 	private float width, height;
+	private Medal medal = null;
 
 	public Level(ShepherdMe game, LevelChooser lc) {
 		Gdx.app.log("LEVEL", "contruye level");
@@ -78,13 +80,7 @@ public class Level implements Screen {
 		stage.draw();
 
 		batch.begin();
-//		int x = 0;
-//		for (AtlasRegion at : cronometer.getImages()) {
-//			if (at != null) {
-//				batch.draw(at, x, 100);
-//				x += at.getRegionWidth();
-//			}
-//		}
+
 		float x = 4*width/5, y = 7*height/8;
 		float swidth = width/25;
 		
@@ -276,5 +272,11 @@ public class Level implements Screen {
 		// TODO Auto-generated method stub
 		Gdx.input.setInputProcessor(null);
 		batch.dispose();
+	}
+	
+	public Medal getMedal(){
+		//Aquí deberíamos elegir la medalla dependiendo del tiempo que se ha tardado
+		
+		return this.medal;
 	}
 }
