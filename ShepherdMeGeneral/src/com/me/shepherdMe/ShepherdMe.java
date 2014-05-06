@@ -11,6 +11,7 @@ public class ShepherdMe extends Game {
 	public static final String NAME="ShepherdMe",VERSION="0.0.0";
 	public static Screen menu;
 	public static Screen chooseLevel;
+	public static Screen recordScreen;
 	
 	
 	@Override

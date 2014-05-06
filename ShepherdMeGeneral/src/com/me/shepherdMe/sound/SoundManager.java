@@ -1,9 +1,15 @@
 package com.me.shepherdMe.sound;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.util.Properties;
 import java.util.Random;
 
 import com.badlogic.gdx.Files.FileType;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Preferences;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.audio.Sound;
 
@@ -18,14 +24,17 @@ public class SoundManager {
 	private static Music mainMenu;
 	
 	public SoundManager() 
-	{
+	{		
 	}
 	
-	//Cargara la configuracion de un archivo en un futuro
 	public static void asignarValores()
 	{
-		musicOn=true;
-		effectsOn=true;
+		
+		Preferences pref = Gdx.app.getPreferences("Audio");
+		
+		musicOn = pref.getBoolean("music");
+		effectsOn = pref.getBoolean("effects");
+
 	}
 	
 	public static void playMusicMenu()
@@ -89,6 +98,13 @@ public class SoundManager {
 	public static void setMusicOn(boolean b)
 	{
 		musicOn=b;
+		
+		Preferences pref = Gdx.app.getPreferences("Audio");
+		
+		pref.putBoolean("music", b);
+		
+		pref.flush();
+		
 		if(b)
 		{
 			SoundManager.playMusicMenu();
@@ -107,6 +123,13 @@ public class SoundManager {
 	public static void setEffectsOn(boolean b)
 	{
 		effectsOn=b;
+		
+		Preferences pref = Gdx.app.getPreferences("Audio");
+		
+		pref.putBoolean("effects", b);
+		
+		pref.flush();
+		
 	}
 	
 

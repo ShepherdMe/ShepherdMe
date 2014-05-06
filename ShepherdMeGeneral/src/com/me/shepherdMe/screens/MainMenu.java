@@ -43,8 +43,6 @@ public class MainMenu implements Screen {
 	private boolean stop = false,
 			showingPause = false;
 	private Image cartelExit;
-	private LevelChooser lc = null;
-	private RecordScreen rs = null;
 	private Timer timer = new Timer();
 
 	public MainMenu(ShepherdMe game) {
@@ -164,20 +162,25 @@ public class MainMenu implements Screen {
 			sheep.setBounds(2 * width / 10, -15, height / 1.5f, height / 1.5f);
 
 		}
+		
 		buttonRecords = new Image(new Texture(
 				Gdx.files.internal("img/main/records.png")));
 		buttonRecords.setBounds(width - width / 5, height / 21, width / 5,
 				height / 4);
-		/*buttonRecords.addListener(new ClickListener() {
+		buttonRecords.addListener(new ClickListener() {
 			@Override
 			public void clicked(InputEvent event, float x, float y) {
 				// TODO Auto-generated method stub
 				super.clicked(event, x, y);
-				if (rs == null)
-					rs = new RecordScreen(game, mm);
-				((Game) Gdx.app.getApplicationListener()).setScreen(rs);
+				if (game.recordScreen == null)
+				{
+					game.recordScreen = new RecordScreen(game);
+				}
+				((Game) Gdx.app.getApplicationListener()).setScreen(game.recordScreen);
 			}
-		});*/
+		});
+		
+		
 		buttonPlay = new Image(new Texture(Gdx.files.internal("img/main/play.png")));
 		buttonPlay.setBounds(width - width / 5, height / 3.5f, width / 5,
 				height / 4);

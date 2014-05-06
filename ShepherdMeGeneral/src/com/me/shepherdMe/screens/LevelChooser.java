@@ -30,13 +30,11 @@ public class LevelChooser implements Screen {
 	private Image backArrow;
 	private List<Image> imagenesNiveles1, imagenesNiveles2;
 	private Image arrowRight, arrowLeft, dog1, dog2;
-	//private MainMenu mm;
 
 	public LevelChooser(ShepherdMe game) {
 		this.game = game;
 		this.imagenesNiveles1 = new ArrayList<Image>();
 		this.imagenesNiveles2 = new ArrayList<Image>();
-		//this.mm = mm;
 		this.game.chooseLevel=this;
 	}
 
