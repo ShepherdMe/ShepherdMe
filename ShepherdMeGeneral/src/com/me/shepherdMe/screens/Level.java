@@ -13,6 +13,7 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas.AtlasRegion;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
@@ -36,11 +37,14 @@ public class Level implements Screen {
 	private LogicaLevel logica;
 	private Cronometro cronometer;
 	private Image cartelExit, buttonContinue, buttonExit;
+	private TextureAtlas atlas;
+	public AtlasRegion Bronze, Silver, Gold;
 	private boolean showingPause = false, stop = false;
 	private Timer timer = new Timer();
 	private SpriteBatch batch;
 	private float width, height;
 	private Medal medal = null;
+	private boolean End;
 
 	public Level(ShepherdMe game, LevelChooser lc) {
 		Gdx.app.log("LEVEL", "contruye level");
@@ -49,6 +53,12 @@ public class Level implements Screen {
 		batch = new SpriteBatch();
 		width = Gdx.graphics.getWidth();
 		height = Gdx.graphics.getHeight();
+		End=false;
+		//medallas
+		atlas = new TextureAtlas(Gdx.files.internal("img/medals.atlas"));
+		Bronze= atlas.findRegion("bronze");
+		Silver = atlas.findRegion("silver");
+		Gold = atlas.findRegion("gold");
 	}
 
 	@Override
@@ -95,6 +105,33 @@ public class Level implements Screen {
 			x += swidth;
 			batch.draw(cronometer.sec2, x, y, swidth, height/16);
 		}
+		if(End)
+		{
+			//CAMBIAR LOS TIEMPOS POR LO QUE TE SALGA DE LOS HUEVOS!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+			if(cronometer.getSegundos()<30)
+			{
+				batch.draw(Gold, cartelExit.getX() + cartelExit.getWidth()
+						/ 1.75f, cartelExit.getY() + cartelExit.getHeight() / 2
+						- Gdx.graphics.getWidth() / 10, Gdx.graphics.getWidth() / 5,
+						Gdx.graphics.getWidth() / 5);
+				
+			}
+			if(cronometer.getMinutos()>1)
+			{
+				batch.draw(Silver, cartelExit.getX() + cartelExit.getWidth()
+						/ 1.75f, cartelExit.getY() + cartelExit.getHeight() / 2
+						- Gdx.graphics.getWidth() / 10, Gdx.graphics.getWidth() / 5,
+						Gdx.graphics.getWidth() / 5);
+			}
+			if(cronometer.getMinutos()>2)
+			{
+				batch.draw(Bronze, cartelExit.getX() + cartelExit.getWidth()
+						/ 1.75f, cartelExit.getY() + cartelExit.getHeight() / 2
+						- Gdx.graphics.getWidth() / 10, Gdx.graphics.getWidth() / 5,
+						Gdx.graphics.getWidth() / 5);	
+			}
+			
+		}
 		batch.end();
 	}
 
@@ -125,7 +162,17 @@ public class Level implements Screen {
 	}
 
 	public void ganar() {
-		sacarCartel();
+		logica.setPause(true);
+		cronometer.pause();
+		cartelExit.setVisible(true);
+		cartelExit.setZIndex(stage.getActors().size);
+		buttonExit.setVisible(true);
+		buttonExit.setZIndex(stage.getActors().size);
+		End=true;
+		
+		
+		
+		
 	}
 
 	@Override
@@ -243,11 +290,17 @@ public class Level implements Screen {
 		buttonContinue.setZIndex(0);
 		cartelExit.setVisible(false);
 		cartelExit.setZIndex(0);
+		
+		
 
 		stage.addActor(cartelExit);
 		stage.addActor(buttonContinue);
 		stage.addActor(buttonExit);
-
+		
+		
+		
+		
+		
 	}
 
 	@Override
