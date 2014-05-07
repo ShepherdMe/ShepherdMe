@@ -5,6 +5,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import utils.GraphicManager;
+import utils.LevelManager;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
@@ -50,6 +51,7 @@ public class MainMenu implements Screen {
 		SoundManager.asignarValores();
 		SoundManager.playMusicMenu();
 		SoundManager.loadAudios();
+		LevelManager.loadLevels();
 		this.game.menu=this;
 	}
 
