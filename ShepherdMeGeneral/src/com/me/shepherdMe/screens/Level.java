@@ -186,6 +186,8 @@ public class Level implements Screen {
 		// TODO Auto-generated method stub
 		Gdx.input.setInputProcessor(stage);
 		Gdx.input.setCatchBackKey(true);
+		
+		System.out.println("HELLO LEVEL");
 
 		logica = new LogicaLevel(game, this);
 		stage.addActor(logica);
