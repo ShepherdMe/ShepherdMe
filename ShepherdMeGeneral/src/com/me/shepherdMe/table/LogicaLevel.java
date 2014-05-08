@@ -16,6 +16,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.me.shepherdMe.ShepherdMe;
 import com.me.shepherdMe.actor.ActorInvisible;
 import com.me.shepherdMe.actor.Background;
+import com.me.shepherdMe.actor.BlackSheep;
 import com.me.shepherdMe.actor.Bush;
 import com.me.shepherdMe.actor.Cloud;
 import com.me.shepherdMe.actor.Dog;
@@ -41,6 +42,7 @@ public class LogicaLevel extends Table {
 	private List<Obstacle> obstacle;
 	private BackgroundUserInput bui;
 	private List<Sheep> sheeps;
+	private List<BlackSheep> bsheeps;
 	private List<Cloud> clouds;
 	private SheepFold fold;
 	private ActorInvisible actorInvisible;
@@ -83,6 +85,11 @@ public class LogicaLevel extends Table {
 		for (Sheep s : sheeps) {
 			addActor(s);
 		}
+		//FALTA AÑADIR OVEJAS NEGRAS!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+		//Deben estar junto con las demás ovejas en el vector sheeps y
+		//deben estar en el vector bsheeps, es necesario para el metodo esNegra(Sheep s)
+		//procedo a crear el vector vacío para que no de nullpointer, cambiar cuando se modifique
+		this.bsheeps=new ArrayList<BlackSheep>();
 		
 		//Cargar obstaculos
 		this.obstacle = LevelReader.cargarObstaculos();
@@ -94,7 +101,9 @@ public class LogicaLevel extends Table {
 		fold = LevelReader.cargarRedil();
 		for(Bush b : fold.getFoldObstacles()){
 			addActor(b);
+			this.obstacle.add(b);
 		}
+		
 		addActor(fold.getGate());
 		
 		//Cargar nubes
@@ -150,9 +159,9 @@ public class LogicaLevel extends Table {
 	}
 	
 	protected void moveSheeps() {
-		// TODO Auto-generated method stub
 		int sheepsIn=0;
 		Sheep oveja;
+		boolean ganar=false;
 		
 		for (int i=0; i< this.sheeps.size();i++) {
 			Vector2 v= this.sheeps.get(i).moveSheep();
@@ -194,7 +203,7 @@ public class LogicaLevel extends Table {
 				{ 
 					Vector2 x=new Vector2(nuevaPosicion.x,this.sheeps.get(i).getY());
 					Vector2 y=new Vector2(this.sheeps.get(i).getX(),nuevaPosicion.y);
-					if(!oveja.ovejaTocaElemento(x)&&!oveja.ovejaTocaElemento(y))
+					if(oveja.ovejaTocaElemento(x)&&oveja.ovejaTocaElemento(y))
 					{
 						
 						this.sheeps.get(i).setX(this.sheeps.get(i).getX());
@@ -219,21 +228,43 @@ public class LogicaLevel extends Table {
 					}
 				}
 			}
-			//Comprobamos si estan todas en el redil
-			if(this.fold.isInFold(this.sheeps.get(i)))
+			//Comprobamos si estan todas en el redil CAMBIAR PARA QUE LAS NEGRAS ESTÉN FUERA	
+			if(this.fold.isInFold(this.sheeps.get(i))&&!esNegra(this.sheeps.get(i)))
 			{
-				sheepsIn++;
 				
-				if(sheepsIn==this.sheeps.size()&&!this.fold.isOpen())
-				{
-					this.screen.ganar();
-					//SACAR CARTEL
-				}
-				
+					sheepsIn++;
+					
+					if(sheepsIn==this.sheeps.size()-this.bsheeps.size()&&!this.fold.isOpen())
+					{
+						ganar=true;
+						//SACAR CARTEL
+					}
 			}
+			if(this.fold.isInFold(this.sheeps.get(i))&&esNegra(this.sheeps.get(i)))
+			{
+				   ganar=false;
+			}
+		}
+		if(ganar)
+		{
+			this.screen.ganar();
 		}
 		
 		
+	}
+	
+	private boolean esNegra(Sheep s)
+	{
+		for (BlackSheep b : this.bsheeps) {
+			
+			if(s.equals(b))
+			{
+				return true;
+			}
+			
+		}
+		
+		return false;
 	}
 	
 	public void pauseOvejas()
