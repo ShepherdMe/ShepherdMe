@@ -6,6 +6,8 @@ import java.util.Random;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import utils.LevelReader;
+
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -22,6 +24,7 @@ import com.me.shepherdMe.actor.Open;
 import com.me.shepherdMe.actor.Sheep;
 import com.me.shepherdMe.actor.SheepFold;
 import com.me.shepherdMe.actor.input.BackgroundUserInput;
+import com.me.shepherdMe.medals.Medal;
 import com.me.shepherdMe.screens.Level;
 import com.me.shepherdMe.sound.SoundManager;
 
@@ -44,10 +47,11 @@ public class LogicaLevel extends Table {
 	private Level screen;
 	private int AltoPantalla = Gdx.graphics.getHeight();
 	private int AnchoPantalla = Gdx.graphics.getWidth();
-
+	private int level;
 	
 	
-	public LogicaLevel(ShepherdMe game, Level screen) {
+	public LogicaLevel(ShepherdMe game, Level screen, int level) {
+		this.level = level;
 		float width = Gdx.graphics.getWidth();
 		float height = Gdx.graphics.getHeight();
 		setBounds(0, 0, width, height);
@@ -58,44 +62,46 @@ public class LogicaLevel extends Table {
 		this.actorInvisible = new ActorInvisible(this);
 		bui = new BackgroundUserInput(this.actorInvisible);
 		this.actorInvisible.addListener(bui);
-		//this.background.addListener(bui);
+		
+		
 		addActor(background);
 		
-		this.dog = new Dog();
+		//Cargar nivel
+		LevelReader.readXML("levels/level" + level + ".xml");
 		
+		//Cargar medallas
+		this.screen.setGold(LevelReader.getGold());
+		this.screen.setSilver(LevelReader.getSilver());
+		this.screen.setBronze(LevelReader.getBronze());
+		
+		//Cargar perro
+		this.dog = LevelReader.cargarPerro();
 		addActor(dog);
-
-		Sheep sheep1 = new Sheep(this, 600, 150);
-		Sheep sheep2 = new Sheep(this, 50, 400);
-
-		this.sheeps = new ArrayList<Sheep>();
-		this.sheeps.add(sheep1);
-		this.sheeps.add(sheep2);
 		
+		//Cargar ovejas
+		this.sheeps = LevelReader.cargarOvejas(this);
 		for (Sheep s : sheeps) {
 			addActor(s);
 		}
 		
-
-		this.obstacle = new ArrayList<Obstacle>();
+		//Cargar obstaculos
+		this.obstacle = LevelReader.cargarObstaculos();
+		for(Obstacle o : this.obstacle){
+			addActor(o);
+		}
 		
-		//redil
-		fold = new SheepFold(200, 200, 400, 400, Open.RIGHT);
-
+		//Cargar redil
+		fold = LevelReader.cargarRedil();
 		for(Bush b : fold.getFoldObstacles()){
 			addActor(b);
 		}
-		
-		
-		//this.obstacle.add(new Bush(200, 150, 100, 50));//Hacerlo mejor, recorrer el array
-		//this.obstacle.add(new WaterCircle(400, 400, 150));
-		//addActor(obstacle.get(0));
-		for(Bush b : fold.getFoldObstacles()){
-//			this.obstacle.add(b);
-		}
-//		this.obstacle.add(fold.getGate());
 		addActor(fold.getGate());
-		//addActor(obstacle.get(1));
+		
+		//Cargar nubes
+		this.clouds = LevelReader.cargarNubes();
+		for (Cloud s : clouds) {
+			addActor(s);
+		}
 		
 		//Mover ovejas DEBE SER LO ULTIMO DEL CONSTRUCTOR!
 		timer = new Timer();
@@ -103,16 +109,7 @@ public class LogicaLevel extends Table {
 		timer.scheduleAtFixedRate(timerTask, 0, 15);
 		//fin mover ovejas
 		
-		this.clouds = new ArrayList<Cloud>();
-		this.clouds.add(new Cloud(200, 100,100, 200));
-		
-		for (Cloud s : clouds) {
-			addActor(s);
-		}
-		
-		
 		addActor(actorInvisible);
-
 	}
 	
 	public SheepFold getFold(){

@@ -2,9 +2,7 @@ package com.me.shepherdMe.screens;
 
 import java.util.Timer;
 import java.util.TimerTask;
-
 import utils.GraphicManager;
-
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
@@ -14,22 +12,31 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas.AtlasRegion;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
-import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.me.shepherdMe.ShepherdMe;
 import com.me.shepherdMe.actor.SheepFold;
 import com.me.shepherdMe.functions.Cronometro;
+import com.me.shepherdMe.medals.BronzeMedal;
+import com.me.shepherdMe.medals.GoldMedal;
 import com.me.shepherdMe.medals.Medal;
+import com.me.shepherdMe.medals.SilverMedal;
 import com.me.shepherdMe.table.LogicaLevel;
 
+/**
+ * Clase que se encarga de sacar cositas en el nivel (como los carteles de
+ * pausa, el cronómetro, etc)
+ * 
+ * @author jesus
+ * 
+ */
 public class Level implements Screen {
 
 	private ShepherdMe game;
@@ -38,27 +45,48 @@ public class Level implements Screen {
 	private Cronometro cronometer;
 	private Image cartelExit, buttonContinue, buttonExit;
 	private TextureAtlas atlas;
-	public AtlasRegion Bronze, Silver, Gold;
 	private boolean showingPause = false, stop = false;
 	private Timer timer = new Timer();
 	private SpriteBatch batch;
 	private float width, height;
 	private Medal medal = null;
 	private boolean End;
+	private int gold, silver, bronze;
+	private int level;
 
-	public Level(ShepherdMe game, LevelChooser lc) {
+	public Level(ShepherdMe game, LevelChooser lc, int level) {
 		Gdx.app.log("LEVEL", "contruye level");
 		this.game = game;
 		this.stage = new Stage();
 		batch = new SpriteBatch();
 		width = Gdx.graphics.getWidth();
 		height = Gdx.graphics.getHeight();
-		End=false;
-		//medallas
-		atlas = new TextureAtlas(Gdx.files.internal("img/medals.atlas"));
-		Bronze= atlas.findRegion("bronze");
-		Silver = atlas.findRegion("silver");
-		Gold = atlas.findRegion("gold");
+		End = false;
+		this.level = level;
+	}
+
+	public int getGold() {
+		return gold;
+	}
+
+	public void setGold(int gold) {
+		this.gold = gold;
+	}
+
+	public int getSilver() {
+		return silver;
+	}
+
+	public void setSilver(int silver) {
+		this.silver = silver;
+	}
+
+	public int getBronze() {
+		return bronze;
+	}
+
+	public void setBronze(int bronze) {
+		this.bronze = bronze;
 	}
 
 	@Override
@@ -91,46 +119,27 @@ public class Level implements Screen {
 
 		batch.begin();
 
-		float x = 4*width/5, y = 7*height/8;
-		float swidth = width/25;
-		
-		if(cronometer != null && cronometer.ready){
-			batch.draw(cronometer.min1, x, y, swidth, height/16);
+		float x = 4 * width / 5, y = 7 * height / 8;
+		float swidth = width / 25;
+
+		if (cronometer != null && cronometer.ready) {
+			batch.draw(cronometer.min1, x, y, swidth, height / 16);
 			x += swidth;
-			batch.draw(cronometer.min2, x, y, swidth, height/16);
+			batch.draw(cronometer.min2, x, y, swidth, height / 16);
 			x += swidth;
-			batch.draw(cronometer.separator, x, y, swidth/4, height/16);
-			x += swidth/4;
-			batch.draw(cronometer.sec1, x, y, swidth, height/16);
+			batch.draw(cronometer.separator, x, y, swidth / 4, height / 16);
+			x += swidth / 4;
+			batch.draw(cronometer.sec1, x, y, swidth, height / 16);
 			x += swidth;
-			batch.draw(cronometer.sec2, x, y, swidth, height/16);
+			batch.draw(cronometer.sec2, x, y, swidth, height / 16);
 		}
-		if(End)
-		{
-			//CAMBIAR LOS TIEMPOS POR LO QUE TE SALGA DE LOS HUEVOS!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-			if(cronometer.getSegundos()<30)
-			{
-				batch.draw(Gold, cartelExit.getX() + cartelExit.getWidth()
-						/ 1.75f, cartelExit.getY() + cartelExit.getHeight() / 2
-						- Gdx.graphics.getWidth() / 10, Gdx.graphics.getWidth() / 5,
-						Gdx.graphics.getWidth() / 5);
-				
-			}
-			if(cronometer.getMinutos()>1)
-			{
-				batch.draw(Silver, cartelExit.getX() + cartelExit.getWidth()
-						/ 1.75f, cartelExit.getY() + cartelExit.getHeight() / 2
-						- Gdx.graphics.getWidth() / 10, Gdx.graphics.getWidth() / 5,
-						Gdx.graphics.getWidth() / 5);
-			}
-			if(cronometer.getMinutos()>2)
-			{
-				batch.draw(Bronze, cartelExit.getX() + cartelExit.getWidth()
-						/ 1.75f, cartelExit.getY() + cartelExit.getHeight() / 2
-						- Gdx.graphics.getWidth() / 10, Gdx.graphics.getWidth() / 5,
-						Gdx.graphics.getWidth() / 5);	
-			}
-			
+		if (End) {
+			batch.draw(medal.getTexture(),
+					cartelExit.getX() + cartelExit.getWidth() / 1.75f,
+					cartelExit.getY() + cartelExit.getHeight() / 2
+							- Gdx.graphics.getWidth() / 10,
+					Gdx.graphics.getWidth() / 5, Gdx.graphics.getWidth() / 5);
+
 		}
 		batch.end();
 	}
@@ -168,11 +177,17 @@ public class Level implements Screen {
 		cartelExit.setZIndex(stage.getActors().size);
 		buttonExit.setVisible(true);
 		buttonExit.setZIndex(stage.getActors().size);
-		End=true;
-		
-		
-		
-		
+		End = true;
+
+		int time = this.cronometer.getMinutos() * 60
+				+ this.cronometer.getSegundos();
+		if (time < gold)
+			this.medal = new GoldMedal();
+		else if (time < silver)
+			this.medal = new SilverMedal();
+		else
+			this.medal = new BronzeMedal();
+		System.out.println(this.medal.getTexture());
 	}
 
 	@Override
@@ -186,10 +201,8 @@ public class Level implements Screen {
 		// TODO Auto-generated method stub
 		Gdx.input.setInputProcessor(stage);
 		Gdx.input.setCatchBackKey(true);
-		
-		System.out.println("HELLO LEVEL");
 
-		logica = new LogicaLevel(game, this);
+		logica = new LogicaLevel(game, this, level);
 		stage.addActor(logica);
 
 		// Cronometer
@@ -292,17 +305,11 @@ public class Level implements Screen {
 		buttonContinue.setZIndex(0);
 		cartelExit.setVisible(false);
 		cartelExit.setZIndex(0);
-		
-		
 
 		stage.addActor(cartelExit);
 		stage.addActor(buttonContinue);
 		stage.addActor(buttonExit);
-		
-		
-		
-		
-		
+
 	}
 
 	@Override
@@ -328,10 +335,11 @@ public class Level implements Screen {
 		Gdx.input.setInputProcessor(null);
 		batch.dispose();
 	}
-	
-	public Medal getMedal(){
-		//Aquí deberíamos elegir la medalla dependiendo del tiempo que se ha tardado
-		
+
+	public Medal getMedal() {
+		// Aquí deberíamos elegir la medalla dependiendo del tiempo que se ha
+		// tardado
+
 		return this.medal;
 	}
 }

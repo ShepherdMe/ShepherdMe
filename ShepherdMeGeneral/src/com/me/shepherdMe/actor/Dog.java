@@ -12,9 +12,9 @@ public class Dog extends Actor {
 	private Texture dog;
 
 
-	public Dog() {
+	public Dog(float x, float y) {
 
-		setPosition(50, 50);
+		setPosition(x, y);
 		setHeight(Gdx.graphics.getHeight()/7);
 		setWidth(Gdx.graphics.getHeight()/7);
 

@@ -428,9 +428,10 @@ public class LevelChooser implements Screen {
 				image.addListener(new InputListener() 
 				{
 					@Override
-					public boolean touchDown(InputEvent event, float x,	float y, int pointer, int button) 
-					{
-						((Game) Gdx.app.getApplicationListener()).setScreen(new Level(game, levelChooser));
+					public boolean touchDown(InputEvent event, float x,
+							float y, int pointer, int button) {
+						((Game) Gdx.app.getApplicationListener())
+								.setScreen(new Level(game, levelChooser, 1));
 						return true;
 					}
 				});
@@ -459,9 +460,10 @@ public class LevelChooser implements Screen {
 			{
 				image.addListener(new InputListener() {
 					@Override
-					public boolean touchDown(InputEvent event, float x,	float y, int pointer, int button) 
-					{
-						((Game) Gdx.app.getApplicationListener()).setScreen(new Level(game, levelChooser));
+					public boolean touchDown(InputEvent event, float x,
+							float y, int pointer, int button) {
+						((Game) Gdx.app.getApplicationListener())
+								.setScreen(new Level(game, levelChooser, 1));
 						return true;
 					}
 				});

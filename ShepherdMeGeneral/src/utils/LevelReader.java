@@ -1,58 +1,72 @@
 package utils;
 
-import java.io.File;
 import java.util.ArrayList;
-
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
-
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
-
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.files.FileHandle;
 import com.me.shepherdMe.actor.Bush;
 import com.me.shepherdMe.actor.Cloud;
 import com.me.shepherdMe.actor.Dog;
 import com.me.shepherdMe.actor.Obstacle;
+import com.me.shepherdMe.actor.Open;
 import com.me.shepherdMe.actor.Sheep;
+import com.me.shepherdMe.actor.SheepFold;
 import com.me.shepherdMe.actor.WaterCircle;
 import com.me.shepherdMe.table.LogicaLevel;
 
 public class LevelReader {
 
 	private static Document datos;
+	private static float width = Gdx.graphics.getWidth(), height = Gdx.graphics.getHeight();
+	
+	private static int gold, silver, bronze;
+	
+	public static int getGold() {
+		return gold;
+	}
 
-	public LevelReader(String level) {
+	public static int getSilver() {
+		return silver;
+	}
 
+	public static int getBronze() {
+		return bronze;
 	}
 
 	public static void readXML(String path) {
 		try {
-
-			File fXmlFile = new File(path);
+			System.out.println("voy a leer el nivel");
+			FileHandle fxmlFile = Gdx.files.internal(path);
+			
 			DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
 			DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
-			Document doc = dBuilder.parse(fXmlFile);
+			Document doc = dBuilder.parse(fxmlFile.read());
 			doc.getDocumentElement().normalize();
-
+			System.out.println("nivel leido");
 			datos=doc;		
 
+			gold = Integer.parseInt(datos.getAttributes().getNamedItem("gold").getNodeValue());
+			silver = Integer.parseInt(datos.getAttributes().getNamedItem("silver").getNodeValue());
+			bronze = Integer.parseInt(datos.getAttributes().getNamedItem("bronze").getNodeValue());
+			
 		} catch (Exception e) {
+			System.out.println("ERROR DE LA LECHE!!");
 			e.printStackTrace();
 		}
 	}
 
 	public static Dog cargarPerro() {
 		
-		Element perro = datos.getElementById("dog");
+		System.out.println("Ha cargado bien? " + datos);
+		Element perro = (Element) datos.getElementsByTagName("dog").item(0);
 		float x = Float.parseFloat(perro.getElementsByTagName("x").item(0).getTextContent());
 		float y = Float.parseFloat(perro.getElementsByTagName("y").item(0).getTextContent());
-		
-		// Habria que cambiar el constructor para que pudieramos colocarlo en el
-		// centro del redil por ejemplo
 	
-		Dog dog = new Dog();
-
+		Dog dog = new Dog(x*width,y*height);
 		return dog;
 	}
 
@@ -68,7 +82,7 @@ public class LevelReader {
 			aux= (Element) nList.item(i);
 			x = Float.parseFloat(aux.getElementsByTagName("x").item(0).getTextContent());
 			y = Float.parseFloat(aux.getElementsByTagName("y").item(0).getTextContent());
-			sheeps.add(new Sheep(LL, x, y));
+			sheeps.add(new Sheep(LL, x*width, y*height));
 		}
 		
 		return sheeps;
@@ -80,19 +94,40 @@ public class LevelReader {
 		NodeList nList = datos.getElementsByTagName("cloud");
 		
 		ArrayList<Cloud> clouds = new ArrayList<Cloud>();
-		float x,y,width,height;
+		float x,y,w,h;
 		Element aux;
 				
 		for (int i = 0; i < nList.getLength(); i++) {
 			aux= (Element) nList.item(i);
 			x = Float.parseFloat(aux.getElementsByTagName("x").item(0).getTextContent());
 			y = Float.parseFloat(aux.getElementsByTagName("y").item(0).getTextContent());
-			width = Float.parseFloat(aux.getElementsByTagName("width").item(0).getTextContent());
-			height = Float.parseFloat(aux.getElementsByTagName("height").item(0).getTextContent());
-			clouds.add(new Cloud(x, y, width, height));
+			w = Float.parseFloat(aux.getElementsByTagName("width").item(0).getTextContent());
+			h = Float.parseFloat(aux.getElementsByTagName("height").item(0).getTextContent());
+			clouds.add(new Cloud(x*width, y*height, w*width, h*height));
 		}
 		
 		return clouds;
+	}
+	
+	public static SheepFold cargarRedil(){
+		Element redil = (Element) datos.getElementsByTagName("redil").item(0);
+		float x = Float.parseFloat(redil.getAttribute("x"));
+		float y = Float.parseFloat(redil.getAttribute("y"));
+		float w = Float.parseFloat(redil.getAttribute("width"));
+		float h = Float.parseFloat(redil.getAttribute("height"));
+		String o = redil.getAttribute("open");
+		Open open;
+		if(o.equals("TOP"))
+			open = Open.TOP;
+		else if(o.equals("BOTTOM"))
+			open = Open.BOTTOM;
+		else if(o.equals("LEFT"))
+			open = Open.LEFT;
+		else
+			open = Open.RIGHT;
+		
+		SheepFold sf = new SheepFold(x*width, y*height, w*width, h*height, open);
+		return sf;
 	}
 	
 	public static ArrayList<Obstacle> cargarObstaculos()
@@ -100,7 +135,7 @@ public class LevelReader {
 		NodeList nList = datos.getElementsByTagName("obstacle");
 		
 		ArrayList<Obstacle> obstacles = new ArrayList<Obstacle>();
-		float x,y,width,height,radio;
+		float x,y,w,h,radio;
 		Element aux;
 		Obstacle obs=null;
 				
@@ -110,16 +145,16 @@ public class LevelReader {
 			y = Float.parseFloat(aux.getElementsByTagName("y").item(0).getTextContent());
 			
 			
-			if(aux.getAttribute("type")=="Bush")
+			if(aux.getAttribute("type").equals("Bush"))
 			{
-				width = Float.parseFloat(aux.getElementsByTagName("width").item(0).getTextContent());
-				height = Float.parseFloat(aux.getElementsByTagName("height").item(0).getTextContent());
-				obs = new Bush(x,y,width,height);
+				w = Float.parseFloat(aux.getElementsByTagName("width").item(0).getTextContent());
+				h = Float.parseFloat(aux.getElementsByTagName("height").item(0).getTextContent());
+				obs = new Bush(x*width,y*height,w*width,y*height);
 			}
-			else if(aux.getAttribute("type")=="Water")
+			else if(aux.getAttribute("type").equals("Water"))
 			{
 				radio = Float.parseFloat(aux.getElementsByTagName("radio").item(0).getTextContent());
-				obs = new WaterCircle(x, y, radio);
+				obs = new WaterCircle(x*width, y*height, radio*width);
 			}
 			
 			obstacles.add(obs);
