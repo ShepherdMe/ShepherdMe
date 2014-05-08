@@ -15,8 +15,8 @@ public class Sheep extends Actor {
 
 	private LogicaLevel LL;
 
-	private TextureRegion regionSheep;
-	private Texture sheep;
+	protected TextureRegion regionSheep;
+	protected Texture sheep;
 	private double STEP;
 	
 	public boolean estaHuyendo=false;
