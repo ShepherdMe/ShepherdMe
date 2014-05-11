@@ -397,10 +397,13 @@ public class LevelChooser implements Screen {
 			stage.addActor(img);
 		for (Image img : imagenesMedallas2)
 			stage.addActor(img);
-		for (Image img : imagenesCandados1)
-			stage.addActor(img);
-		for (Image img : imagenesCandados2)
-			stage.addActor(img);
+		
+		
+		//COMENTO LOS CANDADOS PARA PODER PROBAR QUE CARGA DIFERENTES NIVELES, ESTO HABRÍA QUE VOLVER A PONERLO LUEGO!!!!!!
+//		for (Image img : imagenesCandados1)
+//			stage.addActor(img);
+//		for (Image img : imagenesCandados2)
+//			stage.addActor(img);
 		stage.addActor(chooseText);
 		stage.addActor(arrowRight);
 		stage.addActor(arrowLeft);
@@ -423,19 +426,20 @@ public class LevelChooser implements Screen {
 			this.imagenesNiveles1.add(image);
 			image.setBounds(initialX + imageWidth * deltaX + 2, initialY,imageWidth, imageHeight);
 			deltaX++;
-			if (i == 0) 
-			{
+//			if (i == 0) 
+//			{
+			final int l = i + 1;
 				image.addListener(new InputListener() 
 				{
 					@Override
 					public boolean touchDown(InputEvent event, float x,
 							float y, int pointer, int button) {
 						((Game) Gdx.app.getApplicationListener())
-								.setScreen(new Level(game, levelChooser, 1));
+								.setScreen(new Level(game, levelChooser, l));
 						return true;
 					}
 				});
-			}
+//			}
 			if (i == 2) 
 			{
 				initialY -= imageHeight + 5;
@@ -456,18 +460,19 @@ public class LevelChooser implements Screen {
 			this.imagenesNiveles2.add(image);
 			image.setBounds(Gdx.graphics.getWidth() + initialX + imageWidth* deltaX + 2, initialY, imageWidth, imageHeight);
 			deltaX++;
-			if (i == 0) 
-			{
+//			if (i == 0) 
+//			{
+			final int l = i + 1;
 				image.addListener(new InputListener() {
 					@Override
 					public boolean touchDown(InputEvent event, float x,
 							float y, int pointer, int button) {
 						((Game) Gdx.app.getApplicationListener())
-								.setScreen(new Level(game, levelChooser, 1));
+								.setScreen(new Level(game, levelChooser, l));
 						return true;
 					}
 				});
-			}
+//			}
 			if (i == 2) 
 			{
 				initialY -= imageHeight + 5;

@@ -133,13 +133,12 @@ public class Level implements Screen {
 			x += swidth;
 			batch.draw(cronometer.sec2, x, y, swidth, height / 16);
 		}
-		if (End) {
+		if (End && medal != null) {
 			batch.draw(medal.getTexture(),
 					cartelExit.getX() + cartelExit.getWidth() / 1.75f,
 					cartelExit.getY() + cartelExit.getHeight() / 2
 							- Gdx.graphics.getWidth() / 10,
 					Gdx.graphics.getWidth() / 5, Gdx.graphics.getWidth() / 5);
-
 		}
 		batch.end();
 	}
@@ -181,13 +180,19 @@ public class Level implements Screen {
 
 		int time = this.cronometer.getMinutos() * 60
 				+ this.cronometer.getSegundos();
-		if (time < gold)
+		if (time < gold){
+			System.out.println("Gold Medal!!!");
 			this.medal = new GoldMedal();
-		else if (time < silver)
+		}
+			
+		else if (time < silver){
 			this.medal = new SilverMedal();
-		else
+			System.out.println("Silver Medal!!!");
+		}
+		else{
 			this.medal = new BronzeMedal();
-		System.out.println(this.medal.getTexture());
+			System.out.println("Bronze Medal!!!");
+		}
 	}
 
 	@Override

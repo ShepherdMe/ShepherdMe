@@ -1,0 +1,38 @@
+<level gold="40" silver="50" bronze="60">
+    <dog>
+        <x>0.10</x>
+        <y>0.10</y>
+    </dog>
+    <sheep>
+        <x>0.20</x>
+        <y>0.75</y>
+    </sheep>
+    <sheep>
+        <x>0.4</x>
+        <y>0.4</y>
+    </sheep>
+    
+    <obstacle type="Bush">
+		<x>0.5</x>
+		<y>0.8</y>
+		<width>0.1</width>
+		<height>0.1</height>
+	</obstacle>
+	
+    <obstacle type="Bush">
+		<x>0.5</x>
+		<y>0.2</y>
+		<width>0.1</width>
+		<height>0.1</height>
+	</obstacle>
+	
+    <obstacle type="Bush">
+		<x>0.25</x>
+		<y>0.4</y>
+		<width>0.1</width>
+		<height>0.1</height>
+	</obstacle>
+    
+    <redil height="0.5" width="0.3" x="0.65" y="0.1" open="TOP">
+    </redil>
+</level>

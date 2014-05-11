@@ -148,7 +148,7 @@ public class LevelReader {
 			{
 				w = Float.parseFloat(aux.getElementsByTagName("width").item(0).getTextContent());
 				h = Float.parseFloat(aux.getElementsByTagName("height").item(0).getTextContent());
-				obs = new Bush(x*width,y*height,w*width,y*height);
+				obs = new Bush(x*width,y*height,w*width,h*height);
 			}
 			else if(aux.getAttribute("type").equals("Water"))
 			{

@@ -1,12 +1,12 @@
-<level gold="60" silver="120" bronze="180">
+<level gold="10" silver="20" bronze="30">
     <dog>
         <x>0.10</x>
         <y>0.10</y>
     </dog>
     <sheep>
-        <x>0.50</x>
-        <y>0.25</y>
+        <x>0.70</x>
+        <y>0.7</y>
     </sheep>
-    <redil height="0.3" width="0.3" x="0.5" y="0.5" open="TOP">
+    <redil height="0.3" width="0.3" x="0.65" y="0.1" open="TOP">
     </redil>
 </level>
