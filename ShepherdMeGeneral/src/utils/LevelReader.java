@@ -39,19 +39,18 @@ public class LevelReader {
 
 	public static void readXML(String path) {
 		try {
-			System.out.println("voy a leer el nivel");
 			FileHandle fxmlFile = Gdx.files.internal(path);
 			
 			DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
 			DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
 			Document doc = dBuilder.parse(fxmlFile.read());
 			doc.getDocumentElement().normalize();
-			System.out.println("nivel leido");
 			datos=doc;		
 
-			gold = Integer.parseInt(datos.getAttributes().getNamedItem("gold").getNodeValue());
-			silver = Integer.parseInt(datos.getAttributes().getNamedItem("silver").getNodeValue());
-			bronze = Integer.parseInt(datos.getAttributes().getNamedItem("bronze").getNodeValue());
+			Element root = (Element) doc.getDocumentElement();
+			gold = Integer.parseInt(root.getAttribute("gold"));
+			silver = Integer.parseInt(root.getAttribute("silver"));
+			bronze = Integer.parseInt(root.getAttribute("bronze"));
 			
 		} catch (Exception e) {
 			System.out.println("ERROR DE LA LECHE!!");

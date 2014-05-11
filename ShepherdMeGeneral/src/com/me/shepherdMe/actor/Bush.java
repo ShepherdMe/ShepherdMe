@@ -13,7 +13,7 @@ public class Bush extends Obstacle{
 		super(x, y, width, height);
 		this.area = new Rectangle(x, y, width, height);
 
-		this.obstacle = new Texture(Gdx.files.internal("img/level/muro.jpg"));
+		this.obstacle = new Texture(Gdx.files.internal("img/level/bush.png"));
 		this.regionObstacle = new TextureRegion(this.obstacle);
 
 	}

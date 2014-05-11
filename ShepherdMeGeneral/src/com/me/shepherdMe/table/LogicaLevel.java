@@ -85,10 +85,10 @@ public class LogicaLevel extends Table {
 		for (Sheep s : sheeps) {
 			addActor(s);
 		}
-		//FALTA AÑADIR OVEJAS NEGRAS!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-		//Deben estar junto con las demás ovejas en el vector sheeps y
+		//FALTA Aï¿½ADIR OVEJAS NEGRAS!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+		//Deben estar junto con las demï¿½s ovejas en el vector sheeps y
 		//deben estar en el vector bsheeps, es necesario para el metodo esNegra(Sheep s)
-		//procedo a crear el vector vacío para que no de nullpointer, cambiar cuando se modifique
+		//procedo a crear el vector vacï¿½o para que no de nullpointer, cambiar cuando se modifique
 		this.bsheeps=new ArrayList<BlackSheep>();
 		
 		//Cargar obstaculos
@@ -103,8 +103,10 @@ public class LogicaLevel extends Table {
 			addActor(b);
 			this.obstacle.add(b);
 		}
-		
+		fold.close(this);
 		addActor(fold.getGate());
+		this.obstacle.add(fold.getGate());
+		
 		
 		//Cargar nubes
 		this.clouds = LevelReader.cargarNubes();
@@ -155,6 +157,9 @@ public class LogicaLevel extends Table {
 	@Override
 	public void draw(SpriteBatch batch, float parentAlpha) {
 		batch.setColor(Color.WHITE);
+		for(Obstacle o : this.obstacle){
+			o.draw(batch, parentAlpha);
+		}
 		super.draw(batch, parentAlpha);
 	}
 	
@@ -228,7 +233,7 @@ public class LogicaLevel extends Table {
 					}
 				}
 			}
-			//Comprobamos si estan todas en el redil CAMBIAR PARA QUE LAS NEGRAS ESTÉN FUERA	
+			//Comprobamos si estan todas en el redil CAMBIAR PARA QUE LAS NEGRAS ESTï¿½N FUERA	
 			if(this.fold.isInFold(this.sheeps.get(i))&&!esNegra(this.sheeps.get(i)))
 			{
 				

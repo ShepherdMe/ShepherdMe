@@ -116,7 +116,7 @@ public class Level implements Screen {
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		stage.act(delta);
 		stage.draw();
-
+		
 		batch.begin();
 
 		float x = 4 * width / 5, y = 7 * height / 8;

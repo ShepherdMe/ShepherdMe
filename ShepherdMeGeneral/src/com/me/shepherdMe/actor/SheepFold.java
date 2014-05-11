@@ -40,28 +40,28 @@ public class SheepFold{
 		this.topLeft = new Vector2(this.getX(), this.getY() + this.getHeight());
 		
 		if(open == Open.TOP){
-			obstacles.add(new Bush(x, y, screenWidth/THICKNESS_FACTOR, this.height)); //left
-			obstacles.add(new Bush(x, y, this.width, screenHeight/THICKNESS_FACTOR)); //bottom
-			obstacles.add(new Bush(x+this.width-screenWidth/THICKNESS_FACTOR, y, screenWidth/THICKNESS_FACTOR, this.height));//right
-			openable = new Bush(x, y+this.height-screenHeight/THICKNESS_FACTOR, this.width, screenHeight/THICKNESS_FACTOR); //top
+			obstacles.add(new FoldWall(x, y, screenWidth/THICKNESS_FACTOR, this.height, true)); //left
+			obstacles.add(new FoldWall(x, y, this.width, screenHeight/THICKNESS_FACTOR, false)); //bottom
+			obstacles.add(new FoldWall(x+this.width-screenWidth/THICKNESS_FACTOR, y, screenWidth/THICKNESS_FACTOR, this.height, true));//right
+			openable = new FoldWall(x, y+this.height-screenHeight/THICKNESS_FACTOR, this.width, screenHeight/THICKNESS_FACTOR, false); //top
 		}
 		else if(open == Open.BOTTOM){
-			obstacles.add(new Bush(x, y, screenWidth/THICKNESS_FACTOR, this.height)); //left
-			obstacles.add(new Bush(x+this.width-screenWidth/THICKNESS_FACTOR, y, screenWidth/THICKNESS_FACTOR, this.height));//right
-			obstacles.add(new Bush(x, y+this.height-screenHeight/THICKNESS_FACTOR, this.width, screenHeight/THICKNESS_FACTOR)); //top
-			openable = new Bush(x, y, this.width, screenHeight/THICKNESS_FACTOR);
+			obstacles.add(new FoldWall(x, y, screenWidth/THICKNESS_FACTOR, this.height, true)); //left
+			obstacles.add(new FoldWall(x+this.width-screenWidth/THICKNESS_FACTOR, y, screenWidth/THICKNESS_FACTOR, this.height, true));//right
+			obstacles.add(new FoldWall(x, y+this.height-screenHeight/THICKNESS_FACTOR, this.width, screenHeight/THICKNESS_FACTOR, false)); //top
+			openable = new FoldWall(x, y, this.width, screenHeight/THICKNESS_FACTOR, false);
 		}
 		else if(open == Open.LEFT){
-			obstacles.add(new Bush(x+this.width-screenWidth/THICKNESS_FACTOR, y, screenWidth/THICKNESS_FACTOR, this.height));//right
-			obstacles.add(new Bush(x, y+this.height-screenHeight/THICKNESS_FACTOR, this.width, screenHeight/THICKNESS_FACTOR)); //top
-			obstacles.add(new Bush(x, y, this.width, screenHeight/THICKNESS_FACTOR)); //bottom
-			openable = new Bush(x, y, screenWidth/THICKNESS_FACTOR, this.height);
+			obstacles.add(new FoldWall(x+this.width-screenWidth/THICKNESS_FACTOR, y, screenWidth/THICKNESS_FACTOR, this.height, true));//right
+			obstacles.add(new FoldWall(x, y+this.height-screenHeight/THICKNESS_FACTOR, this.width, screenHeight/THICKNESS_FACTOR, false)); //top
+			obstacles.add(new FoldWall(x, y, this.width, screenHeight/THICKNESS_FACTOR, false)); //bottom
+			openable = new FoldWall(x, y, screenWidth/THICKNESS_FACTOR, this.height, true);
 		}
 		else if(open == Open.RIGHT){
-			obstacles.add(new Bush(x, y+this.height-screenHeight/THICKNESS_FACTOR, this.width, screenHeight/THICKNESS_FACTOR)); //top
-			obstacles.add(new Bush(x, y, this.width, screenHeight/THICKNESS_FACTOR)); //bottom
-			obstacles.add(new Bush(x, y, screenWidth/THICKNESS_FACTOR, this.height)); //left
-			openable = new Bush(x+this.width-screenWidth/THICKNESS_FACTOR, y, screenWidth/THICKNESS_FACTOR, this.height);
+			obstacles.add(new FoldWall(x, y+this.height-screenHeight/THICKNESS_FACTOR, this.width, screenHeight/THICKNESS_FACTOR, false)); //top
+			obstacles.add(new FoldWall(x, y, this.width, screenHeight/THICKNESS_FACTOR, false)); //bottom
+			obstacles.add(new FoldWall(x, y, screenWidth/THICKNESS_FACTOR, this.height, true)); //left
+			openable = new FoldWall(x+this.width-screenWidth/THICKNESS_FACTOR, y, screenWidth/THICKNESS_FACTOR, this.height, true);
 		}
 	}
 	
