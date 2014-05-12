@@ -34,7 +34,7 @@ public class LevelManager {
 		}
 		if(levels.get(0)==0 && levels.get(1)==0)//Caso en el que se ejecuta la primera vez la app
 		{
-			levels.set(0, 3);
+			levels.set(0, 3);//quitar esta linea era para pruebas
 			for (int i = 1; i < LevelManager.numberOfLevels; i++) 
 			{
 				levels.set(i, -1);				
@@ -42,7 +42,7 @@ public class LevelManager {
 		}
 	}
 	
-	public static void comprobarNivel(int numero,Image cartel,List<Image> arrayMedallas,List<Image> arrayCandados)
+	public static void comprobarNivel(int numero,Image cartel,List<Image> arrayMedallas)
 	{
 		int medallas = LevelManager.levels.get(numero);
 		
@@ -55,7 +55,7 @@ public class LevelManager {
 		}
 		else
 		{
-			LevelManager.ponerCandado(cartel,arrayCandados);//habra q tener un array de candados
+			//arrayImagenes.add(lock);//imagenDeBloqueado
 		}
 	}
 	
@@ -85,14 +85,23 @@ public class LevelManager {
 		}
 	}
 	
-	public static void ponerCandado(Image cartel,List<Image> arrayCandados)
-	{
-		//Image lock = new Image(new Texture(Gdx.files.internal("img/chooseLevel/lock.png")));
-		
-		//lock.setBounds(cartel.getX()+cartel.getWidth()/4, cartel.getY()+cartel.getHeight()/4, cartel.getWidth()/2, cartel.getHeight()/2);
-		
-		//arrayCandados.add(lock);
+	public static boolean bloqueado (int nivel){
+		if(levels.get(nivel)!=-1)
+		{
+			return false;
+		}
+		else
+		{
+			return true;
+		}
 	}
+	
+	public static void actualizarNivel (int nivel, int medalla)
+	{
+		levels.set(nivel, medalla);
+	}
+	
+	
 
 	
 	

@@ -32,13 +32,16 @@ public class LevelChooser implements Screen {
 	private Sprite backgroundSprite;
 	private ShepherdMe game;
 	private Image backArrow;
+	private Image ImagenBloqueado;
 	private List<Image> imagenesNiveles1, imagenesNiveles2,imagenesMedallas1, imagenesMedallas2,imagenesCandados1,imagenesCandados2;
 	private Image arrowRight, arrowLeft, dog1, dog2;
 	public AtlasRegion n1,n2,n3,n4,n5,n6,n7,n8,n9,n10,n11,n12, cartel, back, lock,d1,d2,AL,AR;
 	private TextureAtlas atlas1,atlas2;
 
 	
-	public LevelChooser(ShepherdMe game) {
+	public LevelChooser(ShepherdMe game) 
+	{
+		
 		this.game = game;
 		this.imagenesNiveles1 = new ArrayList<Image>();
 		this.imagenesNiveles2 = new ArrayList<Image>();
@@ -75,7 +78,8 @@ public class LevelChooser implements Screen {
 		
 		this.back= atlas2.findRegion("back");
 		
-		this.lock= atlas2.findRegion("NivelGlocked");
+		this.lock= atlas2.findRegion("NLocked");
+		this.ImagenBloqueado = new Image (this.lock);
 			
 		this.game.chooseLevel=this;
 	}
@@ -428,11 +432,7 @@ public class LevelChooser implements Screen {
 			stage.addActor(img);
 		
 		
-		//COMENTO LOS CANDADOS PARA PODER PROBAR QUE CARGA DIFERENTES NIVELES, ESTO HABRÍA QUE VOLVER A PONERLO LUEGO!!!!!!
-//		for (Image img : imagenesCandados1)
-//			stage.addActor(img);
-//		for (Image img : imagenesCandados2)
-//			stage.addActor(img);
+
 		stage.addActor(chooseText);
 		stage.addActor(arrowRight);
 		stage.addActor(arrowLeft);
@@ -451,13 +451,23 @@ public class LevelChooser implements Screen {
 		
 		for (int i = 0; i < 6; i++) 
 		{
-			image = new Image(atlas1.findRegion("N"+(i+1)));
+			if(LevelManager.bloqueado(i))
+			{
+				image = new Image(this.lock);
+			}
+			else
+			{
+				image = new Image(atlas1.findRegion("N"+(i+1)));
+			}
 			this.imagenesNiveles1.add(image);
 			image.setBounds(initialX + imageWidth * deltaX + 2, initialY,imageWidth, imageHeight);
 			deltaX++;
-//			if (i == 0) 
-//			{
+
 			final int l = i + 1;
+			
+			if(!LevelManager.bloqueado(i))
+			{
+
 				image.addListener(new InputListener() 
 				{
 					@Override
@@ -468,14 +478,14 @@ public class LevelChooser implements Screen {
 						return true;
 					}
 				});
-//			}
+			}
 			if (i == 2) 
 			{
 				initialY -= imageHeight + 5;
 				deltaX = 0;
 			}
 			
-			LevelManager.comprobarNivel(i,image,imagenesMedallas1,imagenesCandados1);
+			LevelManager.comprobarNivel(i,image,imagenesMedallas1);
 			
 		}
 
@@ -485,13 +495,21 @@ public class LevelChooser implements Screen {
 		
 		for (int i = 0; i < 6; i++) 
 		{
-			image = new Image(atlas2.findRegion("N"+(i+7)));
+			if(LevelManager.bloqueado(i+6))
+			{
+				image = new Image(this.lock);
+			}
+			else
+			{
+				image = new Image(atlas2.findRegion("N"+(i+7)));
+			}
 			this.imagenesNiveles2.add(image);
 			image.setBounds(Gdx.graphics.getWidth() + initialX + imageWidth* deltaX + 2, initialY, imageWidth, imageHeight);
 			deltaX++;
-//			if (i == 0) 
-//			{
+//			
 			final int l = i + 1;
+			if(!LevelManager.bloqueado(i+6))
+			{
 				image.addListener(new InputListener() {
 					@Override
 					public boolean touchDown(InputEvent event, float x,
@@ -501,14 +519,14 @@ public class LevelChooser implements Screen {
 						return true;
 					}
 				});
-//			}
+			}
 			if (i == 2) 
 			{
 				initialY -= imageHeight + 5;
 				deltaX = 0;
 			}
 			
-			LevelManager.comprobarNivel(i+6,image,imagenesMedallas2,imagenesCandados2);
+			LevelManager.comprobarNivel(i+6,image,imagenesMedallas2);
 
 		}
 

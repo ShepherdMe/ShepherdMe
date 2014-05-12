@@ -3,6 +3,8 @@ package com.me.shepherdMe.screens;
 import java.util.Timer;
 import java.util.TimerTask;
 import utils.GraphicManager;
+import utils.LevelManager;
+
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
@@ -183,15 +185,20 @@ public class Level implements Screen {
 		if (time < gold){
 			System.out.println("Gold Medal!!!");
 			this.medal = new GoldMedal();
+			LevelManager.actualizarNivel(this.level, 3);
 		}
 			
 		else if (time < silver){
 			this.medal = new SilverMedal();
 			System.out.println("Silver Medal!!!");
+			LevelManager.actualizarNivel(this.level, 2);
+
 		}
 		else{
 			this.medal = new BronzeMedal();
 			System.out.println("Bronze Medal!!!");
+			LevelManager.actualizarNivel(this.level, 1);
+
 		}
 	}
 
