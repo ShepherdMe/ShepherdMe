@@ -5,7 +5,6 @@ import java.util.List;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Preferences;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.me.shepherdMe.medals.BronzeMedal;
 import com.me.shepherdMe.medals.GoldMedal;
@@ -88,13 +87,14 @@ public class LevelManager {
 	
 	public static void ponerCandado(Image cartel,List<Image> arrayCandados)
 	{
-		Image lock = new Image(new Texture(Gdx.files.internal("img/chooseLevel/lock.png")));
+		//Image lock = new Image(new Texture(Gdx.files.internal("img/chooseLevel/lock.png")));
 		
-		lock.setBounds(cartel.getX()+cartel.getWidth()/4, cartel.getY()+cartel.getHeight()/4, cartel.getWidth()/2, cartel.getHeight()/2);
+		//lock.setBounds(cartel.getX()+cartel.getWidth()/4, cartel.getY()+cartel.getHeight()/4, cartel.getWidth()/2, cartel.getHeight()/2);
 		
-		arrayCandados.add(lock);
+		//arrayCandados.add(lock);
 	}
 
+	
 	
 
 }

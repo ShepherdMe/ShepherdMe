@@ -1,0 +1,96 @@
+
+niveles2.png
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+chooseLevel
+  rotate: false
+  xy: 1, 897
+  size: 500, 110
+  orig: 500, 110
+  offset: 0, 0
+  index: -1
+N12
+  rotate: false
+  xy: 1, 660
+  size: 300, 235
+  orig: 300, 235
+  offset: 0, 0
+  index: -1
+N10
+  rotate: false
+  xy: 1, 426
+  size: 300, 232
+  orig: 300, 232
+  offset: 0, 0
+  index: -1
+N11
+  rotate: false
+  xy: 1, 193
+  size: 300, 231
+  orig: 300, 231
+  offset: 0, 0
+  index: -1
+N9
+  rotate: false
+  xy: 303, 665
+  size: 300, 230
+  orig: 300, 230
+  offset: 0, 0
+  index: -1
+N7
+  rotate: false
+  xy: 303, 434
+  size: 300, 229
+  orig: 300, 229
+  offset: 0, 0
+  index: -1
+NLocked
+  rotate: false
+  xy: 303, 203
+  size: 300, 229
+  orig: 300, 229
+  offset: 0, 0
+  index: -1
+N8
+  rotate: false
+  xy: 605, 780
+  size: 300, 227
+  orig: 300, 227
+  offset: 0, 0
+  index: -1
+dog1
+  rotate: false
+  xy: 1, 1
+  size: 198, 190
+  orig: 198, 190
+  offset: 0, 0
+  index: -1
+dog2
+  rotate: false
+  xy: 605, 588
+  size: 198, 190
+  orig: 198, 190
+  offset: 0, 0
+  index: -1
+arrowLeft
+  rotate: false
+  xy: 605, 330
+  size: 68, 256
+  orig: 68, 256
+  offset: 0, 0
+  index: -1
+arrowRight
+  rotate: false
+  xy: 675, 330
+  size: 68, 256
+  orig: 68, 256
+  offset: 0, 0
+  index: -1
+back
+  rotate: false
+  xy: 605, 200
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: -1

@@ -13,6 +13,8 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas.AtlasRegion;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
@@ -32,7 +34,10 @@ public class LevelChooser implements Screen {
 	private Image backArrow;
 	private List<Image> imagenesNiveles1, imagenesNiveles2,imagenesMedallas1, imagenesMedallas2,imagenesCandados1,imagenesCandados2;
 	private Image arrowRight, arrowLeft, dog1, dog2;
+	public AtlasRegion n1,n2,n3,n4,n5,n6,n7,n8,n9,n10,n11,n12, cartel, back, lock,d1,d2,AL,AR;
+	private TextureAtlas atlas1,atlas2;
 
+	
 	public LevelChooser(ShepherdMe game) {
 		this.game = game;
 		this.imagenesNiveles1 = new ArrayList<Image>();
@@ -42,6 +47,36 @@ public class LevelChooser implements Screen {
 		this.imagenesCandados1 = new ArrayList<Image>();
 		this.imagenesCandados2 = new ArrayList<Image>();
 
+		this.atlas1 = new TextureAtlas(Gdx.files.internal("img/chooseLevel/niveles.pack"));
+		this.atlas2 = new TextureAtlas(Gdx.files.internal("img/chooseLevel/niveles2.pack"));
+		
+		/*
+		this.n1 = atlas1.findRegion("NivelG01");
+		this.n2 = atlas1.findRegion("NivelG02");
+		this.n3 = atlas1.findRegion("NivelG03");
+		this.n4 = atlas1.findRegion("NivelG04");
+		this.n5 = atlas1.findRegion("NivelG05");
+		this.n6 = atlas1.findRegion("NivelG06");
+		this.n7 = atlas2.findRegion("NivelG07");
+		this.n8 = atlas2.findRegion("NivelG08");
+		this.n9 = atlas2.findRegion("NivelG09");
+		this.n10 = atlas2.findRegion("NivelG10");
+		this.n11= atlas2.findRegion("NivelG11");
+		this.n12 = atlas2.findRegion("NivelG12");
+		*/
+		
+		this.cartel = atlas2.findRegion("chooseLevel");
+		
+		this.d1= atlas2.findRegion("dog1");
+		this.d2= atlas2.findRegion("dog2");
+		
+		this.AL= atlas2.findRegion("arrowLeft");
+		this.AR= atlas2.findRegion("arrowRight");
+		
+		this.back= atlas2.findRegion("back");
+		
+		this.lock= atlas2.findRegion("NivelGlocked");
+			
 		this.game.chooseLevel=this;
 	}
 
@@ -97,21 +132,18 @@ public class LevelChooser implements Screen {
 		
 
 		// Choose level text
-		Image chooseText = new Image(new Texture(
-				Gdx.files.internal("img/chooseLevel/chooseLevel.png")));
+		Image chooseText = new Image(cartel);
 		chooseText.setSize(Gdx.graphics.getWidth() / 1.5f,
 				Gdx.graphics.getHeight() / 4.2f);
 		chooseText.setPosition(
 				Gdx.graphics.getWidth() / 2 - chooseText.getWidth() / 2,
 				Gdx.graphics.getHeight() - chooseText.getHeight() / 0.9f);
 
-		dog1 = new Image(new Texture(
-				Gdx.files.internal("img/chooseLevel/dog1.png")));
+		dog1 = new Image(d1);
 		dog1.setSize(Gdx.graphics.getWidth() / 4.5f,
 				Gdx.graphics.getWidth() / 4.5f);
 
-		dog2 = new Image(new Texture(
-				Gdx.files.internal("img/chooseLevel/dog2.png")));
+		dog2 = new Image(d2);
 		dog2.setSize(Gdx.graphics.getWidth() / 4.5f,
 				Gdx.graphics.getWidth() / 4.5f);
 		dog2.setPosition(Gdx.graphics.getWidth(), -dog2.getHeight() * 2);// Desplazada
@@ -127,8 +159,7 @@ public class LevelChooser implements Screen {
 																			// la
 																			// animacion
 
-		arrowRight = new Image(new Texture(
-				Gdx.files.internal("img/chooseLevel/arrowRight.png")));
+		arrowRight = new Image(AR);
 		arrowRight.setX(Gdx.graphics.getWidth() * 7 / 8);
 		arrowRight.setY(Gdx.graphics.getHeight() * 1 / 7);
 		arrowRight.setHeight(imageHeight * 2 + 5);
@@ -247,8 +278,7 @@ public class LevelChooser implements Screen {
 			}
 		});
 
-		arrowLeft = new Image(new Texture(
-				Gdx.files.internal("img/chooseLevel/arrowLeft.png")));
+		arrowLeft = new Image(AL);
 		arrowLeft.setX(Gdx.graphics.getWidth() / 25);
 		arrowLeft.setY(Gdx.graphics.getHeight() * 1 / 7);
 		arrowLeft.setHeight(imageHeight * 2 + 5);
@@ -370,8 +400,7 @@ public class LevelChooser implements Screen {
 
 		this.crearNiveles();
 
-		backArrow = new Image(new Texture(
-				Gdx.files.internal("img/chooseLevel/back.png")));
+		backArrow = new Image(back);
 		int width = Gdx.graphics.getWidth(), height = Gdx.graphics.getHeight();
 		backArrow
 				.setBounds(width / 20, 7 * height / 8, width / 11, height / 11);
@@ -422,7 +451,7 @@ public class LevelChooser implements Screen {
 		
 		for (int i = 0; i < 6; i++) 
 		{
-			image = new Image(new Texture(Gdx.files.internal("img/chooseLevel/cartel.png")));
+			image = new Image(atlas1.findRegion("N"+(i+1)));
 			this.imagenesNiveles1.add(image);
 			image.setBounds(initialX + imageWidth * deltaX + 2, initialY,imageWidth, imageHeight);
 			deltaX++;
@@ -456,7 +485,7 @@ public class LevelChooser implements Screen {
 		
 		for (int i = 0; i < 6; i++) 
 		{
-			image = new Image(new Texture(Gdx.files.internal("img/chooseLevel/cartel.png")));
+			image = new Image(atlas2.findRegion("N"+(i+7)));
 			this.imagenesNiveles2.add(image);
 			image.setBounds(Gdx.graphics.getWidth() + initialX + imageWidth* deltaX + 2, initialY, imageWidth, imageHeight);
 			deltaX++;
@@ -478,6 +507,9 @@ public class LevelChooser implements Screen {
 				initialY -= imageHeight + 5;
 				deltaX = 0;
 			}
+			
+			LevelManager.comprobarNivel(i+6,image,imagenesMedallas2,imagenesCandados2);
+
 		}
 
 	}
