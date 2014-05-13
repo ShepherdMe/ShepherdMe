@@ -9,4 +9,11 @@
     </sheep>
     <redil height="0.3" width="0.3" x="0.65" y="0.1" open="TOP">
     </redil>
+    
+<obstacle type="Water">
+	<x>0.4</x>
+	<y>0.8</y>
+	<radio>0.1</radio>
+</obstacle>
+    
 </level>

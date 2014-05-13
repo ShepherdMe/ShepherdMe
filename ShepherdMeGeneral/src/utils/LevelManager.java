@@ -44,16 +44,16 @@ public class LevelManager {
 			// Cambiar el numero de medallas necesarias
 			levelsLock.set(0, 0);
 			levelsLock.set(1, 1);
-			levelsLock.set(2, 2);
-			levelsLock.set(3, 3);
-			levelsLock.set(4, 4);
-			levelsLock.set(5, 5);
-			levelsLock.set(6, 6);
-			levelsLock.set(7, 7);
-			levelsLock.set(8, 8);
-			levelsLock.set(9, 9);
-			levelsLock.set(10, 10);
-			levelsLock.set(11, 11);
+			levelsLock.set(2, 3);
+			levelsLock.set(3, 5);
+			levelsLock.set(4, 7);
+			levelsLock.set(5, 9);
+			levelsLock.set(6, 14);
+			levelsLock.set(7, 16);
+			levelsLock.set(8, 19);
+			levelsLock.set(9, 23);
+			levelsLock.set(10, 27);
+			levelsLock.set(11, 31);
 
 			
 		}
@@ -114,7 +114,12 @@ public class LevelManager {
 	public static void actualizarNivel(int nivel, int medalla) {
 		System.out.println("Numero de nivel "+nivel);
 		System.out.println("MeDALLA "+medalla);
-		levels.set(nivel-1, medalla);
+		if(levels.get(nivel-1)<medalla)
+		{
+			levels.set(nivel-1, medalla);
+		}
+		LevelManager.guardarResultados();
+		
 	}
 
 	public static void desbloquearNiveles() {
@@ -125,8 +130,8 @@ public class LevelManager {
 				}
 			}
 		}
-		System.out.println(levels.toString());
-		System.out.println("Medallas " + numeroMedallas());
+		//System.out.println(levels.toString());
+		//System.out.println("Medallas " + numeroMedallas());
 	}
 
 	private static int numeroMedallas() {
@@ -139,4 +144,21 @@ public class LevelManager {
 		return n;
 	}
 
+	public static void guardarResultados()
+	{
+		Preferences level = Gdx.app.getPreferences("Levels");
+		Preferences levelLock = Gdx.app.getPreferences("LevelsLock");
+		
+		for(int i=0;i<LevelManager.numberOfLevels;i++)
+		{
+			level.putInteger(i+"", LevelManager.levels.get(i));
+		}
+		for(int i=0;i<LevelManager.numberOfLevels;i++)
+		{
+			levelLock.putInteger(i+"", LevelManager.levelsLock.get(i));
+		}
+		
+		level.flush();
+		levelLock.flush();
+	}
 }

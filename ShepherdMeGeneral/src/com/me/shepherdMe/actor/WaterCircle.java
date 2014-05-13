@@ -2,7 +2,6 @@ package com.me.shepherdMe.actor;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Circle;
 import com.badlogic.gdx.math.Intersector;
@@ -25,18 +24,18 @@ public class WaterCircle extends Obstacle{
 
 	}
 
-	@Override
+	/*@Override
 	public void draw(SpriteBatch batch, float parentAlpha) {
 
 		batch.draw(regionObstacle, getX(), getY(), getOriginX(), getOriginY(),
 				getWidth(), getHeight(), getScaleX(), getScaleY(),
 				getRotation());
-
-	}
+	}*/
 	
 	
 	@Override
-	public boolean hitArea(float x, float y, float width, float height) {
+	public boolean hitArea(float x, float y, float width, float height) 
+	{
 
 		Vector2 v0 = new Vector2(x, y);
 		Vector2 v1 = new Vector2(x + width, y);
