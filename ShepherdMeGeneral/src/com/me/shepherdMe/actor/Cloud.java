@@ -18,8 +18,8 @@ public class Cloud extends Actor {
 		setPosition(x, y);
 		this.setX(x);
 		this.setY(y);
-		setHeight(width);
-		setWidth(height);
+		setHeight(height);
+		setWidth(width);
 		setOriginX(getWidth() / 2);
 		setOriginY(getHeight() / 2);
 	
