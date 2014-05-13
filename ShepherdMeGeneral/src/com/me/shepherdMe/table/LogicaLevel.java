@@ -49,7 +49,7 @@ public class LogicaLevel extends Table {
 	private Level screen;
 	private int AltoPantalla = Gdx.graphics.getHeight();
 	private int AnchoPantalla = Gdx.graphics.getWidth();
-	private int level;
+	private int level, NumN=0;
 	
 	
 	public LogicaLevel(ShepherdMe game, Level screen, int level) {
@@ -85,11 +85,7 @@ public class LogicaLevel extends Table {
 		for (Sheep s : sheeps) {
 			addActor(s);
 		}
-		//FALTA A�ADIR OVEJAS NEGRAS!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-		//Deben estar junto con las dem�s ovejas en el vector sheeps y
-		//deben estar en el vector bsheeps, es necesario para el metodo esNegra(Sheep s)
-		//procedo a crear el vector vac�o para que no de nullpointer, cambiar cuando se modifique
-		this.bsheeps=new ArrayList<BlackSheep>();
+		this.NumN=ContarNegras(); //Contamos el numero de ovejas negras
 		
 		//Cargar obstaculos
 		this.obstacle = LevelReader.cargarObstaculos();
@@ -238,7 +234,7 @@ public class LogicaLevel extends Table {
 				
 					sheepsIn++;
 					
-					if(sheepsIn==this.sheeps.size()-this.bsheeps.size()&&!this.fold.isOpen())
+					if(sheepsIn==this.sheeps.size()-this.NumN&&!this.fold.isOpen())
 					{
 						ganar=true;
 						//SACAR CARTEL
@@ -256,19 +252,50 @@ public class LogicaLevel extends Table {
 		
 		
 	}
+	private int ContarNegras()
+	{
+		int n=0;
+		for (Sheep b:this.sheeps)
+		{
+			BlackSheep o;
+			try
+			{
+				o=(BlackSheep) b;			
+			}
+			catch(Exception e)
+			{
+				o=null;
+			}
+			if(o!=null)
+			{
+			n++;
+			}
+		}
+		return n;
+	}
 	
 	private boolean esNegra(Sheep s)
 	{
-		for (BlackSheep b : this.bsheeps) {
-			
-			if(s.equals(b))
+		for (Sheep b : this.sheeps) 
+		{
+			BlackSheep o;
+			try
+			{
+				
+				o=(BlackSheep) b;
+				
+			}
+			catch(Exception e)
+			{
+				o=null;
+			}
+			if(s.equals(o))
 			{
 				return true;
-			}
-			
+			}	
 		}
-		
 		return false;
+	
 	}
 	
 	public void pauseOvejas()
