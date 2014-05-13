@@ -449,6 +449,8 @@ public class LevelChooser implements Screen {
 				.getHeight() * 2 / 5, deltaX = 0;
 		final LevelChooser levelChooser = this;
 		
+		LevelManager.desbloquearNiveles();
+		
 		for (int i = 0; i < 6; i++) 
 		{
 			if(LevelManager.bloqueado(i))

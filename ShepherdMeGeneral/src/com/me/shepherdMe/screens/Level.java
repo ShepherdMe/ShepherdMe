@@ -182,23 +182,27 @@ public class Level implements Screen {
 
 		int time = this.cronometer.getMinutos() * 60
 				+ this.cronometer.getSegundos();
-		if (time < gold){
+		if (time < gold)
+		{
 			System.out.println("Gold Medal!!!");
 			this.medal = new GoldMedal();
 			LevelManager.actualizarNivel(this.level, 3);
 		}
-			
-		else if (time < silver){
-			this.medal = new SilverMedal();
-			System.out.println("Silver Medal!!!");
-			LevelManager.actualizarNivel(this.level, 2);
+		else
+		{
+			if (time < silver)
+			{
+				this.medal = new SilverMedal();
+				System.out.println("Silver Medal!!!");
+				LevelManager.actualizarNivel(this.level, 2);
+			}
+			else
+			{
+				this.medal = new BronzeMedal();
+				System.out.println("Bronze Medal!!!");
+				LevelManager.actualizarNivel(this.level, 1);
 
-		}
-		else{
-			this.medal = new BronzeMedal();
-			System.out.println("Bronze Medal!!!");
-			LevelManager.actualizarNivel(this.level, 1);
-
+			}
 		}
 	}
 
