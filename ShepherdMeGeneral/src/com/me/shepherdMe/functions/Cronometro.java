@@ -4,15 +4,16 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
+
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas.AtlasRegion;
+import com.me.shepherdMe.images.Imagenes;
 
 public class Cronometro {
 
 	private int segundos;
 	private int minutos;
-	private TextureAtlas atlas;
+	//private TextureAtlas atlas;
 	public AtlasRegion min1, min2, separator, sec1, sec2;
 	private Timer timer;
 	private cronometerTask timerTask;
@@ -21,19 +22,26 @@ public class Cronometro {
 	public boolean ready = false;
 
 	public Cronometro() {
-		width = Gdx.graphics.getWidth();
-		height = Gdx.graphics.getHeight();
+		this.width = Gdx.graphics.getWidth();
+		this.height = Gdx.graphics.getHeight();
 		this.minutos = 0;
 		this.segundos = 0;
 
-		atlas = new TextureAtlas(Gdx.files.internal("numeros/numbers.atlas"));
+		/*atlas = new TextureAtlas(Gdx.files.internal("numeros/numbers.atlas"));
 		min2 = atlas.findRegion("cero");
 		min1 = atlas.findRegion("cero");
 		sec1 = atlas.findRegion("cero");
 		
 		sec2 = atlas.findRegion("cero");
 		
-		separator = atlas.findRegion("separator");
+		separator = atlas.findRegion("separator");*/
+		
+		this.min2 = Imagenes.cero;
+		this.min1 = Imagenes.cero;
+		this.sec1 = Imagenes.cero;
+		this.sec2 = Imagenes.cero;
+		this.separator = Imagenes.separator;
+		
 		ready = true;
 	}
 	
@@ -68,9 +76,9 @@ public class Cronometro {
 		}
 		this.segundos = 0;
 		this.minutos = 0;
-		sec1 = atlas.findRegion("cero");
-		sec2 = atlas.findRegion("cero");
-		min2 = atlas.findRegion("cero");
+		sec1 = Imagenes.cero;
+		sec2 = Imagenes.cero;
+		min2 = Imagenes.cero;
 		min1 = null;
 	}
 
@@ -107,71 +115,71 @@ public class Cronometro {
 				minutos++;
 				
 				if(minutos<10){
-					min2 = atlas.findRegion(intToString(minutos));
+					min2 = intToString(minutos);
 				}
 				else{
 					int decenas = minutos / 10;
 					int unidades = minutos - decenas*10;
 					boolean update1 = true;
 					if(min1==null){
-						min1 = atlas.findRegion(intToString(decenas));
+						min1 = intToString(decenas);
 						update1 = false;
 					}
 					if(update1){
-						min1 = atlas.findRegion(intToString(decenas));
+						min1 = intToString(decenas);
 					}
 					
-					min2 = atlas.findRegion(intToString(unidades));
+					min2 = intToString(unidades);
 				}
 				
 			}
 			
 			if (segundos < 10) {
-				sec1 = atlas.findRegion("cero");
-				sec2 = atlas.findRegion(intToString(segundos));
+				sec1 = Imagenes.cero;
+				sec2 = intToString(segundos);
 			}
 			else{
 				int decenas = segundos / 10;
 				int unidades = segundos - decenas*10;
-				sec1 = atlas.findRegion(intToString(decenas));
-				sec2 = atlas.findRegion(intToString(unidades));
+				sec1 = intToString(decenas);
+				sec2 =intToString(unidades);
 			}
 			
 		}
 	}
 	
-	private String intToString(int x){
-		String s ="";
+	private AtlasRegion intToString(int x){
+		AtlasRegion s = null;
 		switch (x) {
 		case 0:
-			s= "cero";
+			s= Imagenes.cero;
 			break;
 		case 1:
-			s= "uno";
+			s= Imagenes.uno;
 			break;
 		case 2:
-			s= "dos";
+			s= Imagenes.dos;
 			break;
 		case 3:
-			s= "tres";
+			s= Imagenes.tres;
 			break;
 		case 4:
-			s= "cuatro";
+			s= Imagenes.cuatro;
 			break;
 		case 5:
-			s= "cinco";
+			s= Imagenes.cinco;
 			break;
 		case 6:
-			s= "seis";
+			s= Imagenes.seis;
 			break;
 		case 7:
-			s= "siete";
+			s= Imagenes.siete;
 			break;
 		case 8:
-			s= "ocho";
+			s= Imagenes.ocho;
 			break;
 		case 9:
-			s= "nueve";
+			s= Imagenes.nueve;
 			break;
 			
 		default:

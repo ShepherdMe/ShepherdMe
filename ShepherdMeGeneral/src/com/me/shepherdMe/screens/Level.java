@@ -2,6 +2,7 @@ package com.me.shepherdMe.screens;
 
 import java.util.Timer;
 import java.util.TimerTask;
+
 import utils.GraphicManager;
 import utils.LevelManager;
 
@@ -14,7 +15,6 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
-import com.badlogic.gdx.graphics.g2d.TextureAtlas.AtlasRegion;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
@@ -46,7 +46,7 @@ public class Level implements Screen {
 	private LogicaLevel logica;
 	private Cronometro cronometer;
 	private Image cartelExit, buttonContinue, buttonExit;
-	private TextureAtlas atlas;
+	//private TextureAtlas atlas;
 	private boolean showingPause = false, stop = false;
 	private Timer timer = new Timer();
 	private SpriteBatch batch;
@@ -65,6 +65,8 @@ public class Level implements Screen {
 		height = Gdx.graphics.getHeight();
 		End = false;
 		this.level = level;
+		this.cronometer = new Cronometro();
+
 	}
 
 	public int getGold() {
