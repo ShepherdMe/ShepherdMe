@@ -3,12 +3,12 @@ package com.me.shepherdMe.actor;
 import java.util.List;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.actions.MoveByAction;
+import com.me.shepherdMe.images.Imagenes;
 import com.me.shepherdMe.table.LogicaLevel;
 
 public class Sheep extends Actor {
@@ -16,7 +16,7 @@ public class Sheep extends Actor {
 	private LogicaLevel LL;
 
 	protected TextureRegion regionSheep;
-	protected Texture sheep;
+	//protected Texture sheep;
 	private double STEP;
 	
 	public boolean estaHuyendo=false;
@@ -40,9 +40,9 @@ public class Sheep extends Actor {
 		
 		this.STEP=Math.sqrt(Math.pow(Gdx.graphics.getWidth(), 2)+Math.pow(Gdx.graphics.getHeight(), 2))/100;
 
-		sheep = new Texture(Gdx.files.internal("img/level/sheep.png"));
-
-		regionSheep = new TextureRegion(sheep);
+		//sheep = new Texture(Gdx.files.internal("img/level/sheep.png"));
+		regionSheep = new TextureRegion(Imagenes.nivelSheep);
+		//regionSheep = new TextureRegion(sheep);
 
 	}
 	

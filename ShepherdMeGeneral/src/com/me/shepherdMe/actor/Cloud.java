@@ -1,16 +1,16 @@
 package com.me.shepherdMe.actor;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.actions.MoveByAction;
+import com.me.shepherdMe.images.Imagenes;
 
 public class Cloud extends Actor {
 
 	private TextureRegion regionCloud;
-	private Texture cloud;
+	//private Texture cloud;
 	
 	public Cloud(float x, float y, float width, float height) {
 		
@@ -24,9 +24,9 @@ public class Cloud extends Actor {
 		setOriginY(getHeight() / 2);
 	
 		
-		cloud = new Texture(Gdx.files.internal("img/level/cloud_1.png"));
+		//cloud = new Texture(Gdx.files.internal("img/level/cloud_1.png"));
 
-		regionCloud = new TextureRegion(cloud);
+		regionCloud = new TextureRegion(Imagenes.nivelCloud);
 		
 		MoveByAction ma = new MoveByAction();
 		ma.setAmountX(Gdx.graphics.getWidth());

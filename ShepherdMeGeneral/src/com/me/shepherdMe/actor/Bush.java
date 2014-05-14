@@ -1,9 +1,8 @@
 package com.me.shepherdMe.actor;
 
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Rectangle;
+import com.me.shepherdMe.images.Imagenes;
 
 
 public class Bush extends Obstacle{
@@ -13,8 +12,8 @@ public class Bush extends Obstacle{
 		super(x, y, width, height);
 		this.area = new Rectangle(x, y, width, height);
 
-		this.obstacle = new Texture(Gdx.files.internal("img/level/bush.png"));
-		this.regionObstacle = new TextureRegion(this.obstacle);
+		//this.obstacle = new Texture(Gdx.files.internal("img/level/bush.png"));
+		this.regionObstacle = new TextureRegion(Imagenes.nivelBush);
 
 	}
 

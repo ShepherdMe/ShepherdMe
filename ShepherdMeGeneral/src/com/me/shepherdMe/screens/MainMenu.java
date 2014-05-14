@@ -48,10 +48,6 @@ public class MainMenu implements Screen {
 
 	public MainMenu(ShepherdMe game) {
 		this.game = game;
-		SoundManager.asignarValores();
-		SoundManager.playMusicMenu();
-		SoundManager.loadAudios();
-		LevelManager.loadLevels();
 		this.game.menu=this;
 	}
 

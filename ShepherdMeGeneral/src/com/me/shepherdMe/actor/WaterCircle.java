@@ -1,11 +1,10 @@
 package com.me.shepherdMe.actor;
 
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Circle;
 import com.badlogic.gdx.math.Intersector;
 import com.badlogic.gdx.math.Vector2;
+import com.me.shepherdMe.images.Imagenes;
 
 public class WaterCircle extends Obstacle{
 
@@ -18,21 +17,12 @@ public class WaterCircle extends Obstacle{
 		this.area = new Circle(x, y, radio);
 		this.radio = radio;
 		this.centro= new Vector2(x,y);
-		this.obstacle = new Texture(Gdx.files.internal("img/level/blue.png"));
-		this.regionObstacle = new TextureRegion(this.obstacle);
-		this.regionObstacle.setRegion(x-radio, y-radio, radio*2, radio*2);
+		//this.obstacle = new Texture(Gdx.files.internal("img/level/blue.png"));
+		this.regionObstacle = new TextureRegion(Imagenes.nivelWater);
+		//this.regionObstacle.setRegion(x-radio, y-radio, radio*2, radio*2);
 
 	}
 
-	/*@Override
-	public void draw(SpriteBatch batch, float parentAlpha) {
-
-		batch.draw(regionObstacle, getX(), getY(), getOriginX(), getOriginY(),
-				getWidth(), getHeight(), getScaleX(), getScaleY(),
-				getRotation());
-	}*/
-	
-	
 	@Override
 	public boolean hitArea(float x, float y, float width, float height) 
 	{

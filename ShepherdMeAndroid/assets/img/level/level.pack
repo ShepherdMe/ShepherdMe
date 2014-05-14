@@ -1,0 +1,75 @@
+
+level.png
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+redilH
+  rotate: false
+  xy: 1, 379
+  size: 400, 113
+  orig: 400, 113
+  offset: 0, 0
+  index: -1
+cloud
+  rotate: false
+  xy: 1, 213
+  size: 300, 164
+  orig: 300, 164
+  offset: 0, 0
+  index: -1
+blue
+  rotate: false
+  xy: 1, 1
+  size: 221, 210
+  orig: 221, 210
+  offset: 0, 0
+  index: -1
+bush
+  rotate: false
+  xy: 403, 291
+  size: 200, 201
+  orig: 200, 201
+  offset: 0, 0
+  index: -1
+redilV
+  rotate: false
+  xy: 605, 92
+  size: 113, 400
+  orig: 113, 400
+  offset: 0, 0
+  index: -1
+close
+  rotate: false
+  xy: 720, 364
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: -1
+open
+  rotate: false
+  xy: 720, 234
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: -1
+dog
+  rotate: false
+  xy: 850, 376
+  size: 100, 116
+  orig: 100, 116
+  offset: 0, 0
+  index: -1
+blackSheep
+  rotate: false
+  xy: 720, 128
+  size: 100, 104
+  orig: 100, 104
+  offset: 0, 0
+  index: -1
+sheep
+  rotate: false
+  xy: 850, 270
+  size: 100, 104
+  orig: 100, 104
+  offset: 0, 0
+  index: -1
