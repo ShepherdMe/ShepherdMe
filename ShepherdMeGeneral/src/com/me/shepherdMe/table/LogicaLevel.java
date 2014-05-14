@@ -95,6 +95,7 @@ public class LogicaLevel extends Table {
 		
 		//Cargar redil
 		fold = LevelReader.cargarRedil();
+		addActor(fold.getBF());
 		for(Bush b : fold.getFoldObstacles()){
 			addActor(b);
 			this.obstacle.add(b);

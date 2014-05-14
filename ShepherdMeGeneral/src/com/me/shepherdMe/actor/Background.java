@@ -27,7 +27,7 @@ public class Background extends Actor {
 		Tbackground = new Texture(Gdx.files.internal("img/level/background.jpg"));
 		Tbackground.setWrap(TextureWrap.Repeat, TextureWrap.Repeat);
 		background = new TextureRegion(Tbackground,Gdx.app.getGraphics().getWidth(),Gdx.app.getGraphics().getHeight());
-		
+
 	}
 	
 	public void draw(SpriteBatch batch, float parentApha)

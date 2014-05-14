@@ -15,6 +15,8 @@ public class Imagenes {
 	public static AtlasRegion nivelWater;
 	public static AtlasRegion nivelRedilH;
 	public static AtlasRegion nivelRedilV;
+	public static AtlasRegion nivelBGFold;
+
 
 	public static TextureAtlas cronometro;
 	public static AtlasRegion cero;
@@ -51,6 +53,8 @@ public class Imagenes {
 		Imagenes.nivelWater = Imagenes.nivel.findRegion("blue");
 		Imagenes.nivelRedilH = Imagenes.nivel.findRegion("redilH");
 		Imagenes.nivelRedilV = Imagenes.nivel.findRegion("redilV");	
+		Imagenes.nivelBGFold = Imagenes.nivel.findRegion("BGFold");	
+
 	}
 	
 	public static void cargarImagenesMain()

@@ -15,6 +15,7 @@ public class SheepFold{
 	private static final int THICKNESS_FACTOR = 20;
 	
 	private List<Bush> obstacles;
+	private BackgroundFold BF;
 	private Bush openable;
 	private float screenWidth, screenHeight;
 	private float x, y, width, height;
@@ -24,6 +25,7 @@ public class SheepFold{
 
 	
 	public SheepFold(float x, float y, float width, float heigth, Open open){
+		this.BF = new BackgroundFold(x, y, width, heigth);
 		obstacles = new ArrayList<Bush>();
 		this.x = x;
 		this.y = y;
@@ -125,5 +127,9 @@ public class SheepFold{
 
 	public float getHeight() {
 		return height;
+	}
+	public BackgroundFold getBF()
+	{
+		return BF;
 	}
 }
