@@ -27,17 +27,16 @@ import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.me.shepherdMe.ShepherdMe;
+import com.me.shepherdMe.images.Imagenes;
 import com.me.shepherdMe.sound.SoundManager;
 
 public class MainMenu implements Screen {
 
 	private Stage stage;
-	private TextureAtlas atlas;
 	private SpriteBatch batchBackground;
 	private Texture textureBackground;
 	private Sprite backgroundSprite;
-	private Image buttonPlay, buttonRecords, buttonExit, buttonContinue,
-			heading;
+	private Image buttonPlay, buttonExit, buttonContinue, heading;
 	private Image sun, sheep;
 	private ShepherdMe game;
 	private Image volumeEffects, volumeMusic;
@@ -125,8 +124,7 @@ public class MainMenu implements Screen {
 
 		int width = Gdx.graphics.getWidth(), height = Gdx.graphics.getHeight();
 
-		sun = new Image(
-				new Texture(Gdx.files.internal("img/main/sol_main.png")));
+		sun = new Image(Imagenes.sol);
 		sun.setBounds(width - height / 1.75f, height - height / 1.75f,
 				height / 1.1f, height / 1.1f);
 
@@ -147,8 +145,7 @@ public class MainMenu implements Screen {
 
 		int i = new Random().nextInt(7);
 
-		sheep = new Image(new Texture(Gdx.files.internal("img/main/sheep_" + i
-				+ ".png")));
+		sheep = new Image(Imagenes.getOveja(i));
 		
 		if (i == 2) {
 			sheep.setBounds(2 * width / 10, -15, 1.5f * height / 1.5f,
@@ -161,26 +158,26 @@ public class MainMenu implements Screen {
 
 		}
 		
-		buttonRecords = new Image(new Texture(
-				Gdx.files.internal("img/main/records.png")));
-		buttonRecords.setBounds(width - width / 5, height / 21, width / 5,
-				height / 4);
-		buttonRecords.addListener(new ClickListener() {
-			@Override
-			public void clicked(InputEvent event, float x, float y) {
-				// TODO Auto-generated method stub
-				super.clicked(event, x, y);
-				if (game.recordScreen == null)
-				{
-					game.recordScreen = new RecordScreen(game);
-				}
-				((Game) Gdx.app.getApplicationListener()).setScreen(game.recordScreen);
-			}
-		});
+//		buttonRecords = new Image(new Texture(
+//				Gdx.files.internal("img/main/records.png")));
+//		buttonRecords.setBounds(width - width / 5, height / 21, width / 5,
+//				height / 4);
+//		buttonRecords.addListener(new ClickListener() {
+//			@Override
+//			public void clicked(InputEvent event, float x, float y) {
+//				// TODO Auto-generated method stub
+//				super.clicked(event, x, y);
+//				if (game.recordScreen == null)
+//				{
+//					game.recordScreen = new RecordScreen(game);
+//				}
+//				((Game) Gdx.app.getApplicationListener()).setScreen(game.recordScreen);
+//			}
+//		});
 		
 		
-		buttonPlay = new Image(new Texture(Gdx.files.internal("img/main/play.png")));
-		buttonPlay.setBounds(width - width / 5, height / 3.5f, width / 5,
+		buttonPlay = new Image(Imagenes.play);
+		buttonPlay.setBounds(width - width / 5, height / 7f, width / 5,
 				height / 4);
 		buttonPlay.addListener(new ClickListener() {
 			@Override
@@ -196,19 +193,18 @@ public class MainMenu implements Screen {
 		});
 
 		// Creating heading
-		heading = new Image(new Texture(Gdx.files.internal("img/main/tittle.png")));
-		heading.setBounds(width / 25, 4 * height / 8, width / 1.5f,
-				height / 1.5f);
+		heading = new Image(Imagenes.tittle);
+		heading.setBounds(width / 25, height - height/2.8f, width / 1.5f, height / 3);
 
 		// Volume effects icon
 	
 		if(SoundManager.getEffectsOn())
 		{
-			volumeEffects = new Image(new Texture(Gdx.files.internal("img/main/sonido.png")));
+			volumeEffects = new Image(Imagenes.sonidoON);
 		}
 		else
 		{
-			volumeEffects = new Image(new Texture(Gdx.files.internal("img/main/sonido_2.png")));
+			volumeEffects = new Image(Imagenes.sonidoOFF);
 		}
 		volumeEffects.setBounds(7.2f * width / 8, 7 * height / 8, height / 11,height / 11);
 		volumeEffects.addListener(new InputListener() {
@@ -218,14 +214,10 @@ public class MainMenu implements Screen {
 				// TODO Auto-generated method stub
 				if (SoundManager.getEffectsOn()) {
 					SoundManager.setEffectsOn(false);
-					volumeEffects.setDrawable(new TextureRegionDrawable(
-							new TextureRegion(new Texture(Gdx.files
-									.internal("img/main/sonido_2.png")))));
+					volumeEffects.setDrawable(new TextureRegionDrawable(Imagenes.sonidoOFF));
 				} else {
 					SoundManager.setEffectsOn(true);
-					volumeEffects.setDrawable(new TextureRegionDrawable(
-							new TextureRegion(new Texture(Gdx.files
-									.internal("img/main/sonido.png")))));
+					volumeEffects.setDrawable(new TextureRegionDrawable(Imagenes.sonidoON));
 				}
 				return true;
 			}
@@ -234,11 +226,11 @@ public class MainMenu implements Screen {
 		// Volume music icon
 		if(SoundManager.getMusicOn())
 		{
-			volumeMusic = new Image(new Texture(Gdx.files.internal("img/main/music.png")));
+			volumeMusic = new Image(Imagenes.musicON);
 		}
 		else
 		{
-			volumeMusic = new Image(new Texture(Gdx.files.internal("img/main/music_2.png")));
+			volumeMusic = new Image(Imagenes.musicOFF);
 		}
 		volumeMusic.setBounds(7.2f * width / 8, 6.8f * height / 8 - height / 11, height / 11, height / 11);
 		volumeMusic.addListener(new InputListener() {
@@ -248,14 +240,10 @@ public class MainMenu implements Screen {
 				// TODO Auto-generated method stub
 				if (SoundManager.getMusicOn()) {
 					SoundManager.setMusicOn(false);
-					volumeMusic.setDrawable(new TextureRegionDrawable(
-							new TextureRegion(new Texture(Gdx.files
-									.internal("img/main/music_2.png")))));
+					volumeMusic.setDrawable(new TextureRegionDrawable(Imagenes.musicOFF));
 				} else {
 					SoundManager.setMusicOn(true);
-					volumeMusic.setDrawable(new TextureRegionDrawable(
-							new TextureRegion(new Texture(Gdx.files
-									.internal("img/main/music.png")))));
+					volumeMusic.setDrawable(new TextureRegionDrawable(Imagenes.musicON));
 				}
 				return true;
 			}
@@ -263,7 +251,7 @@ public class MainMenu implements Screen {
 
 		stage.addActor(sheep);
 		stage.addActor(buttonPlay);
-		stage.addActor(buttonRecords);
+//		stage.addActor(buttonRecords);
 		stage.addActor(heading);
 		stage.addActor(volumeEffects);
 		stage.addActor(volumeMusic);
@@ -336,12 +324,12 @@ public class MainMenu implements Screen {
 
 	private void quitarEventos() {
 		buttonPlay.setTouchable(Touchable.disabled);
-		buttonRecords.setTouchable(Touchable.disabled);
+//		buttonRecords.setTouchable(Touchable.disabled);
 	}
 
 	private void ponerEventos() {
 		buttonPlay.setTouchable(Touchable.enabled);
-		buttonRecords.setTouchable(Touchable.enabled);
+//		buttonRecords.setTouchable(Touchable.enabled);
 		showingPause = false;
 	}
 
@@ -367,8 +355,6 @@ public class MainMenu implements Screen {
 	public void dispose() {
 		// TODO Auto-generated method stub
 		stage.dispose();
-		atlas.dispose();
-
 	}
 
 }

@@ -5,42 +5,49 @@ filter: Nearest,Nearest
 repeat: none
 tittle
   rotate: false
-  xy: 1, 82
+  xy: 1, 357
   size: 477, 142
   orig: 477, 142
   offset: 0, 0
   index: -1
+sol
+  rotate: false
+  xy: 1, 55
+  size: 300, 300
+  orig: 300, 300
+  offset: 0, 0
+  index: -1
 play
   rotate: false
-  xy: 480, 1
+  xy: 480, 276
   size: 300, 223
   orig: 300, 223
   offset: 0, 0
   index: -1
-sonido
+sonidoOFF
   rotate: false
-  xy: 1, 54
+  xy: 1, 27
   size: 26, 26
   orig: 26, 26
   offset: 0, 0
   index: -1
-sonido
+sonidoON
   rotate: false
-  xy: 782, 198
+  xy: 782, 473
   size: 26, 26
   orig: 26, 26
   offset: 0, 0
-  index: 2
-music
+  index: -1
+musicON
   rotate: false
-  xy: 1, 28
+  xy: 303, 331
   size: 24, 24
   orig: 24, 24
   offset: 0, 0
-  index: 2
-music
+  index: -1
+musicOFF
   rotate: false
-  xy: 29, 56
+  xy: 1, 1
   size: 24, 24
   orig: 24, 24
   offset: 0, 0

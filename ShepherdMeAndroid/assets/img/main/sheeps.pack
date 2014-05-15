@@ -1,0 +1,54 @@
+
+sheeps.png
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+sheep1
+  rotate: false
+  xy: 1, 599
+  size: 300, 312
+  orig: 300, 312
+  offset: 0, 0
+  index: -1
+sheep3
+  rotate: false
+  xy: 1, 303
+  size: 300, 294
+  orig: 300, 294
+  offset: 0, 0
+  index: -1
+sheep6
+  rotate: false
+  xy: 303, 611
+  size: 288, 300
+  orig: 288, 300
+  offset: 0, 0
+  index: -1
+sheep0
+  rotate: false
+  xy: 1, 1
+  size: 288, 300
+  orig: 288, 300
+  offset: 0, 0
+  index: -1
+sheep5
+  rotate: false
+  xy: 593, 629
+  size: 300, 282
+  orig: 300, 282
+  offset: 0, 0
+  index: -1
+sheep4
+  rotate: false
+  xy: 303, 368
+  size: 300, 241
+  orig: 300, 241
+  offset: 0, 0
+  index: -1
+sheep2
+  rotate: false
+  xy: 605, 401
+  size: 300, 226
+  orig: 300, 226
+  offset: 0, 0
+  index: -1

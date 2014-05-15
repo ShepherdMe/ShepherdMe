@@ -32,6 +32,23 @@ public class Imagenes {
 	public static AtlasRegion separator;
 	
 	
+	public static TextureAtlas main;
+	public static TextureAtlas ovejas;
+	public static AtlasRegion tittle;
+	public static AtlasRegion play;
+	public static AtlasRegion sonidoON;
+	public static AtlasRegion sonidoOFF;
+	public static AtlasRegion musicON;
+	public static AtlasRegion musicOFF;
+	public static AtlasRegion sol;
+	public static AtlasRegion oveja0;
+	public static AtlasRegion oveja1;
+	public static AtlasRegion oveja2;
+	public static AtlasRegion oveja3;
+	public static AtlasRegion oveja4;
+	public static AtlasRegion oveja5;
+	public static AtlasRegion oveja6;
+	
 	public static void cargarImagenes()
 	{
 		Imagenes.cargarImagenesMain();
@@ -59,7 +76,54 @@ public class Imagenes {
 	
 	public static void cargarImagenesMain()
 	{
+		main = new TextureAtlas(Gdx.files.internal("img/main/main.pack"));
+		ovejas = new TextureAtlas(Gdx.files.internal("img/main/sheeps.pack"));
 		
+		tittle = main.findRegion("tittle");
+		play = main.findRegion("play");
+		sonidoON = main.findRegion("sonidoON");
+		sonidoOFF = main.findRegion("sonidoOFF");
+		musicON = main.findRegion("musicON");
+		musicOFF = main.findRegion("musicOFF");
+		sol = main.findRegion("sol");
+		
+		oveja0 = ovejas.findRegion("sheep0");
+		oveja1 = ovejas.findRegion("sheep1");
+		oveja2 = ovejas.findRegion("sheep2");
+		oveja3 = ovejas.findRegion("sheep3");
+		oveja4 = ovejas.findRegion("sheep4");
+		oveja5 = ovejas.findRegion("sheep5");
+		oveja6 = ovejas.findRegion("sheep6");
+	}
+	
+	public static AtlasRegion getOveja(int x){
+		AtlasRegion s = null;
+		switch (x) {
+		case 0:
+			s= Imagenes.oveja0;
+			break;
+		case 1:
+			s= Imagenes.oveja1;
+			break;
+		case 2:
+			s= Imagenes.oveja2;
+			break;
+		case 3:
+			s= Imagenes.oveja3;
+			break;
+		case 4:
+			s= Imagenes.oveja4;
+			break;
+		case 5:
+			s= Imagenes.oveja5;
+			break;
+		case 6:
+			s= Imagenes.oveja6;
+			break;
+		default:
+			break;
+		}
+		return s;
 	}
 	
 	public static void cargarImagenesChooseLevel()

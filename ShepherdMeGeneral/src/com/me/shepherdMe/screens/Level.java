@@ -45,7 +45,6 @@ public class Level implements Screen {
 	private LogicaLevel logica;
 	private Cronometro cronometer;
 	private Image cartelExit, buttonContinue, buttonExit;
-	//private TextureAtlas atlas;
 	private boolean showingPause = false, stop = false;
 	private Timer timer = new Timer();
 	private SpriteBatch batch;
