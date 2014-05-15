@@ -174,6 +174,7 @@ public class Level implements Screen {
 	}
 
 	public void ganar() {
+		stop=true;
 		logica.setPause(true);
 		cronometer.pause();
 		cartelExit.setVisible(true);
