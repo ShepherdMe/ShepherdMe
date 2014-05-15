@@ -27,6 +27,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.me.shepherdMe.ShepherdMe;
+import com.me.shepherdMe.images.Imagenes;
 import com.me.shepherdMe.sound.SoundManager;
 
 public class MainMenu implements Screen {
@@ -268,14 +269,13 @@ public class MainMenu implements Screen {
 		stage.addActor(volumeEffects);
 		stage.addActor(volumeMusic);
 
-		cartelExit = new Image(new Texture(Gdx.files.internal("ui/cartel.png")));
+		cartelExit = new Image(Imagenes.cartel);
 		cartelExit.setBounds(
 				Gdx.graphics.getWidth() / 2 - Gdx.graphics.getWidth() / 3,
 				Gdx.graphics.getHeight() / 2 - Gdx.graphics.getWidth() / 4,
 				Gdx.graphics.getWidth() / 1.5f, Gdx.graphics.getWidth() / 2);
 
-		buttonContinue = new Image(new Texture(
-				Gdx.files.internal("ui/botonContinuar.png")));
+		buttonContinue = new Image(Imagenes.botonContinuar);
 		buttonContinue.setBounds(cartelExit.getX() + cartelExit.getWidth()
 				/ 1.75f, cartelExit.getY() + cartelExit.getHeight() / 2
 				- Gdx.graphics.getWidth() / 10, Gdx.graphics.getWidth() / 5,
@@ -296,8 +296,7 @@ public class MainMenu implements Screen {
 			}
 		});
 
-		buttonExit = new Image(new Texture(
-				Gdx.files.internal("ui/botonExit.png")));
+		buttonExit = new Image(Imagenes.botonExit);
 		buttonExit.setBounds(
 				cartelExit.getX() + cartelExit.getWidth() / 5,
 				cartelExit.getY() + cartelExit.getHeight() / 2

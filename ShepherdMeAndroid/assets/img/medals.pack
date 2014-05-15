@@ -1,0 +1,26 @@
+
+medals.png
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+bronce
+  rotate: false
+  xy: 1, 1
+  size: 30, 37
+  orig: 30, 37
+  offset: 0, 0
+  index: -1
+oro
+  rotate: false
+  xy: 33, 1
+  size: 30, 37
+  orig: 30, 37
+  offset: 0, 0
+  index: -1
+plata
+  rotate: false
+  xy: 65, 1
+  size: 30, 37
+  orig: 30, 37
+  offset: 0, 0
+  index: -1

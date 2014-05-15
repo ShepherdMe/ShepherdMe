@@ -1,8 +1,6 @@
 package com.me.shepherdMe.table;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -21,11 +19,9 @@ import com.me.shepherdMe.actor.Bush;
 import com.me.shepherdMe.actor.Cloud;
 import com.me.shepherdMe.actor.Dog;
 import com.me.shepherdMe.actor.Obstacle;
-import com.me.shepherdMe.actor.Open;
 import com.me.shepherdMe.actor.Sheep;
 import com.me.shepherdMe.actor.SheepFold;
 import com.me.shepherdMe.actor.input.BackgroundUserInput;
-import com.me.shepherdMe.medals.Medal;
 import com.me.shepherdMe.screens.Level;
 import com.me.shepherdMe.sound.SoundManager;
 
@@ -72,9 +68,7 @@ public class LogicaLevel extends Table {
 		this.screen.setSilver(LevelReader.getSilver());
 		this.screen.setBronze(LevelReader.getBronze());
 
-		// Cargar perro
-		this.dog = LevelReader.cargarPerro();
-		addActor(dog);
+		
 
 		// Cargar obstaculos
 		this.obstacle = LevelReader.cargarObstaculos();
@@ -92,7 +86,11 @@ public class LogicaLevel extends Table {
 		fold.close(this);
 		addActor(fold.getGate());
 		this.obstacle.add(fold.getGate());
-
+		
+		// Cargar perro
+				this.dog = LevelReader.cargarPerro();
+				addActor(dog);
+		
 		// Cargar ovejas
 		this.sheeps = LevelReader.cargarOvejas(this);
 		for (Sheep s : sheeps) {
