@@ -31,16 +31,6 @@ public class Imagenes {
 	public static AtlasRegion nueve;
 	public static AtlasRegion separator;
 	
-	public static TextureAtlas medallas;
-	public static AtlasRegion oro;
-	public static AtlasRegion plata;
-	public static AtlasRegion bronce;
-	
-	public static TextureAtlas UI;
-	public static AtlasRegion cartel;
-	public static AtlasRegion botonExit;
-	public static AtlasRegion botonContinuar;
-	
 	
 	public static void cargarImagenes()
 	{
@@ -48,8 +38,6 @@ public class Imagenes {
 		Imagenes.cargarImagenesNivel();
 		Imagenes.cargarImagenesChooseLevel();
 		Imagenes.cargarCronometro();
-		Imagenes.cargarMedallas();
-		Imagenes.cargarUI();
 
 	}
 	
@@ -81,7 +69,7 @@ public class Imagenes {
 	
 	public static void cargarCronometro()
 	{
-		Imagenes.cronometro = new TextureAtlas(Gdx.files.internal("img/numeros/numbers.atlas"));
+		Imagenes.cronometro = new TextureAtlas(Gdx.files.internal("numeros/numbers.atlas"));
 		
 		Imagenes.cero = Imagenes.cronometro.findRegion("cero");
 		Imagenes.uno = Imagenes.cronometro.findRegion("uno");
@@ -95,21 +83,5 @@ public class Imagenes {
 		Imagenes.nueve = Imagenes.cronometro.findRegion("nueve");
 		Imagenes.separator = Imagenes.cronometro.findRegion("separator");
 	}
-	
-	public static void cargarMedallas()
-	{
-		Imagenes.medallas= new TextureAtlas(Gdx.files.internal("img/medallas/medals.pack"));
-		Imagenes.oro = Imagenes.medallas.findRegion("oro");
-		Imagenes.plata = Imagenes.medallas.findRegion("plata");
-		Imagenes.bronce = Imagenes.medallas.findRegion("bronce");	
-	}
 
-	public static void cargarUI()
-	{
-		Imagenes.UI= new TextureAtlas(Gdx.files.internal("img/ui/ui.pack"));
-		Imagenes.cartel = Imagenes.UI.findRegion("cartel");
-		Imagenes.botonExit = Imagenes.UI.findRegion("botonExit");
-		Imagenes.botonContinuar = Imagenes.UI.findRegion("botonContinuar");
-	}
-	
 }

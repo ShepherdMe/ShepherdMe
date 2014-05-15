@@ -25,7 +25,6 @@ import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.me.shepherdMe.ShepherdMe;
 import com.me.shepherdMe.actor.SheepFold;
 import com.me.shepherdMe.functions.Cronometro;
-import com.me.shepherdMe.images.Imagenes;
 import com.me.shepherdMe.medals.BronzeMedal;
 import com.me.shepherdMe.medals.GoldMedal;
 import com.me.shepherdMe.medals.Medal;
@@ -273,13 +272,14 @@ public class Level implements Screen {
 		stage.addActor(imageLocker);
 
 		// Pause Menu
-		cartelExit = new Image(Imagenes.cartel);
+		cartelExit = new Image(new Texture(Gdx.files.internal("ui/cartel.png")));
 		cartelExit.setBounds(
 				Gdx.graphics.getWidth() / 2 - Gdx.graphics.getWidth() / 3,
 				Gdx.graphics.getHeight() / 2 - Gdx.graphics.getWidth() / 4,
 				Gdx.graphics.getWidth() / 1.5f, Gdx.graphics.getWidth() / 2);
 
-		buttonContinue = new Image(Imagenes.botonContinuar);
+		buttonContinue = new Image(new Texture(
+				Gdx.files.internal("ui/botonContinuar.png")));
 		buttonContinue.setBounds(cartelExit.getX() + cartelExit.getWidth()
 				/ 1.75f, cartelExit.getY() + cartelExit.getHeight() / 2
 				- Gdx.graphics.getWidth() / 10, Gdx.graphics.getWidth() / 5,
@@ -293,7 +293,8 @@ public class Level implements Screen {
 			}
 		});
 
-		buttonExit = new Image(Imagenes.botonExit);
+		buttonExit = new Image(new Texture(
+				Gdx.files.internal("ui/botonExit.png")));
 		buttonExit.setBounds(
 				cartelExit.getX() + cartelExit.getWidth() / 5,
 				cartelExit.getY() + cartelExit.getHeight() / 2
