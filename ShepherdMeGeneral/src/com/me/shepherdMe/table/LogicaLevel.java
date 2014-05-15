@@ -29,13 +29,11 @@ import com.me.shepherdMe.medals.Medal;
 import com.me.shepherdMe.screens.Level;
 import com.me.shepherdMe.sound.SoundManager;
 
-
 public class LogicaLevel extends Table {
 
 	private static Timer timer;
 	private static TimerTaskSheep timerTask;
 
-	
 	private ShepherdMe game;
 	private Background background;
 	private Dog dog;
@@ -49,9 +47,8 @@ public class LogicaLevel extends Table {
 	private Level screen;
 	private int AltoPantalla = Gdx.graphics.getHeight();
 	private int AnchoPantalla = Gdx.graphics.getWidth();
-	private int level, NumN=0;
-	
-	
+	private int level, NumN = 0;
+
 	public LogicaLevel(ShepherdMe game, Level screen, int level) {
 		this.level = level;
 		float width = Gdx.graphics.getWidth();
@@ -64,83 +61,78 @@ public class LogicaLevel extends Table {
 		this.actorInvisible = new ActorInvisible(this);
 		bui = new BackgroundUserInput(this.actorInvisible);
 		this.actorInvisible.addListener(bui);
-		
-		
+
 		addActor(background);
-		
-		//Cargar nivel
+
+		// Cargar nivel
 		LevelReader.readXML("levels/level" + level + ".xml");
-		
-		//Cargar medallas
+
+		// Cargar medallas
 		this.screen.setGold(LevelReader.getGold());
 		this.screen.setSilver(LevelReader.getSilver());
 		this.screen.setBronze(LevelReader.getBronze());
-		
-		//Cargar perro
+
+		// Cargar perro
 		this.dog = LevelReader.cargarPerro();
 		addActor(dog);
-		
-		//Cargar ovejas
-		this.sheeps = LevelReader.cargarOvejas(this);
-		for (Sheep s : sheeps) {
-			addActor(s);
-		}
-		this.NumN=ContarNegras(); //Contamos el numero de ovejas negras
-		
-		//Cargar obstaculos
+
+		// Cargar obstaculos
 		this.obstacle = LevelReader.cargarObstaculos();
-		for(Obstacle o : this.obstacle){
+		for (Obstacle o : this.obstacle) {
 			addActor(o);
 		}
-		
-		//Cargar redil
+
+		// Cargar redil
 		fold = LevelReader.cargarRedil();
 		addActor(fold.getBF());
-		for(Bush b : fold.getFoldObstacles()){
+		for (Bush b : fold.getFoldObstacles()) {
 			addActor(b);
 			this.obstacle.add(b);
 		}
 		fold.close(this);
 		addActor(fold.getGate());
 		this.obstacle.add(fold.getGate());
-		
-		
-		//Cargar nubes
+
+		// Cargar ovejas
+		this.sheeps = LevelReader.cargarOvejas(this);
+		for (Sheep s : sheeps) {
+			addActor(s);
+		}
+		this.NumN = ContarNegras(); // Contamos el numero de ovejas negras
+
+		// Cargar nubes
 		this.clouds = LevelReader.cargarNubes();
 		for (Cloud s : clouds) {
 			addActor(s);
 		}
-		
-		//Mover ovejas DEBE SER LO ULTIMO DEL CONSTRUCTOR!
+
+		// Mover ovejas DEBE SER LO ULTIMO DEL CONSTRUCTOR!
 		timer = new Timer();
 		timerTask = new TimerTaskSheep();
 		timer.scheduleAtFixedRate(timerTask, 0, 15);
-		//fin mover ovejas
-		
+		// fin mover ovejas
+
 		addActor(actorInvisible);
 	}
-	
-	public SheepFold getFold(){
+
+	public SheepFold getFold() {
 		return this.fold;
 	}
-	
-	public void openFold(){
+
+	public void openFold() {
 		this.obstacle.remove(fold.getGate());
 		fold.open(this);
 	}
-	
-	public void closeFold(){
+
+	public void closeFold() {
 		this.obstacle.add(fold.getGate());
 		fold.close(this);
 	}
-	
-	public void setPause(boolean pause){
-		if(pause)
-		{
+
+	public void setPause(boolean pause) {
+		if (pause) {
 			pauseOvejas();
-		}
-		else
-		{
+		} else {
 			inciarOvejas();
 		}
 		bui.setPause(pause);
@@ -154,245 +146,210 @@ public class LogicaLevel extends Table {
 	@Override
 	public void draw(SpriteBatch batch, float parentAlpha) {
 		batch.setColor(Color.WHITE);
-		for(Obstacle o : this.obstacle){
+		for (Obstacle o : this.obstacle) {
 			o.draw(batch, parentAlpha);
 		}
 		super.draw(batch, parentAlpha);
 	}
-	
+
 	protected void moveSheeps() {
-		int sheepsIn=0;
+		int sheepsIn = 0;
 		Sheep oveja;
-		boolean ganar=false;
-		
-		for (int i=0; i< this.sheeps.size();i++) {
-			Vector2 v= this.sheeps.get(i).moveSheep();
+		boolean ganar = false;
+
+		for (int i = 0; i < this.sheeps.size(); i++) {
+			Vector2 v = this.sheeps.get(i).moveSheep();
 			oveja = this.sheeps.get(i);
-			
-			if(!nearDog(this.sheeps.get(i)))
-			{
-				if(oveja.estaHuyendo)
-				{
-					oveja.nuevoPunto=true;
-					oveja.estaHuyendo=false;
+
+			if (!nearDog(this.sheeps.get(i))) {
+				if (oveja.estaHuyendo) {
+					oveja.nuevoPunto = true;
+					oveja.estaHuyendo = false;
 				}
 				if (!oveja.ovejaTocaElemento(v)) {
 					this.sheeps.get(i).setX(v.x);
 					this.sheeps.get(i).setY(v.y);
+				} else {
+					oveja.nuevoPunto = true;
 				}
-				else
-				{
-					oveja.nuevoPunto=true;
-				}
-			}
-			else//Si el perro esta cerca.
-			{	
-				
-				if(!oveja.estaHuyendo)
-				{
+			} else// Si el perro esta cerca.
+			{
+
+				if (!oveja.estaHuyendo) {
 					SoundManager.playSheep();
 				}
-				
-				oveja.estaHuyendo=true;
-				Vector2 nuevaPosicion= runAwayDog(oveja);
+
+				oveja.estaHuyendo = true;
+				Vector2 nuevaPosicion = runAwayDog(oveja);
 				if (!oveja.ovejaTocaElemento(nuevaPosicion)) {
-					
+
 					this.sheeps.get(i).setX(nuevaPosicion.x);
 					this.sheeps.get(i).setY(nuevaPosicion.y);
-				}
-				else
-				{ 
-					Vector2 x=new Vector2(nuevaPosicion.x,this.sheeps.get(i).getY());
-					Vector2 y=new Vector2(this.sheeps.get(i).getX(),nuevaPosicion.y);
-					if(oveja.ovejaTocaElemento(x)&&oveja.ovejaTocaElemento(y))
-					{
-						
+				} else {
+					Vector2 x = new Vector2(nuevaPosicion.x, this.sheeps.get(i)
+							.getY());
+					Vector2 y = new Vector2(this.sheeps.get(i).getX(),
+							nuevaPosicion.y);
+					if (oveja.ovejaTocaElemento(x)
+							&& oveja.ovejaTocaElemento(y)) {
+
 						this.sheeps.get(i).setX(this.sheeps.get(i).getX());
 						this.sheeps.get(i).setY(this.sheeps.get(i).getY());
-						
-					}
-					else
-					{
-						if(oveja.ovejaTocaElemento(x))
-						{
-							
+
+					} else {
+						if (oveja.ovejaTocaElemento(x)) {
+
 							this.sheeps.get(i).setX(this.sheeps.get(i).getX());
 							this.sheeps.get(i).setY(nuevaPosicion.y);
-							
-						}
-						else
-						{
+
+						} else {
 							this.sheeps.get(i).setX(nuevaPosicion.x);
 							this.sheeps.get(i).setY(this.sheeps.get(i).getY());
-							
+
 						}
 					}
 				}
 			}
-			//Comprobamos si estan todas en el redil CAMBIAR PARA QUE LAS NEGRAS EST�N FUERA	
-			if(this.fold.isInFold(this.sheeps.get(i))&&!esNegra(this.sheeps.get(i)))
-			{
-				
-					sheepsIn++;
-					
-					if(sheepsIn==this.sheeps.size()-this.NumN&&!this.fold.isOpen())
-					{
-						ganar=true;
-						//SACAR CARTEL
-					}
+			// Comprobamos si estan todas en el redil CAMBIAR PARA QUE LAS
+			// NEGRAS EST�N FUERA
+			if (this.fold.isInFold(this.sheeps.get(i))
+					&& !esNegra(this.sheeps.get(i))) {
+
+				sheepsIn++;
+
+				if (sheepsIn == this.sheeps.size() - this.NumN
+						&& !this.fold.isOpen()) {
+					ganar = true;
+					// SACAR CARTEL
+				}
 			}
-			if(this.fold.isInFold(this.sheeps.get(i))&&esNegra(this.sheeps.get(i)))
-			{
-				   ganar=false;
+			if (this.fold.isInFold(this.sheeps.get(i))
+					&& esNegra(this.sheeps.get(i))) {
+				ganar = false;
 			}
 		}
-		if(ganar)
-		{
+		if (ganar) {
 			this.screen.ganar();
 		}
-		
-		
+
 	}
-	private int ContarNegras()
-	{
-		int n=0;
-		for (Sheep b:this.sheeps)
-		{
+
+	private int ContarNegras() {
+		int n = 0;
+		for (Sheep b : this.sheeps) {
 			BlackSheep o;
-			try
-			{
-				o=(BlackSheep) b;			
+			try {
+				o = (BlackSheep) b;
+			} catch (Exception e) {
+				o = null;
 			}
-			catch(Exception e)
-			{
-				o=null;
-			}
-			if(o!=null)
-			{
-			n++;
+			if (o != null) {
+				n++;
 			}
 		}
 		return n;
 	}
-	
-	private boolean esNegra(Sheep s)
-	{
-		for (Sheep b : this.sheeps) 
-		{
+
+	private boolean esNegra(Sheep s) {
+		for (Sheep b : this.sheeps) {
 			BlackSheep o;
-			try
-			{
-				
-				o=(BlackSheep) b;
-				
+			try {
+
+				o = (BlackSheep) b;
+
+			} catch (Exception e) {
+				o = null;
 			}
-			catch(Exception e)
-			{
-				o=null;
-			}
-			if(s.equals(o))
-			{
+			if (s.equals(o)) {
 				return true;
-			}	
+			}
 		}
 		return false;
-	
+
 	}
-	
-	public void pauseOvejas()
-	{
-		if(timerTask!=null)
-		{
+
+	public void pauseOvejas() {
+		if (timerTask != null) {
 			timerTask.cancel();
-			timerTask=null;
+			timerTask = null;
 		}
 	}
-	public void inciarOvejas()
-	{
-		if(timerTask==null)
-		{
+
+	public void inciarOvejas() {
+		if (timerTask == null) {
 			timerTask = new TimerTaskSheep();
 			timer.scheduleAtFixedRate(timerTask, 0, 15);
 		}
 	}
-	
-	public boolean nearDog(Sheep s)
-	{
+
+	public boolean nearDog(Sheep s) {
 		Vector2 vector;
-		vector=new Vector2 (this.dog.getX()-s.getX() , this.dog.getY()-s.getY());
-		if(Math.sqrt(Math.pow(vector.x,2)+Math.pow(vector.y,2))<Gdx.graphics.getWidth()/5)
-		{
+		vector = new Vector2(this.dog.getX() - s.getX(), this.dog.getY()
+				- s.getY());
+		if (Math.sqrt(Math.pow(vector.x, 2) + Math.pow(vector.y, 2)) < Gdx.graphics
+				.getWidth() / 5) {
 			return true;
 		}
 		return false;
 	}
 
-	public Vector2 runAwayDog(Sheep s)
-	{
-		Vector2 vectorN=new Vector2 (s.getX()-this.dog.getX() , s.getY()-this.dog.getY());
-				
+	public Vector2 runAwayDog(Sheep s) {
+		Vector2 vectorN = new Vector2(s.getX() - this.dog.getX(), s.getY()
+				- this.dog.getY());
+
 		int v;
-		
-		if (vectorN.len()<Gdx.graphics.getWidth()/12)
-		{
-			v=7;
+
+		if (vectorN.len() < Gdx.graphics.getWidth() / 12) {
+			v = 7;
+		} else if (vectorN.len() < Gdx.graphics.getWidth() / 8) {
+			v = 6;
+		} else if (vectorN.len() < Gdx.graphics.getWidth() / 6) {
+			v = 4;
+		} else {
+			v = 3;
 		}
-		else if (vectorN.len()<Gdx.graphics.getWidth()/8)
-		{
-			v=6;
-		}
-		else if(vectorN.len()<Gdx.graphics.getWidth()/6)
-		{
-			v=4;
-		}
-		else
-		{
-			v=3;
-		}
-		
+
 		vectorN.nor();
 		vectorN.scl(v);
-		
-		
-		if ((s.getX() + vectorN.x + s.getWidth()) >= AnchoPantalla ||(s.getX() + vectorN.x) <= 0) {
+
+		if ((s.getX() + vectorN.x + s.getWidth()) >= AnchoPantalla
+				|| (s.getX() + vectorN.x) <= 0) {
 			vectorN.x = 0;
 		}
-		if ((s.getY() + vectorN.y + s.getHeight()) >= AltoPantalla ||(s.getY() + vectorN.y) <= 0) {
+		if ((s.getY() + vectorN.y + s.getHeight()) >= AltoPantalla
+				|| (s.getY() + vectorN.y) <= 0) {
 			vectorN.y = 0;
 		}
-		
-		vectorN.x=s.getX()+vectorN.x;
-		vectorN.y=s.getY()+vectorN.y;
-		return vectorN;		
+
+		vectorN.x = s.getX() + vectorN.x;
+		vectorN.y = s.getY() + vectorN.y;
+		return vectorN;
 	}
-	
+
 	public Background GetBackground() {
 		return this.background;
 	}
 
-	public List<Obstacle> getObstacle()
-	{
+	public List<Obstacle> getObstacle() {
 		return this.obstacle;
 	}
-	public List<Sheep> getSheeps()
-	{
+
+	public List<Sheep> getSheeps() {
 		return this.sheeps;
 	}
+
 	public Dog getDog() {
 		return this.dog;
 	}
-	
-	
-	
-	class TimerTaskSheep extends TimerTask
-	{
+
+	class TimerTaskSheep extends TimerTask {
 
 		@Override
 		public void run() {
 			// TODO Auto-generated method stub
 			moveSheeps();
 		}
-		
+
 	}
 
 }
