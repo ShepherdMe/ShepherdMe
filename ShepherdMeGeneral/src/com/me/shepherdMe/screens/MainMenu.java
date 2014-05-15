@@ -145,7 +145,7 @@ public class MainMenu implements Screen {
 		sun.setOriginY(sun.getHeight() / 2);
 		stage.addActor(sun);
 
-		int i = new Random().nextInt(8);
+		int i = new Random().nextInt(7);
 
 		sheep = new Image(new Texture(Gdx.files.internal("img/main/sheep_" + i
 				+ ".png")));
