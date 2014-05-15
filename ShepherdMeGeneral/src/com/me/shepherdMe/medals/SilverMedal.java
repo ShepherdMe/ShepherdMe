@@ -1,10 +1,11 @@
 package com.me.shepherdMe.medals;
 
+import com.me.shepherdMe.images.Imagenes;
+
 public class SilverMedal extends Medal{
 	
 	public SilverMedal(){
-		super();
-		this.medal = this.medalAtlas.findRegion("silver");
+		this.medal = Imagenes.plata;
 	}
 	
 }

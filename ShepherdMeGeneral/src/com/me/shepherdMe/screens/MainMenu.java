@@ -33,10 +33,12 @@ import com.me.shepherdMe.sound.SoundManager;
 public class MainMenu implements Screen {
 
 	private Stage stage;
+	private TextureAtlas atlas;
 	private SpriteBatch batchBackground;
 	private Texture textureBackground;
 	private Sprite backgroundSprite;
-	private Image buttonPlay, buttonExit, buttonContinue, heading;
+	private Image buttonPlay, buttonRecords, buttonExit, buttonContinue,
+			heading;
 	private Image sun, sheep;
 	private ShepherdMe game;
 	private Image volumeEffects, volumeMusic;
@@ -256,14 +258,13 @@ public class MainMenu implements Screen {
 		stage.addActor(volumeEffects);
 		stage.addActor(volumeMusic);
 
-		cartelExit = new Image(new Texture(Gdx.files.internal("ui/cartel.png")));
+		cartelExit = new Image(Imagenes.cartel);
 		cartelExit.setBounds(
 				Gdx.graphics.getWidth() / 2 - Gdx.graphics.getWidth() / 3,
 				Gdx.graphics.getHeight() / 2 - Gdx.graphics.getWidth() / 4,
 				Gdx.graphics.getWidth() / 1.5f, Gdx.graphics.getWidth() / 2);
 
-		buttonContinue = new Image(new Texture(
-				Gdx.files.internal("ui/botonContinuar.png")));
+		buttonContinue = new Image(Imagenes.botonContinuar);
 		buttonContinue.setBounds(cartelExit.getX() + cartelExit.getWidth()
 				/ 1.75f, cartelExit.getY() + cartelExit.getHeight() / 2
 				- Gdx.graphics.getWidth() / 10, Gdx.graphics.getWidth() / 5,
@@ -284,8 +285,7 @@ public class MainMenu implements Screen {
 			}
 		});
 
-		buttonExit = new Image(new Texture(
-				Gdx.files.internal("ui/botonExit.png")));
+		buttonExit = new Image(Imagenes.botonExit);
 		buttonExit.setBounds(
 				cartelExit.getX() + cartelExit.getWidth() / 5,
 				cartelExit.getY() + cartelExit.getHeight() / 2
