@@ -144,7 +144,7 @@ public class Imagenes {
 	
 	public static void cargarCronometro()
 	{
-		Imagenes.cronometro = new TextureAtlas(Gdx.files.internal("numeros/numbers.atlas"));
+		Imagenes.cronometro = new TextureAtlas(Gdx.files.internal("img/numeros/numbers.atlas"));
 		
 		Imagenes.cero = Imagenes.cronometro.findRegion("cero");
 		Imagenes.uno = Imagenes.cronometro.findRegion("uno");
