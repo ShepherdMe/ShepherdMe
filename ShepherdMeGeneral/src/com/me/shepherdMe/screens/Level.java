@@ -30,6 +30,7 @@ import com.me.shepherdMe.medals.BronzeMedal;
 import com.me.shepherdMe.medals.GoldMedal;
 import com.me.shepherdMe.medals.Medal;
 import com.me.shepherdMe.medals.SilverMedal;
+import com.me.shepherdMe.sound.SoundManager;
 import com.me.shepherdMe.table.LogicaLevel;
 
 /**
@@ -60,6 +61,7 @@ public class Level implements Screen {
 		Gdx.app.log("LEVEL", "contruye level");
 		this.game = game;
 		this.stage = new Stage();
+		SoundManager.loadAudios();
 		batch = new SpriteBatch();
 		width = Gdx.graphics.getWidth();
 		height = Gdx.graphics.getHeight();

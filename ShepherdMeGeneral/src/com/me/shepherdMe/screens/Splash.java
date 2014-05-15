@@ -70,7 +70,6 @@ public class Splash implements Screen {
 				Imagenes.cargarImagenes();
 				SoundManager.asignarValores();
 				SoundManager.playMusicMenu();
-				SoundManager.loadAudios();
 				LevelManager.loadLevels();
 				((Game)Gdx.app.getApplicationListener()).setScreen(new MainMenu(game));
 			}
