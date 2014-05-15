@@ -160,7 +160,7 @@ public class Sheep extends Actor {
 	{
 		List<Obstacle> obstaculos = this.LL.getObstacle();
 		for (Obstacle obstacle : obstaculos) {
-			if (obstacle.hitArea(siguientePunto.x, siguientePunto.y,this.getWidth(), this.getHeight())) {
+			if (obstacle.hitArea(siguientePunto.x, siguientePunto.y,3*this.getWidth()/4, 3*this.getHeight()/4)) {
 				return true;
 			}
 		}

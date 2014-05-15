@@ -67,23 +67,35 @@ public class SheepFold{
 		}
 	}
 	
-	public boolean isInFold(Actor actor){
+public boolean isInFold(Actor actor){
 		
 		Array<Vector2> polygon = new Array<Vector2>();
 		
 		polygon.add(topLeft);
-		polygon.add(topRight);
-		polygon.add(bottomLeft);
+		//polygon.add(topRight);
+		//polygon.add(bottomLeft);
 		polygon.add(bottomRight);
 		
 		
 		Vector2 point = new Vector2(actor.getX()+actor.getWidth()/2, actor.getY() + actor.getHeight()/2);
-		
-		if(Intersector.isPointInPolygon(polygon, point))
+		if(puntoEnPoligono(polygon, point))
 		{	
 			return true;
 		}
 		
+		return false;
+	}
+	public boolean puntoEnPoligono(Array<Vector2> poligono, Vector2 punto)
+	{
+		float XMIN= poligono.get(0).x;
+		float XMAX= poligono.get(1).x;
+		float YMAX= poligono.get(0).y;
+		float YMIN=poligono.get(1).y;
+		
+		if(punto.x<=XMAX&&punto.x>=XMIN&&punto.y<=YMAX&&punto.y>=YMIN)
+		{
+			return true;
+		}
 		return false;
 	}
 	
