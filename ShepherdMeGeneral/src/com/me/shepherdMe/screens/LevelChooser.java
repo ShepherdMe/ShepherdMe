@@ -23,6 +23,8 @@ import com.badlogic.gdx.scenes.scene2d.actions.MoveByAction;
 import com.badlogic.gdx.scenes.scene2d.actions.ParallelAction;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.me.shepherdMe.ShepherdMe;
+import com.me.shepherdMe.images.Imagenes;
+import com.sun.org.apache.bcel.internal.generic.IMUL;
 
 public class LevelChooser implements Screen {
 
@@ -35,8 +37,8 @@ public class LevelChooser implements Screen {
 	private Image ImagenBloqueado;
 	private List<Image> imagenesNiveles1, imagenesNiveles2,imagenesMedallas1, imagenesMedallas2,imagenesCandados1,imagenesCandados2;
 	private Image arrowRight, arrowLeft, dog1, dog2;
-	public AtlasRegion n1,n2,n3,n4,n5,n6,n7,n8,n9,n10,n11,n12, cartel, back, lock,d1,d2,AL,AR;
-	private TextureAtlas atlas1,atlas2;
+	//public AtlasRegion n1,n2,n3,n4,n5,n6,n7,n8,n9,n10,n11,n12, cartel, back, lock,d1,d2,AL,AR;
+	//private TextureAtlas atlas1,atlas2;
 
 	
 	public LevelChooser(ShepherdMe game) 
@@ -50,8 +52,8 @@ public class LevelChooser implements Screen {
 		this.imagenesCandados1 = new ArrayList<Image>();
 		this.imagenesCandados2 = new ArrayList<Image>();
 
-		this.atlas1 = new TextureAtlas(Gdx.files.internal("img/chooseLevel/niveles.pack"));
-		this.atlas2 = new TextureAtlas(Gdx.files.internal("img/chooseLevel/niveles2.pack"));
+		//this.atlas1 = new TextureAtlas(Gdx.files.internal("img/chooseLevel/niveles.pack"));
+		//this.atlas2 = new TextureAtlas(Gdx.files.internal("img/chooseLevel/niveles2.pack"));
 		
 		/*
 		this.n1 = atlas1.findRegion("NivelG01");
@@ -68,7 +70,7 @@ public class LevelChooser implements Screen {
 		this.n12 = atlas2.findRegion("NivelG12");
 		*/
 		
-		this.cartel = atlas2.findRegion("chooseLevel");
+		/*this.cartel = Imagenes.cartelCL;
 		
 		this.d1= atlas2.findRegion("dog1");
 		this.d2= atlas2.findRegion("dog2");
@@ -78,8 +80,8 @@ public class LevelChooser implements Screen {
 		
 		this.back= atlas2.findRegion("back");
 		
-		this.lock= atlas2.findRegion("NLocked");
-		this.ImagenBloqueado = new Image (this.lock);
+		this.lock= atlas2.findRegion("NLocked");*/
+		this.ImagenBloqueado = new Image (Imagenes.levelLock);
 			
 		this.game.chooseLevel=this;
 	}
@@ -136,18 +138,18 @@ public class LevelChooser implements Screen {
 		
 
 		// Choose level text
-		Image chooseText = new Image(cartel);
+		Image chooseText = new Image(Imagenes.cartelCL);
 		chooseText.setSize(Gdx.graphics.getWidth() / 1.5f,
 				Gdx.graphics.getHeight() / 4.2f);
 		chooseText.setPosition(
 				Gdx.graphics.getWidth() / 2 - chooseText.getWidth() / 2,
 				Gdx.graphics.getHeight() - chooseText.getHeight() / 0.9f);
 
-		dog1 = new Image(d1);
+		dog1 = new Image(Imagenes.dog1);
 		dog1.setSize(Gdx.graphics.getWidth() / 4.5f,
 				Gdx.graphics.getWidth() / 4.5f);
 
-		dog2 = new Image(d2);
+		dog2 = new Image(Imagenes.dog2);
 		dog2.setSize(Gdx.graphics.getWidth() / 4.5f,
 				Gdx.graphics.getWidth() / 4.5f);
 		dog2.setPosition(Gdx.graphics.getWidth(), -dog2.getHeight() * 2);// Desplazada
@@ -163,7 +165,7 @@ public class LevelChooser implements Screen {
 																			// la
 																			// animacion
 
-		arrowRight = new Image(AR);
+		arrowRight = new Image(Imagenes.AR);
 		arrowRight.setX(Gdx.graphics.getWidth() * 7 / 8);
 		arrowRight.setY(Gdx.graphics.getHeight() * 1 / 7);
 		arrowRight.setHeight(imageHeight * 2 + 5);
@@ -282,7 +284,7 @@ public class LevelChooser implements Screen {
 			}
 		});
 
-		arrowLeft = new Image(AL);
+		arrowLeft = new Image(Imagenes.AL);
 		arrowLeft.setX(Gdx.graphics.getWidth() / 25);
 		arrowLeft.setY(Gdx.graphics.getHeight() * 1 / 7);
 		arrowLeft.setHeight(imageHeight * 2 + 5);
@@ -404,7 +406,7 @@ public class LevelChooser implements Screen {
 
 		this.crearNiveles();
 
-		backArrow = new Image(back);
+		backArrow = new Image(Imagenes.back);
 		int width = Gdx.graphics.getWidth(), height = Gdx.graphics.getHeight();
 		backArrow
 				.setBounds(width / 20, 7 * height / 8, width / 11, height / 11);
@@ -455,11 +457,11 @@ public class LevelChooser implements Screen {
 		{
 			if(LevelManager.bloqueado(i))
 			{
-				image = new Image(this.lock);
+				image = new Image(Imagenes.levelLock);
 			}
 			else
 			{
-				image = new Image(atlas1.findRegion("N"+(i+1)));
+				image = new Image(Imagenes.getNivel(i));
 			}
 			this.imagenesNiveles1.add(image);
 			image.setBounds(initialX + imageWidth * deltaX + 2, initialY,imageWidth, imageHeight);
@@ -499,11 +501,11 @@ public class LevelChooser implements Screen {
 		{
 			if(LevelManager.bloqueado(i+6))
 			{
-				image = new Image(this.lock);
+				image = new Image(Imagenes.levelLock);
 			}
 			else
 			{
-				image = new Image(atlas2.findRegion("N"+(i+7)));
+				image = new Image(Imagenes.getNivel(i));
 			}
 			this.imagenesNiveles2.add(image);
 			image.setBounds(Gdx.graphics.getWidth() + initialX + imageWidth* deltaX + 2, initialY, imageWidth, imageHeight);
