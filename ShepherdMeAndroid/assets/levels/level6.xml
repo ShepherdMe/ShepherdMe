@@ -27,8 +27,33 @@
 	<x>0.7</x>
 	<y>0.20</y>
 	<width>0.1</width>
-	<height>0.45</height>
+	<height>0.1</height>
 </obstacle>
+<obstacle type="Bush">
+	<x>0.7</x>
+	<y>0.3</y>
+	<width>0.1</width>
+	<height>0.1</height>
+</obstacle>
+<obstacle type="Bush">
+	<x>0.7</x>
+	<y>0.4</y>
+	<width>0.1</width>
+	<height>0.1</height>
+</obstacle>
+<obstacle type="Bush">
+	<x>0.7</x>
+	<y>0.5</y>
+	<width>0.1</width>
+	<height>0.1</height>
+</obstacle>
+<obstacle type="Bush">
+	<x>0.7</x>
+	<y>0.6</y>
+	<width>0.1</width>
+	<height>0.1</height>
+</obstacle>
+
 
 <obstacle type="Water">
 	<x>0.35</x>

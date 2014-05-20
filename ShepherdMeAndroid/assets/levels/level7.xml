@@ -21,14 +21,38 @@
 <obstacle type="Bush">
 	<x>0.2</x>
 	<y>0.6</y>
-	<width>0.3</width>
+	<width>0.1</width>
+	<height>0.1</height>
+</obstacle>
+<obstacle type="Bush">
+	<x>0.3</x>
+	<y>0.6</y>
+	<width>0.1</width>
+	<height>0.1</height>
+</obstacle>
+<obstacle type="Bush">
+	<x>0.4</x>
+	<y>0.6</y>
+	<width>0.1</width>
 	<height>0.1</height>
 </obstacle>
 
 <obstacle type="Bush">
 	<x>0.2</x>
 	<y>0.3</y>
-	<width>0.3</width>
+	<width>0.1</width>
+	<height>0.1</height>
+</obstacle>
+<obstacle type="Bush">
+	<x>0.3</x>
+	<y>0.3</y>
+	<width>0.1</width>
+	<height>0.1</height>
+</obstacle>
+<obstacle type="Bush">
+	<x>0.4</x>
+	<y>0.3</y>
+	<width>0.1</width>
 	<height>0.1</height>
 </obstacle>
    
