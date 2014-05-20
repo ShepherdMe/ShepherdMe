@@ -17,6 +17,8 @@ public class Imagenes {
 	public static AtlasRegion nivelRedilH;
 	public static AtlasRegion nivelRedilV;
 	public static AtlasRegion nivelBGFold;
+	public static AtlasRegion nivelOpen;
+	public static AtlasRegion nivelClose;
 
 
 	public static TextureAtlas cronometro;
@@ -94,6 +96,10 @@ public class Imagenes {
 		Imagenes.nivelRedilH = Imagenes.nivel.findRegion("redilH");
 		Imagenes.nivelRedilV = Imagenes.nivel.findRegion("redilV");	
 		Imagenes.nivelBGFold = Imagenes.nivel.findRegion("BGFold");	
+		Imagenes.nivelOpen = Imagenes.nivel.findRegion("open");	
+		Imagenes.nivelClose = Imagenes.nivel.findRegion("close");
+
+		
 
 	}
 	

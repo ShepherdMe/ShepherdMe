@@ -241,11 +241,10 @@ public class Level implements Screen {
 		cronometer.start();
 
 		// Open and close fold
-		final Image imageLocker = new Image(new Texture(
-				Gdx.files.internal("img/level/close.png")));
+		final Image imageLocker = new Image(Imagenes.nivelClose);
 		int width = Gdx.graphics.getWidth(), height = Gdx.graphics.getHeight();
 		imageLocker.setBounds(width / 20, 7 * height / 8, width / 11,
-				height / 11);
+				height / 9);
 
 		/*
 		 * imageLocker.setDrawable(new TextureRegionDrawable(new TextureRegion(
@@ -258,14 +257,10 @@ public class Level implements Screen {
 				// TODO Auto-generated method stub
 				SheepFold fold = logica.getFold();
 				if (fold.isOpen()) {
-					imageLocker.setDrawable(new TextureRegionDrawable(
-							new TextureRegion(new Texture(Gdx.files
-									.internal("img/level/close.png")))));
+					imageLocker.setDrawable(new TextureRegionDrawable(Imagenes.nivelClose));
 					logica.closeFold();
 				} else {
-					imageLocker.setDrawable(new TextureRegionDrawable(
-							new TextureRegion(new Texture(Gdx.files
-									.internal("img/level/open.png")))));
+					imageLocker.setDrawable(new TextureRegionDrawable(Imagenes.nivelOpen));
 					logica.openFold();
 				}
 
