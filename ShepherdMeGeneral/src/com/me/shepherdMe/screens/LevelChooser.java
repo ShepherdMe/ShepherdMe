@@ -37,6 +37,7 @@ public class LevelChooser implements Screen {
 	private Image ImagenBloqueado;
 	private List<Image> imagenesNiveles1, imagenesNiveles2,imagenesMedallas1, imagenesMedallas2,imagenesCandados1,imagenesCandados2;
 	private Image arrowRight, arrowLeft, dog1, dog2;
+	private int subScreen;
 	//public AtlasRegion n1,n2,n3,n4,n5,n6,n7,n8,n9,n10,n11,n12, cartel, back, lock,d1,d2,AL,AR;
 	//private TextureAtlas atlas1,atlas2;
 
@@ -52,38 +53,10 @@ public class LevelChooser implements Screen {
 		this.imagenesCandados1 = new ArrayList<Image>();
 		this.imagenesCandados2 = new ArrayList<Image>();
 
-		//this.atlas1 = new TextureAtlas(Gdx.files.internal("img/chooseLevel/niveles.pack"));
-		//this.atlas2 = new TextureAtlas(Gdx.files.internal("img/chooseLevel/niveles2.pack"));
-		
-		/*
-		this.n1 = atlas1.findRegion("NivelG01");
-		this.n2 = atlas1.findRegion("NivelG02");
-		this.n3 = atlas1.findRegion("NivelG03");
-		this.n4 = atlas1.findRegion("NivelG04");
-		this.n5 = atlas1.findRegion("NivelG05");
-		this.n6 = atlas1.findRegion("NivelG06");
-		this.n7 = atlas2.findRegion("NivelG07");
-		this.n8 = atlas2.findRegion("NivelG08");
-		this.n9 = atlas2.findRegion("NivelG09");
-		this.n10 = atlas2.findRegion("NivelG10");
-		this.n11= atlas2.findRegion("NivelG11");
-		this.n12 = atlas2.findRegion("NivelG12");
-		*/
-		
-		/*this.cartel = Imagenes.cartelCL;
-		
-		this.d1= atlas2.findRegion("dog1");
-		this.d2= atlas2.findRegion("dog2");
-		
-		this.AL= atlas2.findRegion("arrowLeft");
-		this.AR= atlas2.findRegion("arrowRight");
-		
-		this.back= atlas2.findRegion("back");
-		
-		this.lock= atlas2.findRegion("NLocked");*/
 		this.ImagenBloqueado = new Image (Imagenes.levelLock);
 			
 		this.game.chooseLevel=this;
+		subScreen = 0;
 	}
 
 	@Override
@@ -121,6 +94,7 @@ public class LevelChooser implements Screen {
 	@Override
 	public void show() {
 		// TODO Auto-generated method stub
+		System.out.println("Mostrando level chooser");
 		batchBackground = new SpriteBatch();
 		textureBackground = new Texture(
 				Gdx.files.internal("img/chooseLevel/fondo.png"));
@@ -175,111 +149,9 @@ public class LevelChooser implements Screen {
 			@Override
 			public boolean touchDown(InputEvent event, float x, float y,
 					int pointer, int button) {
-
-				for (Image imagen : imagenesNiveles1) {
-
-					MoveByAction mba = new MoveByAction();
-					mba.setAmountX(-Gdx.graphics.getWidth());
-					mba.setDuration(0.75f);
-
-					AlphaAction apA = new AlphaAction();
-					apA.setAlpha(0);
-					apA.setDuration(0.75f);
-
-					ParallelAction pa = new ParallelAction(mba, apA);
-					imagen.addAction(pa);
-
-				}
 				
-				for (Image imagen : imagenesMedallas1) {
-
-					MoveByAction mba = new MoveByAction();
-					mba.setAmountX(-Gdx.graphics.getWidth());
-					mba.setDuration(0.75f);
-
-					AlphaAction apA = new AlphaAction();
-					apA.setAlpha(0);
-					apA.setDuration(0.75f);
-
-					ParallelAction pa = new ParallelAction(mba, apA);
-					imagen.addAction(pa);
-
-				}
-				
-				for (Image imagen : imagenesCandados1) {
-
-					MoveByAction mba = new MoveByAction();
-					mba.setAmountX(-Gdx.graphics.getWidth());
-					mba.setDuration(0.75f);
-
-					AlphaAction apA = new AlphaAction();
-					apA.setAlpha(0);
-					apA.setDuration(0.75f);
-
-					ParallelAction pa = new ParallelAction(mba, apA);
-					imagen.addAction(pa);
-
-				}
-
-				for (Image imagen : imagenesNiveles2) {
-
-					MoveByAction mba = new MoveByAction();
-					mba.setAmountX(-Gdx.graphics.getWidth());
-					mba.setDuration(0.75f);
-
-					AlphaAction apA = new AlphaAction();
-					apA.setAlpha(1);
-					apA.setDuration(0.75f);
-
-					ParallelAction pa = new ParallelAction(mba, apA);
-					imagen.addAction(pa);
-
-				}
-				
-				
-				for (Image imagen : imagenesMedallas2) {
-
-					MoveByAction mba = new MoveByAction();
-					mba.setAmountX(-Gdx.graphics.getWidth());
-					mba.setDuration(0.75f);
-
-					AlphaAction apA = new AlphaAction();
-					apA.setAlpha(1);
-					apA.setDuration(0.75f);
-
-					ParallelAction pa = new ParallelAction(mba, apA);
-					imagen.addAction(pa);
-
-				}
-				
-				for (Image imagen : imagenesCandados2) {
-
-					MoveByAction mba = new MoveByAction();
-					mba.setAmountX(-Gdx.graphics.getWidth());
-					mba.setDuration(0.75f);
-
-					AlphaAction apA = new AlphaAction();
-					apA.setAlpha(1);
-					apA.setDuration(0.75f);
-
-					ParallelAction pa = new ParallelAction(mba, apA);
-					imagen.addAction(pa);
-
-				}
-				
-				arrowLeft.setVisible(true);
-				arrowRight.setVisible(false);
-
-				MoveByAction mba = new MoveByAction();
-				mba.setAmount(-dog1.getWidth(), -dog1.getHeight() * 2);
-				mba.setDuration(1f);
-				dog1.addAction(mba);
-
-				MoveByAction mba2 = new MoveByAction();
-				mba2.setAmount(-dog2.getWidth(), dog2.getHeight() * 2);
-				mba2.setDuration(1f);
-				dog2.addAction(mba2);
-
+				subScreen++;
+				moveRight();
 				return true;
 			}
 		});
@@ -295,110 +167,9 @@ public class LevelChooser implements Screen {
 			public boolean touchDown(InputEvent event, float x, float y,
 					int pointer, int button) {
 
-				for (Image imagen : imagenesNiveles2) {
-
-					MoveByAction mba = new MoveByAction();
-					mba.setAmountX(Gdx.graphics.getWidth());
-					mba.setDuration(0.75f);
-
-					AlphaAction apA = new AlphaAction();
-					apA.setAlpha(0);
-					apA.setDuration(0.75f);
-
-					ParallelAction pa = new ParallelAction(mba, apA);
-					imagen.addAction(pa);
-
-				}
+				subScreen--;
 				
-				for (Image imagen : imagenesMedallas2) {
-
-					MoveByAction mba = new MoveByAction();
-					mba.setAmountX(Gdx.graphics.getWidth());
-					mba.setDuration(0.75f);
-
-					AlphaAction apA = new AlphaAction();
-					apA.setAlpha(0);
-					apA.setDuration(0.75f);
-
-					ParallelAction pa = new ParallelAction(mba, apA);
-					imagen.addAction(pa);
-
-				}
-				
-				for (Image imagen : imagenesCandados2) {
-
-					MoveByAction mba = new MoveByAction();
-					mba.setAmountX(Gdx.graphics.getWidth());
-					mba.setDuration(0.75f);
-
-					AlphaAction apA = new AlphaAction();
-					apA.setAlpha(0);
-					apA.setDuration(0.75f);
-
-					ParallelAction pa = new ParallelAction(mba, apA);
-					imagen.addAction(pa);
-
-				}
-				
-
-				for (Image imagen : imagenesNiveles1) {
-
-					MoveByAction mba = new MoveByAction();
-					mba.setAmountX(Gdx.graphics.getWidth());
-					mba.setDuration(0.75f);
-
-					AlphaAction apA = new AlphaAction();
-					apA.setAlpha(1);
-					apA.setDuration(0.75f);
-
-					ParallelAction pa = new ParallelAction(mba, apA);
-					imagen.addAction(pa);
-
-				}
-				
-				for (Image imagen : imagenesMedallas1) {
-
-					MoveByAction mba = new MoveByAction();
-					mba.setAmountX(Gdx.graphics.getWidth());
-					mba.setDuration(0.75f);
-
-					AlphaAction apA = new AlphaAction();
-					apA.setAlpha(1);
-					apA.setDuration(0.75f);
-
-					ParallelAction pa = new ParallelAction(mba, apA);
-					imagen.addAction(pa);
-
-				}
-				
-				for (Image imagen : imagenesCandados1) {
-
-					MoveByAction mba = new MoveByAction();
-					mba.setAmountX(Gdx.graphics.getWidth());
-					mba.setDuration(0.75f);
-
-					AlphaAction apA = new AlphaAction();
-					apA.setAlpha(1);
-					apA.setDuration(0.75f);
-
-					ParallelAction pa = new ParallelAction(mba, apA);
-					imagen.addAction(pa);
-
-				}
-				
-
-				arrowLeft.setVisible(false);
-				arrowRight.setVisible(true);
-
-				MoveByAction mba = new MoveByAction();
-				mba.setAmount(dog1.getWidth(), dog1.getHeight() * 2);
-				mba.setDuration(1f);
-				dog1.addAction(mba);
-
-				MoveByAction mba2 = new MoveByAction();
-				mba2.setAmount(dog2.getWidth(), -dog2.getHeight() * 2);
-				mba2.setDuration(1f);
-				dog2.addAction(mba2);
+				moveLeft();
 
 				return true;
 			}
@@ -441,6 +212,11 @@ public class LevelChooser implements Screen {
 		stage.addActor(backArrow);
 		stage.addActor(dog1);
 		stage.addActor(dog2);
+		
+		for(int i=0;i<subScreen;i++){
+			moveRight();
+		}
+		
 	}
 
 	public void crearNiveles() {
@@ -558,6 +334,219 @@ public class LevelChooser implements Screen {
 	public void dispose() {
 		// TODO Auto-generated method stub
 
+	}
+	
+	private void moveRight(){
+		for (Image imagen : imagenesNiveles1) {
+
+			MoveByAction mba = new MoveByAction();
+			mba.setAmountX(-Gdx.graphics.getWidth());
+			mba.setDuration(0.75f);
+
+			AlphaAction apA = new AlphaAction();
+			apA.setAlpha(0);
+			apA.setDuration(0.75f);
+
+			ParallelAction pa = new ParallelAction(mba, apA);
+			imagen.addAction(pa);
+
+		}
+		
+		for (Image imagen : imagenesMedallas1) {
+
+			MoveByAction mba = new MoveByAction();
+			mba.setAmountX(-Gdx.graphics.getWidth());
+			mba.setDuration(0.75f);
+
+			AlphaAction apA = new AlphaAction();
+			apA.setAlpha(0);
+			apA.setDuration(0.75f);
+
+			ParallelAction pa = new ParallelAction(mba, apA);
+			imagen.addAction(pa);
+
+		}
+		
+		for (Image imagen : imagenesCandados1) {
+
+			MoveByAction mba = new MoveByAction();
+			mba.setAmountX(-Gdx.graphics.getWidth());
+			mba.setDuration(0.75f);
+
+			AlphaAction apA = new AlphaAction();
+			apA.setAlpha(0);
+			apA.setDuration(0.75f);
+
+			ParallelAction pa = new ParallelAction(mba, apA);
+			imagen.addAction(pa);
+
+		}
+
+		for (Image imagen : imagenesNiveles2) {
+
+			MoveByAction mba = new MoveByAction();
+			mba.setAmountX(-Gdx.graphics.getWidth());
+			mba.setDuration(0.75f);
+
+			AlphaAction apA = new AlphaAction();
+			apA.setAlpha(1);
+			apA.setDuration(0.75f);
+
+			ParallelAction pa = new ParallelAction(mba, apA);
+			imagen.addAction(pa);
+
+		}
+		
+		
+		for (Image imagen : imagenesMedallas2) {
+
+			MoveByAction mba = new MoveByAction();
+			mba.setAmountX(-Gdx.graphics.getWidth());
+			mba.setDuration(0.75f);
+
+			AlphaAction apA = new AlphaAction();
+			apA.setAlpha(1);
+			apA.setDuration(0.75f);
+
+			ParallelAction pa = new ParallelAction(mba, apA);
+			imagen.addAction(pa);
+
+		}
+		
+		for (Image imagen : imagenesCandados2) {
+
+			MoveByAction mba = new MoveByAction();
+			mba.setAmountX(-Gdx.graphics.getWidth());
+			mba.setDuration(0.75f);
+
+			AlphaAction apA = new AlphaAction();
+			apA.setAlpha(1);
+			apA.setDuration(0.75f);
+
+			ParallelAction pa = new ParallelAction(mba, apA);
+			imagen.addAction(pa);
+
+		}
+		
+		arrowLeft.setVisible(true);
+		arrowRight.setVisible(false);
+
+		MoveByAction mba = new MoveByAction();
+		mba.setAmount(-dog1.getWidth(), -dog1.getHeight() * 2);
+		mba.setDuration(1f);
+		dog1.addAction(mba);
+
+		MoveByAction mba2 = new MoveByAction();
+		mba2.setAmount(-dog2.getWidth(), dog2.getHeight() * 2);
+		mba2.setDuration(1f);
+		dog2.addAction(mba2);
+	}
+	
+	private void moveLeft(){
+		for (Image imagen : imagenesNiveles2) {
+
+			MoveByAction mba = new MoveByAction();
+			mba.setAmountX(Gdx.graphics.getWidth());
+			mba.setDuration(0.75f);
+
+			AlphaAction apA = new AlphaAction();
+			apA.setAlpha(0);
+			apA.setDuration(0.75f);
+
+			ParallelAction pa = new ParallelAction(mba, apA);
+			imagen.addAction(pa);
+
+		}
+		
+		for (Image imagen : imagenesMedallas2) {
+
+			MoveByAction mba = new MoveByAction();
+			mba.setAmountX(Gdx.graphics.getWidth());
+			mba.setDuration(0.75f);
+
+			AlphaAction apA = new AlphaAction();
+			apA.setAlpha(0);
+			apA.setDuration(0.75f);
+
+			ParallelAction pa = new ParallelAction(mba, apA);
+			imagen.addAction(pa);
+
+		}
+		
+		for (Image imagen : imagenesCandados2) {
+
+			MoveByAction mba = new MoveByAction();
+			mba.setAmountX(Gdx.graphics.getWidth());
+			mba.setDuration(0.75f);
+
+			AlphaAction apA = new AlphaAction();
+			apA.setAlpha(0);
+			apA.setDuration(0.75f);
+
+			ParallelAction pa = new ParallelAction(mba, apA);
+			imagen.addAction(pa);
+
+		}
+		
+
+		for (Image imagen : imagenesNiveles1) {
+
+			MoveByAction mba = new MoveByAction();
+			mba.setAmountX(Gdx.graphics.getWidth());
+			mba.setDuration(0.75f);
+
+			AlphaAction apA = new AlphaAction();
+			apA.setAlpha(1);
+			apA.setDuration(0.75f);
+
+			ParallelAction pa = new ParallelAction(mba, apA);
+			imagen.addAction(pa);
+
+		}
+		
+		for (Image imagen : imagenesMedallas1) {
+
+			MoveByAction mba = new MoveByAction();
+			mba.setAmountX(Gdx.graphics.getWidth());
+			mba.setDuration(0.75f);
+
+			AlphaAction apA = new AlphaAction();
+			apA.setAlpha(1);
+			apA.setDuration(0.75f);
+
+			ParallelAction pa = new ParallelAction(mba, apA);
+			imagen.addAction(pa);
+
+		}
+		
+		for (Image imagen : imagenesCandados1) {
+
+			MoveByAction mba = new MoveByAction();
+			mba.setAmountX(Gdx.graphics.getWidth());
+			mba.setDuration(0.75f);
+
+			AlphaAction apA = new AlphaAction();
+			apA.setAlpha(1);
+			apA.setDuration(0.75f);
+
+			ParallelAction pa = new ParallelAction(mba, apA);
+			imagen.addAction(pa);
+
+		}
+		
+
+		arrowLeft.setVisible(false);
+		arrowRight.setVisible(true);
+
+		MoveByAction mba = new MoveByAction();
+		mba.setAmount(dog1.getWidth(), dog1.getHeight() * 2);
+		mba.setDuration(1f);
+		dog1.addAction(mba);
+
+		MoveByAction mba2 = new MoveByAction();
+		mba2.setAmount(dog2.getWidth(), -dog2.getHeight() * 2);
+		mba2.setDuration(1f);
+		dog2.addAction(mba2);
 	}
 
 }
