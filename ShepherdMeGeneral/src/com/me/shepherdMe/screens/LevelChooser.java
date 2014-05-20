@@ -505,7 +505,7 @@ public class LevelChooser implements Screen {
 			}
 			else
 			{
-				image = new Image(Imagenes.getNivel(i));
+				image = new Image(Imagenes.getNivel(i+6));
 			}
 			this.imagenesNiveles2.add(image);
 			image.setBounds(Gdx.graphics.getWidth() + initialX + imageWidth* deltaX + 2, initialY, imageWidth, imageHeight);
@@ -519,7 +519,7 @@ public class LevelChooser implements Screen {
 					public boolean touchDown(InputEvent event, float x,
 							float y, int pointer, int button) {
 						((Game) Gdx.app.getApplicationListener())
-								.setScreen(new Level(game, levelChooser, l));
+								.setScreen(new Level(game, levelChooser, l+6));
 						return true;
 					}
 				});
