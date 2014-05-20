@@ -208,16 +208,16 @@ public class MainMenu implements Screen {
 		
 		buttonPlay.setOriginX(buttonPlay.getWidth() / 2);
 		buttonPlay.setOriginY(buttonPlay.getHeight() / 2);
-		buttonPlay.setRotation(-15);
+		buttonPlay.setRotation(-7.5f);
 		RotateByAction rba2 = new RotateByAction();
 
-		rba2.setAmount(30);
-		rba2.setDuration(1f);
+		rba2.setAmount(15);
+		rba2.setDuration(0.7f);
 		
 		RotateByAction rba3 = new RotateByAction();
 
-		rba3.setAmount(-30);
-		rba3.setDuration(1f);
+		rba3.setAmount(-15);
+		rba3.setDuration(0.7f);
 		
 		RepeatAction ra2 = new RepeatAction();
 		ra2.setActor(buttonPlay);
