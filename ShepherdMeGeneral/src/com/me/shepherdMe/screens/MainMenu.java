@@ -21,6 +21,8 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.Touchable;
 import com.badlogic.gdx.scenes.scene2d.actions.RepeatAction;
 import com.badlogic.gdx.scenes.scene2d.actions.RotateByAction;
+import com.badlogic.gdx.scenes.scene2d.actions.ScaleByAction;
+import com.badlogic.gdx.scenes.scene2d.actions.SequenceAction;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
@@ -158,6 +160,19 @@ public class MainMenu implements Screen {
 
 		}
 		
+		sheep.addListener(new ClickListener() {
+			@Override
+			public void clicked(InputEvent event, float x, float y) {
+				// TODO Auto-generated method stub
+				super.clicked(event, x, y);
+				if (game.chooseLevel == null)
+				{
+					game.chooseLevel = new LevelChooser(game);
+				}
+				((Game) Gdx.app.getApplicationListener()).setScreen(game.chooseLevel);
+			}
+		});
+		
 //		buttonRecords = new Image(new Texture(
 //				Gdx.files.internal("img/main/records.png")));
 //		buttonRecords.setBounds(width - width / 5, height / 21, width / 5,
@@ -177,8 +192,7 @@ public class MainMenu implements Screen {
 		
 		
 		buttonPlay = new Image(Imagenes.play);
-		buttonPlay.setBounds(width - width / 5, height / 7f, width / 5,
-				height / 4);
+		buttonPlay.setBounds(width - width / 3.5f, height / 18f, width / 4,	height / 3f);
 		buttonPlay.addListener(new ClickListener() {
 			@Override
 			public void clicked(InputEvent event, float x, float y) {
@@ -191,7 +205,27 @@ public class MainMenu implements Screen {
 				((Game) Gdx.app.getApplicationListener()).setScreen(game.chooseLevel);
 			}
 		});
+		
+		buttonPlay.setOriginX(buttonPlay.getWidth() / 2);
+		buttonPlay.setOriginY(buttonPlay.getHeight() / 2);
+		buttonPlay.setRotation(-15);
+		RotateByAction rba2 = new RotateByAction();
 
+		rba2.setAmount(30);
+		rba2.setDuration(1f);
+		
+		RotateByAction rba3 = new RotateByAction();
+
+		rba3.setAmount(-30);
+		rba3.setDuration(1f);
+		
+		RepeatAction ra2 = new RepeatAction();
+		ra2.setActor(buttonPlay);
+		ra2.setAction(new SequenceAction(rba2,rba3));
+		ra2.setCount(RepeatAction.FOREVER);
+
+		buttonPlay.addAction(ra2);
+		
 		// Creating heading
 		heading = new Image(Imagenes.tittle);
 		heading.setBounds(width / 25, height - height/2.8f, width / 1.5f, height / 3);
