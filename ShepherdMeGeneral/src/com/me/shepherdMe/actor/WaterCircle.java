@@ -27,10 +27,10 @@ public class WaterCircle extends Obstacle{
 	public boolean hitArea(float x, float y, float width, float height) 
 	{
 
-		Vector2 v0 = new Vector2(x, y);
-		Vector2 v1 = new Vector2(x + width, y);
+		Vector2 v0 = new Vector2(x + 3*width/5, y+3*height/5);
+		Vector2 v1 = new Vector2(x + width, y+3*height/5);
 		Vector2 v2 = new Vector2(x + width, y + height);
-		Vector2 v3 = new Vector2(x, y + height);
+		Vector2 v3 = new Vector2(x + 3*width/5, y + height);
 
 		if ((Intersector.distanceLinePoint(v0, v1, this.centro) <= this.radio)
 				|| ((Intersector.distanceLinePoint(v1, v2, this.centro) <= this.radio))

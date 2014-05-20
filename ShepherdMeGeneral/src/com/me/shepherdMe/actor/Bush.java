@@ -20,9 +20,9 @@ public class Bush extends Obstacle{
 	@Override
 	public boolean hitArea(float x, float y, float width, float height) {
 
-		if ((x + width >= this.getX()) && (x <= this.getX() + this.getWidth())) {
+		if ((x + width >= this.getX()) && (x+ 3*width/5 <= this.getX() + this.getWidth())) {
 			if ((y + height >= this.getY())
-					&& (y <= this.getY() + this.getHeight())) {
+					&& (y+ 3*height/5 <= this.getY() + this.getHeight())) {
 				return true;
 			} else {
 				return false;

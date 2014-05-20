@@ -142,7 +142,8 @@ public class BackgroundUserInput extends InputListener {
 	private boolean hitArea(Vector2 v) {
 		List<Obstacle> obstaculos = this.AI.getLogica().getObstacle();
 		for (Obstacle obstacle : obstaculos) {
-			if (obstacle.hitArea(v.x, v.y, 3*this.AI.getLogica().getDog()
+			if (obstacle.hitArea(v.x+2/3*this.AI.getLogica().getDog().getWidth(), v.y+2/5*this.AI.getLogica().getDog()
+					.getHeight(), 3*this.AI.getLogica().getDog()
 					.getWidth()/5, 3*this.AI.getLogica().getDog().getHeight()/5)) {
 				return true;
 			}
