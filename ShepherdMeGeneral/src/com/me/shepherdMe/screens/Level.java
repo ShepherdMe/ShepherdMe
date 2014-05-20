@@ -3,7 +3,6 @@ package com.me.shepherdMe.screens;
 import java.util.Timer;
 import java.util.TimerTask;
 
-import sun.security.action.GetLongAction;
 import utils.GraphicManager;
 import utils.LevelManager;
 
@@ -13,9 +12,7 @@ import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
@@ -257,6 +254,7 @@ public class Level implements Screen {
 			public boolean touchDown(InputEvent event, float x, float y,
 					int pointer, int button) {
 				// TODO Auto-generated method stub
+				SoundManager.playDoor();
 				SheepFold fold = logica.getFold();
 				if (fold.isOpen()) {
 					boolean choca = false;

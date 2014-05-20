@@ -13,6 +13,7 @@ public class SoundManager {
 	private static boolean musicOn;
 	private static boolean effectsOn;
 
+	private static Sound doorSound;
 	private static Sound dogSound;
 	private static Sound sheepSound1;
 	private static Sound sheepSound2;
@@ -40,6 +41,14 @@ public class SoundManager {
 			mainMenu.setVolume(1);
 			mainMenu.play();
 			mainMenu.setLooping(true);
+		}
+	}
+	
+	public static void playDoor()
+	{
+		if(effectsOn)
+		{
+			SoundManager.doorSound.play(1);
 		}
 	}
 	
@@ -81,7 +90,7 @@ public class SoundManager {
 			dogSound = Gdx.audio.newSound(Gdx.files.internal("sounds/dog.wav"));
 			sheepSound1 = Gdx.audio.newSound(Gdx.files.internal("sounds/balido_1.mp3"));
 			sheepSound2 = Gdx.audio.newSound(Gdx.files.internal("sounds/balido_2.mp3"));
-
+			doorSound = Gdx.audio.newSound(Gdx.files.internal("sounds/cierre.mp3"));
 		}
 	}
 
