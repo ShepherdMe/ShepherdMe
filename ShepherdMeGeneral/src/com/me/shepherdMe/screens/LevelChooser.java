@@ -445,7 +445,7 @@ public class LevelChooser implements Screen {
 
 	public void crearNiveles() {
 		Image image;
-		float imageHeight = Gdx.graphics.getHeight() / 3;
+		float imageHeight = Gdx.graphics.getHeight() / 3.3f;
 		float imageWidth = Gdx.graphics.getWidth() / 5;
 		float initialX = Gdx.graphics.getWidth() * 3 / 16, initialY = Gdx.graphics
 				.getHeight() * 2 / 5, deltaX = 0;
@@ -464,7 +464,7 @@ public class LevelChooser implements Screen {
 				image = new Image(Imagenes.getNivel(i));
 			}
 			this.imagenesNiveles1.add(image);
-			image.setBounds(initialX + imageWidth * deltaX + 2, initialY,imageWidth, imageHeight);
+			image.setBounds(initialX + imageWidth * deltaX + deltaX*5, initialY,imageWidth, imageHeight);
 			deltaX++;
 
 			final int l = i + 1;
@@ -508,7 +508,7 @@ public class LevelChooser implements Screen {
 				image = new Image(Imagenes.getNivel(i+6));
 			}
 			this.imagenesNiveles2.add(image);
-			image.setBounds(Gdx.graphics.getWidth() + initialX + imageWidth* deltaX + 2, initialY, imageWidth, imageHeight);
+			image.setBounds(Gdx.graphics.getWidth() + initialX + imageWidth* deltaX + deltaX*5, initialY, imageWidth, imageHeight);
 			deltaX++;
 //			
 			final int l = i + 1;
