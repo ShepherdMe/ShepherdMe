@@ -3,6 +3,7 @@ package com.me.shepherdMe.screens;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import sun.security.action.GetLongAction;
 import utils.GraphicManager;
 import utils.LevelManager;
 
@@ -23,6 +24,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.me.shepherdMe.ShepherdMe;
+import com.me.shepherdMe.actor.Sheep;
 import com.me.shepherdMe.actor.SheepFold;
 import com.me.shepherdMe.functions.Cronometro;
 import com.me.shepherdMe.images.Imagenes;
@@ -257,8 +259,19 @@ public class Level implements Screen {
 				// TODO Auto-generated method stub
 				SheepFold fold = logica.getFold();
 				if (fold.isOpen()) {
-					imageLocker.setDrawable(new TextureRegionDrawable(Imagenes.nivelClose));
-					logica.closeFold();
+					boolean choca = false;
+					for(Sheep s : logica.getSheeps()){
+						if(fold.chocaConPuerta(s)){
+							choca = true;
+							break;
+						}
+					}
+					if(fold.chocaConPuerta(logica.getDog()))
+						choca = true;
+					if(!choca){
+						imageLocker.setDrawable(new TextureRegionDrawable(Imagenes.nivelClose));
+						logica.closeFold();
+					}
 				} else {
 					imageLocker.setDrawable(new TextureRegionDrawable(Imagenes.nivelOpen));
 					logica.openFold();
