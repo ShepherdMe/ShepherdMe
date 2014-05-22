@@ -69,5 +69,17 @@
 	<height>0.2</height>
     
 </cloud>
+<cloud>
+    <x>0.4</x>
+	<y>0.3</y>
+	<width>0.4</width>
+	<height>0.3</height> 
+</cloud>
+<cloud>
+    <x>0.1</x>
+	<y>0.7</y>
+	<width>0.3</width>
+	<height>0.1</height> 
+</cloud>
     
 </level>

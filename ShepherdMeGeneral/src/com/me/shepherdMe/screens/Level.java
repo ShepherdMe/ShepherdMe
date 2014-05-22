@@ -57,7 +57,7 @@ public class Level implements Screen {
 		Gdx.app.log("LEVEL", "contruye level");
 		this.game = game;
 		this.stage = new Stage();
-		SoundManager.loadAudios();
+		//SoundManager.loadAudios();
 		batch = new SpriteBatch();
 		width = Gdx.graphics.getWidth();
 		height = Gdx.graphics.getHeight();

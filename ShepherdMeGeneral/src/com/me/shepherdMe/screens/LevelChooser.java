@@ -22,6 +22,7 @@ import com.badlogic.gdx.scenes.scene2d.actions.ParallelAction;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.me.shepherdMe.ShepherdMe;
 import com.me.shepherdMe.images.Imagenes;
+import com.me.shepherdMe.sound.SoundManager;
 
 public class LevelChooser implements Screen {
 
@@ -119,6 +120,15 @@ public class LevelChooser implements Screen {
 		dog1 = new Image(Imagenes.dog1);
 		dog1.setSize(Gdx.graphics.getWidth() / 4.5f,
 				Gdx.graphics.getWidth() / 4.5f);
+		dog1.addListener(new InputListener() {
+			@Override
+			public boolean touchDown(InputEvent event, float x, float y,
+					int pointer, int button) {
+				
+				SoundManager.playDog();
+				return true;
+			}
+		});
 
 		dog2 = new Image(Imagenes.dog2);
 		dog2.setSize(Gdx.graphics.getWidth() / 4.5f,
@@ -136,6 +146,16 @@ public class LevelChooser implements Screen {
 																			// la
 																			// animacion
 
+		dog2.addListener(new InputListener() {
+			@Override
+			public boolean touchDown(InputEvent event, float x, float y,
+					int pointer, int button) {
+				
+				SoundManager.playDog();
+				return true;
+			}
+		});
+		
 		arrowRight = new Image(Imagenes.AR);
 		arrowRight.setX(Gdx.graphics.getWidth() * 7 / 8);
 		arrowRight.setY(Gdx.graphics.getHeight() * 1 / 7);
