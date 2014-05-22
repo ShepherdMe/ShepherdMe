@@ -3,9 +3,6 @@ package com.me.shepherdMe.screens;
 import java.util.Random;
 import java.util.Timer;
 import java.util.TimerTask;
-
-import utils.GraphicManager;
-
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
@@ -111,7 +108,6 @@ public class MainMenu implements Screen {
 	@Override
 	public void show() {
 		// TODO Auto-generated method stub
-		GraphicManager.initialize();
 		final MainMenu mm = this;
 		Gdx.input.setCatchBackKey(true);
 		batchBackground = new SpriteBatch();

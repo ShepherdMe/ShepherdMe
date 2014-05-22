@@ -3,21 +3,18 @@ package com.me.shepherdMe.screens;
 import java.util.Timer;
 import java.util.TimerTask;
 
-import utils.GraphicManager;
 import utils.LevelManager;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.Screen;
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
-import com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.me.shepherdMe.ShepherdMe;
@@ -224,12 +221,6 @@ public class Level implements Screen {
 
 		logica = new LogicaLevel(game, this, level);
 		stage.addActor(logica);
-
-		// Cronometer
-		GraphicManager.initialize();
-		GraphicManager.scaleFont(GraphicManager.getBlackFont());
-		LabelStyle headingStyle = new LabelStyle(GraphicManager.getBlackFont(),
-				Color.BLACK);
 
 		cronometer = new Cronometro();
 		// for(Image image : cronometer.getImages()){
