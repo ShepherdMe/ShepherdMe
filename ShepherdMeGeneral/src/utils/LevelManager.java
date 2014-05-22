@@ -43,8 +43,8 @@ public class LevelManager {
 
 			// Cambiar el numero de medallas necesarias
 			levelsLock.set(0, 0);
-			levelsLock.set(1, 1);//1
-			levelsLock.set(2, 3);//3
+			levelsLock.set(1, 0);//1
+			levelsLock.set(2, 0);//3
 			levelsLock.set(3, 0);//5
 			levelsLock.set(4, 0);//7
 			levelsLock.set(5, 0);//9

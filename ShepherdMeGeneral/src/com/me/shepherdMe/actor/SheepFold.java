@@ -91,7 +91,7 @@ public class SheepFold {
 	public boolean chocaConPuerta(Actor actor) {
 
 		if (openable.hitArea(actor.getX(), actor.getY(),
-				3 * actor.getWidth() / 5, 3 * actor.getHeight() / 5)) {
+				actor.getWidth(), actor.getHeight())) {
 			return true;
 		}
 

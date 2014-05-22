@@ -3,7 +3,6 @@ package com.me.shepherdMe.images;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas.AtlasRegion;
-import com.badlogic.gdx.scenes.scene2d.ui.Image;
 
 public class Imagenes {
 
