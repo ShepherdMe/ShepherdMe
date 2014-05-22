@@ -27,8 +27,8 @@ public class SoundManager {
 		
 		Preferences pref = Gdx.app.getPreferences("Audio");
 		
-		musicOn = pref.getBoolean("music");
-		effectsOn = pref.getBoolean("effects");
+		musicOn = pref.getBoolean("music", true);
+		effectsOn = pref.getBoolean("effects", true);
 
 	}
 	
