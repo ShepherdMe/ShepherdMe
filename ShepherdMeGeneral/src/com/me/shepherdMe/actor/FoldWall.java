@@ -18,5 +18,20 @@ public class FoldWall extends Bush{
 			//this.obstacle = new Texture(Gdx.files.internal("img/level/redilH.png"));
 		//this.regionObstacle = new TextureRegion(this.obstacle);
 	}
+	
+	@Override
+	public boolean hitArea(float x, float y, float width, float height) {
+
+		if ((x + width >= this.getX()) && (x <= this.getX() + this.getWidth())) {
+			if ((y + height >= this.getY())
+					&& (y <= this.getY() + this.getHeight())) {
+				return true;
+			} else {
+				return false;
+			}
+		} else {
+			return false;
+		}
+	}
 
 }

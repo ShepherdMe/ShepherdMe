@@ -20,8 +20,7 @@ public class SoundManager {
 	private static Music mainMenu;
 	
 	public SoundManager() 
-	{		
-	}
+	{}
 	
 	public static void asignarValores()
 	{
