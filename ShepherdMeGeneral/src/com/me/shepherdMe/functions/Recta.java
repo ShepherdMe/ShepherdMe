@@ -1,4 +1,4 @@
-package com.me.shepherdMe.functions;
+/*package com.me.shepherdMe.functions;
 
 import com.badlogic.gdx.math.Vector2;
 
@@ -50,4 +50,4 @@ public class Recta {
 		return v;
 	}
 
-}
+}*/

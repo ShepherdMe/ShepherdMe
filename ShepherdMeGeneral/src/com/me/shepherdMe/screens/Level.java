@@ -245,7 +245,6 @@ public class Level implements Screen {
 			public boolean touchDown(InputEvent event, float x, float y,
 					int pointer, int button) {
 				// TODO Auto-generated method stub
-				SoundManager.playDoor();
 				SheepFold fold = logica.getFold();
 				if (fold.isOpen()) {
 					boolean choca = false;
@@ -258,10 +257,12 @@ public class Level implements Screen {
 					if(fold.chocaConPuerta(logica.getDog()))
 						choca = true;
 					if(!choca){
+						SoundManager.playDoor();
 						imageLocker.setDrawable(new TextureRegionDrawable(Imagenes.nivelClose));
 						logica.closeFold();
 					}
 				} else {
+					SoundManager.playDoor();
 					imageLocker.setDrawable(new TextureRegionDrawable(Imagenes.nivelOpen));
 					logica.openFold();
 				}
