@@ -7,16 +7,19 @@
     <sheep>
         <x>0.10</x>
         <y>0.70</y>
+        <color>b</color>
     </sheep>
     
     <sheep>
         <x>0.50</x>
         <y>0.85</y>
+        <color>b</color>
     </sheep>
     
     <sheep>
         <x>0.7</x>
         <y>0.01</y>
+        <color>b</color>
     </sheep>
     
     <redil height="0.3" width="0.3" x="0.7" y="0.7" open="BOTTOM">

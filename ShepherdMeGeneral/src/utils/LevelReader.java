@@ -8,6 +8,7 @@ import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
+import com.me.shepherdMe.actor.BlackSheep;
 import com.me.shepherdMe.actor.Bush;
 import com.me.shepherdMe.actor.Cloud;
 import com.me.shepherdMe.actor.Dog;
@@ -75,13 +76,23 @@ public class LevelReader {
 		
 		ArrayList<Sheep> sheeps = new ArrayList<Sheep>();
 		float x,y;
+		String color;
 		Element aux;
 				
 		for (int i = 0; i < nList.getLength(); i++) {
 			aux= (Element) nList.item(i);
 			x = Float.parseFloat(aux.getElementsByTagName("x").item(0).getTextContent());
 			y = Float.parseFloat(aux.getElementsByTagName("y").item(0).getTextContent());
-			sheeps.add(new Sheep(LL, x*width, y*height));
+			color =aux.getElementsByTagName("color").item(0).getTextContent().toString();
+			if(color.equals("n"))
+			{
+				sheeps.add(new BlackSheep(LL, x*width, y*height));
+			}
+			else
+			{
+				sheeps.add(new Sheep(LL, x*width, y*height));
+			}
+			
 		}
 		
 		return sheeps;

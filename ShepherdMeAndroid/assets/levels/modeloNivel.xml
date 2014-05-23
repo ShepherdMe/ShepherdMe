@@ -7,6 +7,7 @@
     <sheep>
         <x>0.50</x>
         <y>0.50</y>
+        <color>b</color>
     </sheep>
     <redil height="0.3" width="0.3" x="0.5" y="0.5" open="TOP">
     </redil>

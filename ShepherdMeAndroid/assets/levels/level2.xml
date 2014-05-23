@@ -6,10 +6,12 @@
     <sheep>
         <x>0.20</x>
         <y>0.75</y>
+        <color>b</color>
     </sheep>
     <sheep>
         <x>0.4</x>
         <y>0.4</y>
+        <color>b</color>
     </sheep>
     
     <obstacle type="Bush">

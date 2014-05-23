@@ -1,0 +1,23 @@
+<level bronze="3" gold="1" silver="2" >
+    <dog>
+        <x>0.10</x>
+        <y>0.10</y>
+    </dog>
+
+    <sheep>
+        <x>0.10</x>
+        <y>0.50</y>
+        <color>b</color>
+    </sheep>
+    
+    <sheep>
+        <x>0.50</x>
+        <y>0.50</y>
+        <color>n</color>
+    </sheep>
+    
+    <redil height="0.3" width="0.3" x="0.7" y="0.35" open="LEFT">
+    </redil>
+
+    
+</level>
