@@ -5,7 +5,7 @@
     </dog>
 
     <sheep>
-        <x>0.10</x>
+        <x>0.40</x>
         <y>0.80</y>
         <color>b</color>
     </sheep>
@@ -13,6 +13,12 @@
     <sheep>
         <x>0.50</x>
         <y>0.45</y>
+        <color>n</color>
+    </sheep>
+    
+    <sheep>
+        <x>0.20</x>
+        <y>0.80</y>
         <color>n</color>
     </sheep>
     

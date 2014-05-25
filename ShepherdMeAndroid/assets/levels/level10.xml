@@ -20,6 +20,13 @@
         <color>n</color>
     </sheep>
     
+    <obstacle type="Bush">
+	<x>0.1</x>
+	<y>0.3</y>
+	<width>0.1</width>
+	<height>0.1</height>
+	</obstacle>
+    
     <redil height="0.4" width="0.2" x="0.8" y="0.3" open="LEFT">
     </redil>
 
