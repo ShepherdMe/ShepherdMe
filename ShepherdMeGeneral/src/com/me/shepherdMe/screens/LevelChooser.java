@@ -52,8 +52,9 @@ public class LevelChooser implements Screen {
 		this.imagenesCandados2 = new ArrayList<Image>();
 
 		this.ImagenBloqueado = new Image (Imagenes.levelLock);
-			
 		this.game.chooseLevel=this;
+
+		
 		subScreen = 0;
 	}
 
@@ -81,6 +82,7 @@ public class LevelChooser implements Screen {
 		stage.act(delta);
 
 		stage.draw();
+
 	}
 
 	@Override
@@ -93,6 +95,7 @@ public class LevelChooser implements Screen {
 	public void show() {
 		// TODO Auto-generated method stub
 		System.out.println("Mostrando level chooser");
+		
 		batchBackground = new SpriteBatch();
 		textureBackground = new Texture(
 				Gdx.files.internal("img/chooseLevel/fondo.png"));
@@ -238,6 +241,8 @@ public class LevelChooser implements Screen {
 
 	public void crearNiveles() {
 		Image image;
+		this.imagenesNiveles1= new ArrayList<Image>();
+		this.imagenesNiveles2= new ArrayList<Image>();
 		float imageHeight = Gdx.graphics.getHeight() / 3.3f;
 		float imageWidth = Gdx.graphics.getWidth() / 5;
 		float initialX = Gdx.graphics.getWidth() * 3 / 16, initialY = Gdx.graphics

@@ -55,7 +55,7 @@ public class LevelManager {
 			levelsLock.set(10, 27);//27
 			levelsLock.set(11, 31);//31
 
-//			
+			
 //			levelsLock.set(0, 0);
 //			levelsLock.set(1, 0);//1
 //			levelsLock.set(2, 0);//3
