@@ -17,19 +17,18 @@
     
     <sheep>
         <x>0.65</x>
-        <y>0.70</y>
+        <y>0.7</y>
         <color>n</color>
     </sheep>
     
     <sheep>
         <x>0.55</x>
-        <y>0.7</y>
+        <y>0.75</y>
         <color>n</color>
     </sheep>
     
-    <redil height="0.2" width="0.2" x="0.4" y="0.5" open="TOP">
+    <redil height="0.25" width="0.2" x="0.4" y="0.49" open="TOP">
     </redil>
-
     
     
 <obstacle type="Bush">
@@ -201,7 +200,18 @@
 	<height>0.1</height>
 </obstacle>
     
-
+levelsLock.set(0, 0);
+//			levelsLock.set(1, 1);//1
+//			levelsLock.set(2, 3);//3
+//			levelsLock.set(3, 5);//5
+//			levelsLock.set(4, 7);//7
+//			levelsLock.set(5, 9);//9
+//			levelsLock.set(6, 14);//14
+//			levelsLock.set(7, 16);//16
+//			levelsLock.set(8, 19);//19
+//			levelsLock.set(9, 23);//23
+//			levelsLock.set(10, 27);//27
+//			levelsLock.set(11, 31);//31
 <obstacle type="Bush">
 	<x>0.7</x>
 	<y>0.4</y>

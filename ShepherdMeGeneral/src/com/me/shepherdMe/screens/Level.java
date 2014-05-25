@@ -10,6 +10,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
@@ -43,7 +44,7 @@ public class Level implements Screen {
 	private LogicaLevel logica;
 	private Cronometro cronometer;
 	private Image cartelExit, buttonContinue, buttonExit;
-	//private TextureAtlas atlas;
+	// private TextureAtlas atlas;
 	private boolean showingPause = false, stop = false;
 	private Timer timer = new Timer();
 	private SpriteBatch batch;
@@ -57,7 +58,7 @@ public class Level implements Screen {
 		Gdx.app.log("LEVEL", "contruye level");
 		this.game = game;
 		this.stage = new Stage();
-		//SoundManager.loadAudios();
+		// SoundManager.loadAudios();
 		batch = new SpriteBatch();
 		width = Gdx.graphics.getWidth();
 		height = Gdx.graphics.getHeight();
@@ -118,7 +119,7 @@ public class Level implements Screen {
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		stage.act(delta);
 		stage.draw();
-		
+
 		batch.begin();
 
 		float x = 4 * width / 5, y = 7 * height / 8;
@@ -172,7 +173,7 @@ public class Level implements Screen {
 	}
 
 	public void ganar() {
-		stop=true;
+		stop = true;
 		logica.setPause(true);
 		cronometer.pause();
 		cartelExit.setVisible(true);
@@ -183,22 +184,16 @@ public class Level implements Screen {
 
 		int time = this.cronometer.getMinutos() * 60
 				+ this.cronometer.getSegundos();
-		if (time < gold)
-		{
+		if (time < gold) {
 			System.out.println("Gold Medal!!!");
 			this.medal = new GoldMedal();
 			LevelManager.actualizarNivel(this.level, 3);
-		}
-		else
-		{
-			if (time < silver)
-			{
+		} else {
+			if (time < silver) {
 				this.medal = new SilverMedal();
 				System.out.println("Silver Medal!!!");
 				LevelManager.actualizarNivel(this.level, 2);
-			}
-			else
-			{
+			} else {
 				this.medal = new BronzeMedal();
 				System.out.println("Bronze Medal!!!");
 				LevelManager.actualizarNivel(this.level, 1);
@@ -248,22 +243,24 @@ public class Level implements Screen {
 				SheepFold fold = logica.getFold();
 				if (fold.isOpen()) {
 					boolean choca = false;
-					for(Sheep s : logica.getSheeps()){
-						if(fold.chocaConPuerta(s)){
+					for (Sheep s : logica.getSheeps()) {
+						if (fold.chocaConPuerta(s)) {
 							choca = true;
 							break;
 						}
 					}
-					if(fold.chocaConPuerta(logica.getDog()))
+					if (fold.chocaConPuerta(logica.getDog()))
 						choca = true;
-					if(!choca){
+					if (!choca) {
 						SoundManager.playDoor();
-						imageLocker.setDrawable(new TextureRegionDrawable(Imagenes.nivelClose));
+						imageLocker.setDrawable(new TextureRegionDrawable(
+								Imagenes.nivelClose));
 						logica.closeFold();
 					}
 				} else {
 					SoundManager.playDoor();
-					imageLocker.setDrawable(new TextureRegionDrawable(Imagenes.nivelOpen));
+					imageLocker.setDrawable(new TextureRegionDrawable(
+							Imagenes.nivelOpen));
 					logica.openFold();
 				}
 
@@ -322,6 +319,41 @@ public class Level implements Screen {
 		buttonContinue.setZIndex(0);
 		cartelExit.setVisible(false);
 		cartelExit.setZIndex(0);
+
+		if (level == 1 && LevelManager.esPrimeraPartida()) {
+			LevelManager.setPrimeraPartida(false);
+			Image tutorialPerro = new Image(new Texture(
+					Gdx.files.internal("img/tutorial/moverPerro.png")));
+			tutorialPerro.setSize(width, height);
+			tutorialPerro.setPosition(0, 0);
+			final Image tp = tutorialPerro;
+			tutorialPerro.addListener(new ClickListener() {
+				@Override
+				public void clicked(InputEvent event, float x, float y) {
+					// TODO Auto-generated method stub
+					super.clicked(event, x, y);
+					tp.setVisible(false);
+					tp.setZIndex(9000);
+					Image tutorialCandado = new Image(new Texture(Gdx.files
+							.internal("img/tutorial/abrirCandado2.png")));
+					tutorialCandado.setSize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+					tutorialCandado.setPosition(0, 0);
+					final Image tc = tutorialCandado;
+					tutorialCandado.addListener(new ClickListener() {
+						@Override
+						public void clicked(InputEvent event, float x, float y) {
+							// TODO Auto-generated method stub
+							super.clicked(event, x, y);
+							tc.setVisible(false);
+							tc.setZIndex(9000);
+						}
+					});
+					stage.addActor(tutorialCandado);
+
+				}
+			});
+			stage.addActor(tutorialPerro);
+		}
 
 		stage.addActor(cartelExit);
 		stage.addActor(buttonContinue);

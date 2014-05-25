@@ -55,8 +55,37 @@ public class LevelManager {
 			levelsLock.set(10, 27);//27
 			levelsLock.set(11, 31);//31
 
+//			
+//			levelsLock.set(0, 0);
+//			levelsLock.set(1, 0);//1
+//			levelsLock.set(2, 0);//3
+//			levelsLock.set(3, 0);//5
+//			levelsLock.set(4, 0);//7
+//			levelsLock.set(5, 0);//9
+//			levelsLock.set(6, 0);//14
+//			levelsLock.set(7, 0);//16
+//			levelsLock.set(8, 0);//19
+//			levelsLock.set(9, 0);//23
+//			levelsLock.set(10,0);//27
+//			levelsLock.set(11, 0);//31
 			
 		}
+	}
+	
+	public static boolean esPrimeraPartida(){
+		Preferences pref = Gdx.app.getPreferences("Primera");
+		
+		boolean primera = pref.getBoolean("primera", true);
+		
+		return primera;
+//		return true;
+	}
+	
+	public static void setPrimeraPartida(boolean primera){
+		Preferences pref = Gdx.app.getPreferences("Primera");
+		
+		pref.putBoolean("primera", primera);
+		pref.flush();
 	}
 
 	public static void comprobarNivel(int numero, Image cartel,
