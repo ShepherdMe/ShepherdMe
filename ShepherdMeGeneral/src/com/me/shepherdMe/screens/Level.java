@@ -326,38 +326,41 @@ public class Level implements Screen {
 					Gdx.files.internal("img/tutorial/moverPerro.png")));
 			tutorialPerro.setSize(width, height);
 			tutorialPerro.setPosition(0, 0);
-			final Image tp = tutorialPerro;
+			//final Image tp = tutorialPerro;
 			tutorialPerro.addListener(new ClickListener() {
 				@Override
 				public void clicked(InputEvent event, float x, float y) {
 					// TODO Auto-generated method stub
 					super.clicked(event, x, y);
-					tp.setVisible(false);
-					tp.setZIndex(9000);
+					event.getListenerActor().remove();
+					//tp.setVisible(false);
+					//tp.setZIndex(9000);
 					Image tutorialCandado = new Image(new Texture(Gdx.files
 							.internal("img/tutorial/abrirCandado.png")));
 					tutorialCandado.setSize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 					tutorialCandado.setPosition(0, 0);
-					final Image tc = tutorialCandado;
+					//final Image tc = tutorialCandado;
 					tutorialCandado.addListener(new ClickListener() {
 						@Override
 						public void clicked(InputEvent event, float x, float y) {
 							// TODO Auto-generated method stub
 							super.clicked(event, x, y);
-							tc.setVisible(false);
-							tc.setZIndex(9000);
+							event.getListenerActor().remove();
+							//tc.setVisible(false);
+							//tc.setZIndex(9000);
 							Image tutorialCerrar = new Image(new Texture(Gdx.files
 									.internal("img/tutorial/cerrarRedil.png")));
 							tutorialCerrar.setSize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 							tutorialCerrar.setPosition(0, 0);
-							final Image tc = tutorialCerrar;
+							//final Image tc = tutorialCerrar;
 							tutorialCerrar.addListener(new ClickListener() {
 								@Override
 								public void clicked(InputEvent event, float x, float y) {
 									// TODO Auto-generated method stub
 									super.clicked(event, x, y);
-									tc.setVisible(false);
-									tc.setZIndex(9000);
+									event.getListenerActor().remove();
+									//tc.setVisible(false);
+									//tc.setZIndex(9000);
 								}
 							});
 							stage.addActor(tutorialCerrar);
@@ -373,20 +376,22 @@ public class Level implements Screen {
 			stage.addActor(tutorialPerro);
 		}
 		
-		if (level == 7 && LevelManager.esPrimeraPartida2()) {
+		if (level == 8 && LevelManager.esPrimeraPartida2()) {
 			LevelManager.setPrimeraPartida2(false);
 			Image tutorialNegra = new Image(new Texture(
 					Gdx.files.internal("img/tutorial/ovejasNegras.png")));
 			tutorialNegra.setSize(width, height);
 			tutorialNegra.setPosition(0, 0);
-			final Image tp = tutorialNegra;
+			//final Image tp = tutorialNegra;
 			tutorialNegra.addListener(new ClickListener() {
 				@Override
 				public void clicked(InputEvent event, float x, float y) {
 					// TODO Auto-generated method stub
 					super.clicked(event, x, y);
-					tp.setVisible(false);
-					tp.setZIndex(9000);
+					event.getListenerActor().remove();
+
+					//tp.setVisible(false);
+					//tp.setZIndex(9000);
 				}
 			});
 			stage.addActor(tutorialNegra);
