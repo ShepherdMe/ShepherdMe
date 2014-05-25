@@ -320,8 +320,8 @@ public class Level implements Screen {
 		cartelExit.setVisible(false);
 		cartelExit.setZIndex(0);
 
-		if (level == 1 && LevelManager.esPrimeraPartida()) {
-			LevelManager.setPrimeraPartida(false);
+		if (level == 1 && LevelManager.esPrimeraPartida1()) {
+			LevelManager.setPrimeraPartida1(false);
 			Image tutorialPerro = new Image(new Texture(
 					Gdx.files.internal("img/tutorial/moverPerro.png")));
 			tutorialPerro.setSize(width, height);
@@ -335,7 +335,7 @@ public class Level implements Screen {
 					tp.setVisible(false);
 					tp.setZIndex(9000);
 					Image tutorialCandado = new Image(new Texture(Gdx.files
-							.internal("img/tutorial/abrirCandado2.png")));
+							.internal("img/tutorial/abrirCandado.png")));
 					tutorialCandado.setSize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 					tutorialCandado.setPosition(0, 0);
 					final Image tc = tutorialCandado;
@@ -346,13 +346,50 @@ public class Level implements Screen {
 							super.clicked(event, x, y);
 							tc.setVisible(false);
 							tc.setZIndex(9000);
+							Image tutorialCerrar = new Image(new Texture(Gdx.files
+									.internal("img/tutorial/cerrarRedil.png")));
+							tutorialCerrar.setSize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+							tutorialCerrar.setPosition(0, 0);
+							final Image tc = tutorialCerrar;
+							tutorialCerrar.addListener(new ClickListener() {
+								@Override
+								public void clicked(InputEvent event, float x, float y) {
+									// TODO Auto-generated method stub
+									super.clicked(event, x, y);
+									tc.setVisible(false);
+									tc.setZIndex(9000);
+								}
+							});
+							stage.addActor(tutorialCerrar);
+
 						}
 					});
 					stage.addActor(tutorialCandado);
+					
 
 				}
+				
 			});
 			stage.addActor(tutorialPerro);
+		}
+		
+		if (level == 7 && LevelManager.esPrimeraPartida2()) {
+			LevelManager.setPrimeraPartida2(false);
+			Image tutorialNegra = new Image(new Texture(
+					Gdx.files.internal("img/tutorial/ovejasNegras.png")));
+			tutorialNegra.setSize(width, height);
+			tutorialNegra.setPosition(0, 0);
+			final Image tp = tutorialNegra;
+			tutorialNegra.addListener(new ClickListener() {
+				@Override
+				public void clicked(InputEvent event, float x, float y) {
+					// TODO Auto-generated method stub
+					super.clicked(event, x, y);
+					tp.setVisible(false);
+					tp.setZIndex(9000);
+				}
+			});
+			stage.addActor(tutorialNegra);
 		}
 
 		stage.addActor(cartelExit);

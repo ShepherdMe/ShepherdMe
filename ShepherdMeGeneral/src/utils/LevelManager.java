@@ -48,7 +48,7 @@ public class LevelManager {
 			levelsLock.set(3, 5);//5
 			levelsLock.set(4, 7);//7
 			levelsLock.set(5, 9);//9
-			levelsLock.set(6, 14);//14
+			levelsLock.set(6, 0);//14
 			levelsLock.set(7, 16);//16
 			levelsLock.set(8, 19);//19
 			levelsLock.set(9, 23);//23
@@ -72,19 +72,36 @@ public class LevelManager {
 		}
 	}
 	
-	public static boolean esPrimeraPartida(){
+	public static boolean esPrimeraPartida1(){
 		Preferences pref = Gdx.app.getPreferences("Primera");
 		
-		boolean primera = pref.getBoolean("primera", true);
+		boolean primera1 = pref.getBoolean("primera1", true);
 		
-		return primera;
+		return primera1;
+//		return true;
+	}
+	public static boolean esPrimeraPartida2(){
+		Preferences pref = Gdx.app.getPreferences("Primera");
+		
+		boolean primera2 = pref.getBoolean("primera2", true);
+		
+		return primera2;
 //		return true;
 	}
 	
-	public static void setPrimeraPartida(boolean primera){
+	public static void setPrimeraPartida1(boolean primera){//Nivel 1
 		Preferences pref = Gdx.app.getPreferences("Primera");
 		
-		pref.putBoolean("primera", primera);
+		pref.putBoolean("primera1", primera);
+
+		pref.flush();
+	}
+	
+	public static void setPrimeraPartida2(boolean primera){//Nivel 6
+		Preferences pref = Gdx.app.getPreferences("Primera");
+		
+		pref.putBoolean("primera2", primera);
+
 		pref.flush();
 	}
 
