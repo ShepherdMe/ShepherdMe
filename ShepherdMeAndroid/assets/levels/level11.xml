@@ -11,7 +11,19 @@
     </sheep>
     
     <sheep>
+        <x>0.40</x>
+        <y>0.10</y>
+        <color>b</color>
+    </sheep>
+    
+    <sheep>
         <x>0.50</x>
+        <y>0.45</y>
+        <color>n</color>
+    </sheep>
+    
+    <sheep>
+        <x>0.3</x>
         <y>0.45</y>
         <color>n</color>
     </sheep>
@@ -84,7 +96,7 @@
 	<height>0.1</height>
 </obstacle>
     
-    <redil height="0.40" width="0.25" x="0.75" y="0.30" open="LEFT">
+    <redil height="0.40" width="0.28" x="0.72" y="0.30" open="LEFT">
     </redil>
     
     <cloud>
